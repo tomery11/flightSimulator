@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Command.h"
 #include <map>
+#include <fstream>
 #include "DataReaderServer.h"
 
 using namespace std;
@@ -50,28 +51,51 @@ void parser(const vector <string> *inputVec, const map<string,Command*> *mapComm
 
 //get a file as argument or no arguments for getting lines from the user.
 int main(int argc, char *argv[]) {
-    //one argument to get the script from a file
-    if (argc == 2) { //todo
+    std::string input;
+    vector<string> inputVec;
+    //create map string Command
+    map<string, Command *> commandMap;
+    DataReaderServer server = DataReaderServer();
+    commandMap["test"] = (Command *) &server;
 
-    } else if (argc == 1) { //no argument for per line parsing
-        std::string input;
-        vector<string> inputVec;
-        //create map string Command
-        map<string, Command *> commandMap;
-        DataReaderServer server = DataReaderServer();
-        commandMap["test"] = (Command *) &server;
-        //check if got file as argument
-        //if()
-        //get lines from the user
+    try {
+        //one argument to get the script from a file
+        if (argc == 2) { //todo
+            //open the file
+            fstream scriptFile(argv[1]);
+            //if failed
+            if (scriptFile.fail()) {
+                throw "bad file";
+            }
+            //if open
+            if (scriptFile.is_open()) {
+                string line;
+                //parse the lines, one at a time
+                getline(scriptFile, line);
+                while (!line.empty()) { //todo: in case there is no new line at the end of the file there is a loop on the last line
+                    cout << line << endl;
+                    //send for lexer and parser
+                    lexer(&input, inputVec);
+                    parser(&inputVec, &commandMap);
+                    //get the next line from the file
+                    getline(scriptFile, line);
+                }
+                scriptFile.close();
+            }
+        } else if (argc == 1) { //no argument for per line parsing
+            do {
+                //get the next line from the user
+                getline(std::cin, input);
+                //send for lexer and parser
+                lexer(&input, inputVec);
+                parser(&inputVec, &commandMap);
 
-        do {
-            getline(std::cin, input);
-            lexer(&input, inputVec);
-            parser(&inputVec, &commandMap);
-
-        } while (input != "print \"done\"");
-    } else { //two and more arguments are not allowed
-        throw "bad argument number";
+            } while (input != "print \"done\"");
+        } else { //two and more arguments are not allowed
+            throw "bad argument number";
+        }
+    } catch (char const *exception) {
+        printf("%s", exception);
     }
     return 0;
 
