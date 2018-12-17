@@ -9,5 +9,6 @@ void DataReaderServer::doCommand(std::vector<string> inputVec) {
 
     this->port = stoi(inputVec.at(1));
     this->frequency = stoi(inputVec.at(2));
-    //open thread and read a line in frequency
+    //open thread and read a line in the required frequency
+
 }
