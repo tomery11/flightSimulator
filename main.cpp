@@ -7,6 +7,7 @@
 #include <map>
 #include <fstream>
 #include "DataReaderServer.h"
+#include "OpenServerCommand.h"
 
 using namespace std;
 
@@ -27,6 +28,7 @@ void lexer(const string *input, vector<string> inputVec){
     }
     ///n?
     cout << "end of lexer" << endl;
+
 }
 
 void parser(const vector <string> *inputVec, const map<string,Command*> *mapCommand){
@@ -56,7 +58,7 @@ int main(int argc, char *argv[]) {
     vector<string> inputVec;
     //create map string Command
     map<string, Command *> commandMap;
-    DataReaderServer server = DataReaderServer();
+    OpenServerCommand server = OpenServerCommand();
     commandMap["test"] = (Command *) &server;
 
     try {

@@ -10,4 +10,4 @@ void VarCommand::doCommand(std::vector<string> inputVec) {
     this->name= inputVec.at(0);
     this->value= stoi(inputVec.at(2));
     //set to simulator
-}
+}//
