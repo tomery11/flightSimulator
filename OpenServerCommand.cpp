@@ -4,17 +4,19 @@
 
 #include "OpenServerCommand.h"
 
-void OpenServerCommand::doCommand(std::vector<string> inputVec) {
+void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
     //input validation
 
-    this->port = stoi(inputVec.at(1));
-    this->frequency = stoi(inputVec.at(2));
-    //open thread and read a line in frequency
+    this->port = stoi(inputVec->at(1));
+    this->frequency = stoi(inputVec->at(2));
+    //open thread and read a line in frequency, update symbol table
+    pthread_t threadID;
+    int rc = pthread_create(&threadID, NULL, thread_func, (void *)inputVec);
 
 }
 
-
-void* OpenServerCommand::thread_func(void* arg)
+//
+void* ::thread_func(void* arg)
 {
     DataReaderServer server(port, frequency);
     cout << "Thread!" << endl;

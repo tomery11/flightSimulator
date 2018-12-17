@@ -8,6 +8,7 @@
 #include <fstream>
 #include "DataReaderServer.h"
 #include "OpenServerCommand.h"
+#include "SymbolsTable.h"
 
 using namespace std;
 
@@ -31,25 +32,36 @@ void lexer(const string *input, vector<string> inputVec){
 
 }
 
-void parser(const vector <string> *inputVec, const map<string,Command*> *mapCommand){
+void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, SymbolsTable symbols){
     //
-    cout<<"parser"<<endl;
     //todo handle the case where { and } are not in their own lines
     //if in while loop or in if condition and haven't reached end, return without doing the command
     if (!inputVec->empty() && (inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
         inputVec->at(inputVec->size()-2) != "}") {
-        cout<<"don't do the command"<<endl;
                 return;
     }
-    cout<<"after if in parser"<<endl;
     //do the command
     //print test
 
     for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
-        cout << "after parser"<<endl;
         cout<<' '<<*it<<endl;
     }
-    //mapCommand.find(inputVec.at(0))->doCommand(inputVec);
+
+    //find in commands
+    Command *c;
+    c = mapCommand->find(inputVec->at(0))->second;
+    if (c != NULL) {
+        c->doCommand(inputVec);
+    } else { //find in variables
+
+        if (symbols.exist(inputVec->at(0))) {
+            //todo set the variable value
+            symbols.set(inputVec->at(0), inputVec->at(3))
+        } else {
+            throw "bad input: not a command or a variable";
+        }
+    }
+
 }
 
 //get a file as argument or no arguments for getting lines from the user.
@@ -60,6 +72,8 @@ int main(int argc, char *argv[]) {
     map<string, Command *> commandMap;
     OpenServerCommand server = OpenServerCommand();
     commandMap["test"] = (Command *) &server;
+    //create symbol map - variable name and it's value
+    SymbolsTable symbols;
 
     try {
         //one argument to get the script from a file
@@ -79,7 +93,7 @@ int main(int argc, char *argv[]) {
                     cout << line << endl;
                     //send for lexer and parser
                     lexer(&input, inputVec);
-                    parser(&inputVec, &commandMap);
+                    parser(&inputVec, &commandMap, symbols);
                     //get the next line from the file
                     getline(scriptFile, line);
                 }
@@ -91,7 +105,7 @@ int main(int argc, char *argv[]) {
                 getline(std::cin, input);
                 //send for lexer and parser
                 lexer(&input, inputVec);
-                parser(&inputVec, &commandMap);
+                parser(&inputVec, &commandMap, &symbolsMap);
 
             } while (input != "print \"done\"");
         } else { //two and more arguments are not allowed

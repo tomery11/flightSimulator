@@ -5,6 +5,13 @@
 #include "DataReaderServer.h"
 
 DataReaderServer::DataReaderServer(int port, int frequency) {
+
+}
+
+
+void DataReaderServer::sendToClient(char *hello) {
+
+
     this->port = port;
     this->frequency = frequency;
     //create server
@@ -13,6 +20,9 @@ DataReaderServer::DataReaderServer(int port, int frequency) {
 
 
     char buffer[1024] = {0};
+
+    //char *hello = "Hello from server";
+    int addrlen = sizeof(address);
 
     // Creating socket file descriptor
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -24,15 +34,6 @@ DataReaderServer::DataReaderServer(int port, int frequency) {
     // Forcefully attaching socket to the port 8080
     bind(server_fd, (struct sockaddr *)&address,sizeof(address));
     this->server_fd = server_fd;
-}
-
-void DataReaderServer::sendToClient(char *hello) {
-
-
-    //char *hello = "Hello from server";
-    int addrlen = sizeof(address);
-
-
 
     listen(server_fd, 5);
 
@@ -46,3 +47,4 @@ void DataReaderServer::sendToClient(char *hello) {
     printf("Hello message sent\n");
 
 }
+

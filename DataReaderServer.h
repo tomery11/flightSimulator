@@ -17,7 +17,7 @@ int frequency;
 int server_fd;
 public:
     DataReaderServer(int port, int frequency);
-    void sendToClient();
+    void sendToClient(char *hello);
 };
 
 

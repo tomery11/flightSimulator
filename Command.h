@@ -11,7 +11,7 @@ using namespace std;
 
 class Command {
 public:
-    virtual void doCommand(std::vector<string> inputVec)=0;
+    virtual void doCommand(std::vector<string> *inputVec)=0;
 };
 
 

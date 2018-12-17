@@ -8,6 +8,8 @@ void var::doCommand(std::vector<string> inputVec) {
     this->name= inputVec[1];
     this->path = inputVec[4];
 
+    //add to symbols table
+
     //get the value
     //bind
 }

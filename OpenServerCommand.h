@@ -15,8 +15,7 @@ class OpenServerCommand : Command {
     int frequency;
     int port;
 public:
-    void doCommand(std::vector<string> inputVec);
-    void* thread_func(void* arg);
+    void doCommand(std::vector<string> *inputVec);
 };
 
 
