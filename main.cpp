@@ -15,13 +15,13 @@ void lexer(const string *input, vector<string> inputVec){
 
     cout << "lexer" << endl;
     //todo add more whitespaces to token?
-    string token = " \t\n";
+    string token = " \t";
     std::istringstream iss(*input);
     //if not in while loop or in if condition, delete the vector contents
     if (!inputVec.empty() && (inputVec.at(0) != "while" || inputVec.at(0) != "if")) {
         inputVec.clear();
     }
-    //go over the line and parses according to space ' '
+    //go over the line and parses according to to the token
     while(std::getline(iss,token,' ')){
         inputVec.push_back(token);
     }
@@ -32,6 +32,7 @@ void lexer(const string *input, vector<string> inputVec){
 void parser(const vector <string> *inputVec, const map<string,Command*> *mapCommand){
     //
     cout<<"parser"<<endl;
+    //todo handle the case where { and } are not in their own lines
     //if in while loop or in if condition and haven't reached end, return without doing the command
     if (!inputVec->empty() && (inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
         inputVec->at(inputVec->size()-2) != "}") {
