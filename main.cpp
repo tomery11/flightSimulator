@@ -13,7 +13,8 @@ using namespace std;
 void lexer(string input, vector<string> inputVec){
 
     cout << "lexer" << endl;
-    string token;
+    //todo add more whitespaces to token?
+    string token = " \t\n";
     std::istringstream iss(input);
     //if not in while loop or in if condition, delete the vector contents
     if (!inputVec.empty() && (inputVec.at(0) != "while" || inputVec.at(0) != "if")) {
@@ -25,7 +26,6 @@ void lexer(string input, vector<string> inputVec){
     }
     ///n?
     cout << "end of lexer" << endl;
-
 }
 
 void parser(const vector <string> *inputVec, const map<string,Command*> *mapCommand){
@@ -48,25 +48,31 @@ void parser(const vector <string> *inputVec, const map<string,Command*> *mapComm
     //mapCommand.find(inputVec.at(0))->doCommand(inputVec);
 }
 
+//get a file as argument or no arguments for getting lines from the user.
+int main(int argc, char *argv[]) {
+    //one argument to get the script from a file
+    if (argc == 1) { //todo
 
-int main() {
-    std::string input;
-    vector<string> inputVec;
-    //create map string Command
-    map<string,Command*> commandMap;
-    DataReaderServer server= DataReaderServer();
-    commandMap["test"]=(Command*) &server;
-    //check if got file as argument
-    //if()
-    //get lines from the user
+    } else if (argc == 0) { //no argument for per line parsing
+        std::string input;
+        vector<string> inputVec;
+        //create map string Command
+        map<string, Command *> commandMap;
+        DataReaderServer server = DataReaderServer();
+        commandMap["test"] = (Command *) &server;
+        //check if got file as argument
+        //if()
+        //get lines from the user
 
-    do {
-        getline(std::cin, input);
-        lexer(input, inputVec);
-        parser(&inputVec,&commandMap);
+        do {
+            getline(std::cin, input);
+            lexer(input, inputVec);
+            parser(&inputVec, &commandMap);
 
-    } while (input != "print \"done\"");
-
+        } while (input != "print \"done\"");
+    } else { //two and more arguments are not allowed
+        throw "bad argument number";
+    }
     return 0;
 
 }
