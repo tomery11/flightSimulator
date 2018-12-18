@@ -12,5 +12,5 @@ void *ConnectCommand::connect(void *arg) {
 //create a thread and run connect
 void ConnectCommand::doCommand(std::vector<string> *inputVec) {
     pthread_t threadID;
-    int rc = pthread_create(&threadID, NULL, connect, (void *)inputVec);
+    //int rc = pthread_create(&threadID, NULL, connect, (void *)inputVec);
 }

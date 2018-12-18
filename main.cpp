@@ -13,31 +13,42 @@
 using namespace std;
 
 
-void lexer(const string *input, vector<string> inputVec){
+void lexer(const string *input, vector<string> *inputVec){
 
     cout << "lexer" << endl;
-    //todo add more whitespaces to token?
-    string token = " \t";
+    string line;
     std::istringstream iss(*input);
     //if not in while loop or in if condition, delete the vector contents
-    if (!inputVec.empty() && (inputVec.at(0) != "while" || inputVec.at(0) != "if")) {
-        inputVec.clear();
+    if (!inputVec->empty() && (inputVec->at(0) != "while" || inputVec->at(0) != "if")) {
+        inputVec->clear();
     }
     //go over the line and parses according to to the token
-    while(std::getline(iss,token,' ')){
-        inputVec.push_back(token);
+    while(std::getline(iss,line)){
+        std::size_t prev = 0, pos;
+        while ((pos = line.find_first_of(" \t", prev)) != string::npos) {
+            if (pos > prev) {
+                inputVec->push_back(line.substr(prev, pos - prev));
+                cout << "pushed: " << line.substr(prev, pos - prev) << endl;
+            }
+            prev = pos + 1;
+        }
+        //add last word
+        if (prev < line.length()) {
+            inputVec->push_back(line.substr(prev, string::npos));
+            cout << "pushed: " << line.substr(prev, string::npos) << endl;
+        }
     }
     ///n?
     cout << "end of lexer" << endl;
-
 }
 
-void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, SymbolsTable symbols){
+void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, SymbolsTable *symbols){
+    cout << "parser" << endl;
     //
     //todo handle the case where { and } are not in their own lines
     //if in while loop or in if condition and haven't reached end, return without doing the command
     if (!inputVec->empty() && (inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
-        inputVec->at(inputVec->size()-2) != "}") {
+        inputVec->at(inputVec->size()) != "}") {
                 return;
     }
     //do the command
@@ -53,28 +64,30 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
     if (c != NULL) {
         c->doCommand(inputVec);
     } else { //find in variables
-
-        if (symbols.exist(inputVec->at(0))) {
+        if (symbols->exist(inputVec->at(0))) {
             //todo set the variable value
-            symbols.set(inputVec->at(0), inputVec->at(3))
+            //symbols->set(inputVec->at(0), inputVec->at(3)->)
         } else {
             throw "bad input: not a command or a variable";
         }
     }
-
+    cout << "end of parser" << endl;
 }
 
 //get a file as argument or no arguments for getting lines from the user.
 int main(int argc, char *argv[]) {
     std::string input;
     vector<string> inputVec;
-    //create map string Command
-    map<string, Command *> commandMap;
-    OpenServerCommand server = OpenServerCommand();
-    commandMap["test"] = (Command *) &server;
     //create symbol map - variable name and it's value
     SymbolsTable symbols;
+    //create map string Command
+    map<string, Command *> commandMap;
+    //add commands
+    OpenServerCommand server = OpenServerCommand();
+    server.setSymbolTable(&symbols);
+    commandMap["test"] = (Command *) &server;
 
+    //run a script
     try {
         //one argument to get the script from a file
         if (argc == 2) { //todo
@@ -92,8 +105,8 @@ int main(int argc, char *argv[]) {
                 while (!line.empty()) { //todo: in case there is no new line at the end of the file there is a loop on the last line
                     cout << line << endl;
                     //send for lexer and parser
-                    lexer(&input, inputVec);
-                    parser(&inputVec, &commandMap, symbols);
+                    lexer(&input, &inputVec);
+                    parser(&inputVec, &commandMap, &symbols);
                     //get the next line from the file
                     getline(scriptFile, line);
                 }
@@ -104,8 +117,8 @@ int main(int argc, char *argv[]) {
                 //get the next line from the user
                 getline(std::cin, input);
                 //send for lexer and parser
-                lexer(&input, inputVec);
-                parser(&inputVec, &commandMap, &symbolsMap);
+                lexer(&input, &inputVec);
+                parser(&inputVec, &commandMap, &symbols);
 
             } while (input != "print \"done\"");
         } else { //two and more arguments are not allowed
@@ -115,5 +128,4 @@ int main(int argc, char *argv[]) {
         printf("%s", exception);
     }
     return 0;
-
 }

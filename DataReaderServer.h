@@ -11,13 +11,17 @@
 #include <stdlib.h>
 #include <netinet/in.h>
 #include <string.h>
+#include "SymbolsTable.h"
+
+
+
 class DataReaderServer {
 int port;
 int frequency;
 int server_fd;
 public:
     DataReaderServer(int port, int frequency);
-    void sendToClient(char *hello);
+    void update(SymbolsTable *symbolTable);
 };
 
 

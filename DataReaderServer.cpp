@@ -5,15 +5,42 @@
 #include "DataReaderServer.h"
 
 DataReaderServer::DataReaderServer(int port, int frequency) {
+    this->port = port;
+    this->frequency = frequency;
+
+    int newSocket, socketDescriptor;
+    //create socket
+    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+    if (socketDescriptor == 0) {
+        throw "server secket creation failed";
+    }
+    //create address structure for bind
+    struct sockaddr_in address;
+    int addrlen = sizeof(address);
+    address.sin_family = AF_INET; //tcp
+    address.sin_addr.s_addr = INADDR_ANY; //127.0.0.1 = self
+    address.sin_port = htons( (uint16_t)this->port);
+    //bind socket to port and ip address
+    if (bind(socketDescriptor, (struct sockaddr *)&address,sizeof(address)) < 0) {
+        throw "server could not bind";
+    }
+    //listen
+    if (listen(socketDescriptor, this->frequency) < 0) {
+        throw "server listen failed";
+    }
+    //accept
+    newSocket = accept(socketDescriptor, (struct sockaddr *)&address, (socklen_t*)&addrlen);
+    if(newSocket < 0) {
+        throw "server accept failed";
+    }
+    //read and update
+
 
 }
 
+//update the symbol table
+void DataReaderServer::update(SymbolsTable *symbolTable) {
 
-void DataReaderServer::sendToClient(char *hello) {
-
-
-    this->port = port;
-    this->frequency = frequency;
     //create server
     int server_fd, new_socket, valread;
     struct sockaddr_in address;
@@ -21,7 +48,7 @@ void DataReaderServer::sendToClient(char *hello) {
 
     char buffer[1024] = {0};
 
-    //char *hello = "Hello from server";
+    char *hello;// = "Hello from server";
     int addrlen = sizeof(address);
 
     // Creating socket file descriptor
