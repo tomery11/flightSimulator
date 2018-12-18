@@ -34,6 +34,8 @@ DataReaderServer::DataReaderServer(int port, int frequency) {
         throw "server accept failed";
     }
     //read and update
+    //parse
+    //update the binded vars
 
 
 }

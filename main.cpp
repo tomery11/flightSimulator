@@ -60,8 +60,8 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
 
     //find in commands
     Command *c;
-    c = mapCommand->find(inputVec->at(0))->second;
-    if (c != NULL) {
+    if (mapCommand->count(inputVec->at(0)) > 0) {
+        c = mapCommand->find(inputVec->at(0))->second;
         c->doCommand(inputVec);
     } else { //find in variables
         if (symbols->exist(inputVec->at(0))) {
