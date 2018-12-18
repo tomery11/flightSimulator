@@ -4,7 +4,7 @@
 #define FLIGHTSIMULATOR_VARCOMMAND_H
 
 #include "Command.h"
-class VarCommand:Command {
+class VarCommand: public Command {
     string name;
     int value;
 public:

@@ -10,7 +10,7 @@
 #include <pthread.h>
 using namespace std;
 
-class ConnectCommand : Command {
+class ConnectCommand : public Command {
     string ip_address;
     int port;
 public:

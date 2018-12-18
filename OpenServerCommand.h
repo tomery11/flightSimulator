@@ -21,7 +21,7 @@ struct ServerData {
 //the server thread function
 void* thread_func(void* serverData);
 
-class OpenServerCommand : Command {
+class OpenServerCommand : public Command {
     int frequency;
     int port;
     SymbolsTable *symbolTable;

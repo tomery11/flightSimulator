@@ -7,7 +7,7 @@
 #include <string>
 #include "Command.h"
 using namespace std;
-class var : Command {
+class var : public Command {
 string name;
 string path;
 public:
