@@ -7,8 +7,8 @@
 DataReaderServer::DataReaderServer(int port, int frequency) {
     this->port = port;
     this->frequency = frequency;
-
-    int newSocket, socketDescriptor;
+    char buffer[256];
+    int newSocket, socketDescriptor, n;
     //create socket
     socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
     if (socketDescriptor == 0) {
@@ -34,6 +34,23 @@ DataReaderServer::DataReaderServer(int port, int frequency) {
         throw "server accept failed";
     }
     //read and update
+    memset(buffer, 0, 256);
+    n = (int)read( newSocket,buffer,255 );
+
+    if (n < 0) {
+        perror("ERROR reading from socket");
+        exit(1);
+    }
+
+    printf("Here is the message: %s\n",buffer);
+
+    /* Write a response to the client */
+    //n = write(newsockfd,"I got your message",18);
+
+    if (n < 0) {
+        perror("ERROR writing to socket");
+        exit(1);
+    }
     //parse
     //update the binded vars
 

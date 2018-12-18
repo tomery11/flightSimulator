@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
     //add commands
     OpenServerCommand server = OpenServerCommand();
     server.setSymbolTable(&symbols);
-    commandMap["test"] = (Command *) &server;
+    commandMap["openDataServer"] = (Command *) &server;
 
     //run a script
     try {
