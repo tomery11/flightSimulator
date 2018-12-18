@@ -8,7 +8,7 @@
 
 class Expression {
 public:
-    Expression();
+    //Expression();
     virtual double calculate()=0;
 };
 

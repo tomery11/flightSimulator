@@ -33,28 +33,29 @@ DataReaderServer::DataReaderServer(int port, int frequency) {
     if(newSocket < 0) {
         throw "server accept failed";
     }
-    //read and update
-    memset(buffer, 0, 256);
-    n = (int)read( newSocket,buffer,255 );
+    //infinite loop with updates for symbolTable
+    while (true) {
+        //read and update
+        memset(buffer, 0, 256);
+        n = (int) read(newSocket, buffer, 255);
 
-    if (n < 0) {
-        perror("ERROR reading from socket");
-        exit(1);
+        if (n < 0) {
+            perror("ERROR reading from socket");
+            exit(1);
+        }
+
+        printf("Here is the message: %s\n", buffer);
+
+        /* Write a response to the client */
+        //n = write(newsockfd,"I got your message",18);
+
+        if (n < 0) {
+            perror("ERROR writing to socket");
+            exit(1);
+        }
+        //parse
+        //update the binded vars
     }
-
-    printf("Here is the message: %s\n",buffer);
-
-    /* Write a response to the client */
-    //n = write(newsockfd,"I got your message",18);
-
-    if (n < 0) {
-        perror("ERROR writing to socket");
-        exit(1);
-    }
-    //parse
-    //update the binded vars
-
-
 }
 
 //update the symbol table

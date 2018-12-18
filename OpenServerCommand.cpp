@@ -19,6 +19,7 @@ void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
         throw "can not start server thread, bad pointer to symbol Table";
     }
     serverData.symbolTable = this->symbolTable;
+    //start the thread
     int rc = pthread_create(&threadID, NULL, thread_func, (void *)&serverData);
 }
 
@@ -33,11 +34,7 @@ void* thread_func(void *serverData) {
     //serverData is of type ServerData
     struct ServerData *serverData1;
     serverData1 = (struct ServerData *) serverData;
-    //open the server
+    //open the server, infinite loop with updates for symbolTable
     DataReaderServer server(serverData1->port, serverData1->frequency);
-    //infinite loop with updates for symbolTable
-    while (true) {
-        server.update(serverData1->symbolTable);
-    }
-    //return nullptr;
+    return nullptr;
 }
