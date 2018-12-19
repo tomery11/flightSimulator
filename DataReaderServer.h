@@ -1,19 +1,23 @@
 //
-// Created by tomer on 12/16/18.
+// Created by Tomer Yona on 2018-12-19.
 //
 
 #ifndef FLIGHTSIMULATOR_DATAREADERSERVER_H
 #define FLIGHTSIMULATOR_DATAREADERSERVER_H
 
-
-#include "Command.h"
-#include <string>
-
-class DataReaderServer : Command {
-    int frequency;
-    int port;
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <netinet/in.h>
+#include <string.h>
+class DataReaderServer {
+int port;
+int frequency;
+int server_fd;
 public:
-    void doCommand(std::vector<string> inputVec);
+    DataReaderServer(int port, int frequency);
+    void sendToClient();
 };
 
 

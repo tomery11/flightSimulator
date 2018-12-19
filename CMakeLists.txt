@@ -8,6 +8,6 @@ include_directories(.)
 add_executable(flightSimulator
         Command.cpp
         Command.h
-        DataReaderServer.cpp
-        DataReaderServer.h
-        main.cpp VarCommand.cpp VarCommand.h)
+        OpenServerCommand.cpp
+        OpenServerCommand.h
+        main.cpp VarCommand.cpp VarCommand.h DataReaderServer.cpp DataReaderServer.h var.cpp var.h)

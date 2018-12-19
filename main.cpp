@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Command.h"
 #include <map>
-#include "DataReaderServer.h"
+#include "OpenServerCommand.h"
 
 using namespace std;
 
@@ -54,7 +54,7 @@ int main() {
     vector<string> inputVec;
     //create map string Command
     map<string,Command*> commandMap;
-    DataReaderServer server= DataReaderServer();
+    OpenServerCommand server= OpenServerCommand();
     commandMap["test"]=(Command*) &server;
     //check if got file as argument
     //if()
