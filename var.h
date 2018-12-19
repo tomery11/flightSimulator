@@ -13,6 +13,6 @@ string path;
 public:
     virtual void doCommand(std::vector<string> inputVec);
 };
-
+//
 
 #endif //FLIGHTSIMULATOR_VAR_H

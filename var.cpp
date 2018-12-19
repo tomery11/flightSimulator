@@ -11,3 +11,4 @@ void var::doCommand(std::vector<string> inputVec) {
     //get the value
     //bind
 }
+//

@@ -13,3 +13,4 @@ public:
 
 
 #endif //FLIGHTSIMULATOR_VARCOMMAND_H
+//
