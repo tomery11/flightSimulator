@@ -118,7 +118,7 @@ string ShuntingYard::prepareNumber(string expr, int i) {
 
 
 
-/*need to finish this function-- this is according to Reverse Polish notation algoritm*/
+/* i need to finish this function-- this is according to Reverse Polish notation algoritm*/
 Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
     stack<string> operatorStack;
     stack<Expression> operandStack;
