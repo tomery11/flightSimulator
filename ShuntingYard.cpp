@@ -4,7 +4,7 @@
 
 #include "ShuntingYard.h"
 /*
- * this function checks if the give charcatar is
+ * this function checks if the give character is
  */
 bool ShuntingYard::isNumber(char a) {
     bool ans= false;
@@ -19,7 +19,7 @@ bool ShuntingYard::isOperator(char a) {
         ans = true;
     return ans;
 }
-
+/*this funtion will eventually return the final expression after all caculations*/
 Expression *ShuntingYard::algorithm(string expr) {
     /* the queue is for storing mostly numbers according to shunting yard algorithm*/
     queue<string> myQueue;
@@ -36,10 +36,11 @@ Expression *ShuntingYard::algorithm(string expr) {
         if ( isdigit(expr[i]) ){
 
             if(isNegative){
-                myQueue.push("0");
+                myQueue.push("0,");
             }
             string number = prepareNumber(expr,i);
-            myQueue.push(number);
+            myQueue.push(number+",");
+
         }
 
 
@@ -47,8 +48,8 @@ Expression *ShuntingYard::algorithm(string expr) {
          * the stack is an operator that has a priority i.e: '*' has a priority over '+' so
          * if it has a priority then we push it into the queue otherwise we push it into the stack*/
         else if(isOperator(expr[i])){
-            /*in this case I take care if we have the expression "4- -5" then I push
-             * the value zero into the queue and later on it will be dequeued  0-4-5*/
+            /*this case i take is whether the following number is negative such as -4
+             * this also takes care of the priority*/
             if(expr[i] == '+' || expr[i] == '-' ){
                 if(expr[i]=='-'){
                     isNegative=true;
@@ -57,7 +58,7 @@ Expression *ShuntingYard::algorithm(string expr) {
                 while( !myStack.empty() && (myStack.top() == '*' || myStack.top() == '/')){
                     string opr_toPush;
                     opr_toPush.push_back(myStack.top());
-                    myQueue.push(opr_toPush);
+                    myQueue.push(opr_toPush+",");
                     myStack.pop();
                 }
                 myStack.push(expr[i]);
@@ -80,7 +81,7 @@ Expression *ShuntingYard::algorithm(string expr) {
             while(!myStack.empty() && myStack.top()!= '(' && myStack.top() != ')'){
                 string opr_toPush;
                 opr_toPush.push_back(myStack.top());
-                myQueue.push(opr_toPush);
+                myQueue.push(opr_toPush+",");
                 myStack.pop();
             }
             myStack.pop();
@@ -93,9 +94,18 @@ Expression *ShuntingYard::algorithm(string expr) {
         }
 
     }
-    return convert_toExpr(myQueue);
+    /*after all iterations we want to empty the stack and insert the operators into the our queue*/
+    while(!myStack.empty()){
+        string opr_toPush;
+        opr_toPush.push_back(myStack.top());
+        myQueue.push(opr_toPush+",");
+    }
+    return postfix_calc(myQueue);
 }
 
+
+/*this functions recieves a string and int as parameter and as long is a valid number then loop
+ * keeps on running and in the end returns to caller the valid number as string*/
 string ShuntingYard::prepareNumber(string expr, int i) {
     string toReturn;
     while(isdigit(expr[i])){
@@ -104,12 +114,66 @@ string ShuntingYard::prepareNumber(string expr, int i) {
     }
     return toReturn;
 }
-/*need to finish this function*/
-Expression *ShuntingYard::convert_toExpr(queue<string>& myQueue) {
+
+
+
+
+/*need to finish this function-- this is according to Reverse Polish notation algoritm*/
+Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
+    stack<string> operatorStack;
+    stack<Expression> operandStack;
+    bool pending_operand;
     reverseContent(myQueue);
+    string token;
     while(!myQueue.empty()){
 
+        token=myQueue.front();
+        //pops out the number/operator from queue
+        myQueue.pop();
+        if(isOperator(token[0])){
+            string opr_toPush;
+            opr_toPush.push_back(token[0]);
+            pending_operand= false;
+            continue;
+        }
+        else {
+            string operand;
+            while (!myQueue.empty() && myQueue.front() != ",") {
+                operand += myQueue.front();
+                double double_operand= stod(operand);
+                myQueue.pop();
+            }
+            if (pending_operand) {
+                while(!operandStack.empty()){
+                    Number operand_left=operandStack.top();
+                    operandStack.pop();
+                    string curr_operator= operatorStack.top();
+                    operatorStack.pop();
+                    string operand_right=operandStack.top();
+                    operandStack.pop();
+                    //need to caclulate the current operand ---> do here calculation
+                }
+
+
+            }
+            //push here the operand into the operand stack ----> push here to stack
+            pending_operand=true;
+            //double double_expr = stod(operandStack.top());
+            //Expression num= new Number(operandStack.top());
+
+
+
+
+        }
+
+
+
+
+        //pops out the comma that seprates between values in queue
+        myQueue.pop();
     }
+
+
     return nullptr;
 }
 

@@ -9,6 +9,7 @@
 #include <stack>
 #include <string>
 #include "Expression.h"
+#include "Number.h"
 using namespace std;
 class ShuntingYard {
 
@@ -18,7 +19,7 @@ private:
     bool isOperator(char a);
     Expression* algorithm(string expr);
     string prepareNumber(string expr, int i);
-    Expression* convert_toExpr(queue<string>& myQueue);
+    Expression* postfix_calc(queue<string>& myQueue);
     void reverseContent(queue<string>& myQueue);
 
 };
