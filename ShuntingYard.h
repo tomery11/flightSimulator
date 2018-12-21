@@ -10,6 +10,10 @@
 #include <string>
 #include "Expression.h"
 #include "Number.h"
+#include "Plus.h"
+#include "Minus.h"
+#include "Multiply.h"
+#include "Divide.h"
 using namespace std;
 class ShuntingYard {
 
@@ -21,6 +25,8 @@ private:
     string prepareNumber(string expr, int i);
     Expression* postfix_calc(queue<string>& myQueue);
     void reverseContent(queue<string>& myQueue);
+    bool isValid_number(string number);
+
 
 };
 

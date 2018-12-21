@@ -4,57 +4,74 @@
 
 #include "DataReaderServer.h"
 
-DataReaderServer::DataReaderServer(int port, int frequency) {
-    this->port = port;
-    this->frequency = frequency;
-    char buffer[256];
-    int newSocket, socketDescriptor, n;
-    //create socket
-    socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
-    if (socketDescriptor == 0) {
-        throw "server secket creation failed";
-    }
-    //create address structure for bind
-    struct sockaddr_in address;
-    int addrlen = sizeof(address);
-    address.sin_family = AF_INET; //tcp
-    address.sin_addr.s_addr = INADDR_ANY; //127.0.0.1 = self
-    address.sin_port = htons( (uint16_t)this->port);
-    //bind socket to port and ip address
-    if (bind(socketDescriptor, (struct sockaddr *)&address,sizeof(address)) < 0) {
-        throw "server could not bind";
-    }
-    //listen
-    if (listen(socketDescriptor, this->frequency) < 0) {
-        throw "server listen failed";
-    }
-    //accept
-    newSocket = accept(socketDescriptor, (struct sockaddr *)&address, (socklen_t*)&addrlen);
-    if(newSocket < 0) {
-        throw "server accept failed";
-    }
-    //infinite loop with updates for symbolTable
-    while (true) {
-        //read and update
-        memset(buffer, 0, 256);
-        n = (int) read(newSocket, buffer, 255);
-
-        if (n < 0) {
-            perror("ERROR reading from socket");
-            exit(1);
+DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbols) {
+    try {
+        this->port = port;
+        this->frequency = frequency;
+        char buffer[256];
+        int newSocket, socketDescriptor, n;
+        int opt = 1;
+        //create socket
+        socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
+        if (socketDescriptor == 0) {
+            throw "server socket creation failed";
         }
-
-        printf("Here is the message: %s\n", buffer);
-
-        /* Write a response to the client */
-        //n = write(newsockfd,"I got your message",18);
-
-        if (n < 0) {
-            perror("ERROR writing to socket");
-            exit(1);
+        //allow reuse of address and port
+        if (setsockopt(socketDescriptor, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)) != 0) {
+            throw "set socket option failed";
         }
-        //parse
-        //update the binded vars
+        //create address structure for bind
+        struct sockaddr_in address;
+        int addrlen = sizeof(address);
+        address.sin_family = AF_INET; //tcp
+        address.sin_addr.s_addr = INADDR_ANY; //accept all addresses\clients
+        address.sin_port = htons((uint16_t) this->port);
+
+        cout << "After setSockOpt. port: " << this->port << " port after htons: " << address.sin_port << endl;
+        //bind socket to port and ip address
+        if (bind(socketDescriptor, (struct sockaddr *) &address, sizeof(address)) < 0) {
+            throw "server could not bind";
+        }
+        //infinite loop with updates for symbolTable
+        while (true) {
+            cout << "loop " << endl;
+            //listen
+            int l = 0;
+            //while (l == 0) {
+
+                l = listen(socketDescriptor, 5);
+                if (l < 0) {
+                    throw "server listen failed";
+                }
+            //}
+            //accept
+            newSocket = accept(socketDescriptor, (struct sockaddr *) &address, (socklen_t *) &addrlen);
+            if (newSocket < 0) {
+                throw "server accept failed";
+            }
+            //read and update
+            memset(buffer, 0, 256);
+            n = (int) read(newSocket, buffer, 255);
+
+            if (n < 0) {
+                perror("ERROR reading from socket");
+                exit(1);
+            }
+
+            printf("Here is the message: %s\n", buffer);
+
+            /* Write a response to the client */
+            //n = write(newsockfd,"I got your message",18);
+
+            if (n < 0) {
+                perror("ERROR writing to socket");
+                exit(1);
+            }
+            //parse
+            //update the binded vars
+        }
+    } catch (char *exception) {
+        printf("%s",exception);
     }
 }
 
@@ -88,7 +105,7 @@ void DataReaderServer::update(SymbolsTable *symbolTable) {
     new_socket = accept(server_fd, (struct sockaddr *)&address,
                         (socklen_t*)&addrlen);
 
-    valread = read( new_socket , buffer, 1024);
+    valread = (int)read(new_socket, buffer, 1024);
     printf("%s\n",buffer );
     send(new_socket , hello , strlen(hello) , 0 );
     printf("Hello message sent\n");

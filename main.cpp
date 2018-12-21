@@ -27,6 +27,7 @@ void lexer(const string *input, vector<string> *inputVec){
         std::size_t prev = 0, pos;
         while ((pos = line.find_first_of(" \t", prev)) != string::npos) {
             if (pos > prev) {
+                //remove
                 inputVec->push_back(line.substr(prev, pos - prev));
                 cout << "pushed: " << line.substr(prev, pos - prev) << endl;
             }
@@ -61,10 +62,12 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
     //find in commands
     Command *c;
     if (mapCommand->count(inputVec->at(0)) > 0) {
+        cout << "found in commands" << endl;
         c = mapCommand->find(inputVec->at(0))->second;
         c->doCommand(inputVec);
     } else { //find in variables
         if (symbols->exist(inputVec->at(0))) {
+            cout << "found in vars" << endl;
             //todo set the variable value
             //symbols->set(inputVec->at(0), inputVec->at(3)->)
         } else {

@@ -3,3 +3,18 @@
 //
 
 #include "Number.h"
+
+Number::Number(double value) {
+    this->value=value;
+
+}
+
+Number::Number(string value) {
+    this->value=stod(value);
+
+}
+
+Number::Number(int value) {
+    this->value=value;
+
+}

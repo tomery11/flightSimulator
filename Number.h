@@ -7,14 +7,15 @@
 
 
 #include "Expression.h"
-
+#include <string>
+using namespace std;
 class Number : public Expression {
-
 private:
     double value;
 public:
     Number(int value);
     Number(double value);
+    Number (string value);
     double calculate();
 };
 

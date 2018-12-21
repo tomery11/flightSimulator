@@ -35,6 +35,6 @@ void* thread_func(void *serverData) {
     struct ServerData *serverData1;
     serverData1 = (struct ServerData *) serverData;
     //open the server, infinite loop with updates for symbolTable
-    DataReaderServer server(serverData1->port, serverData1->frequency);
+    DataReaderServer server(serverData1->port, serverData1->frequency, serverData1->symbolTable);
     return nullptr;
 }

@@ -120,75 +120,108 @@ string ShuntingYard::prepareNumber(string expr, int i) {
 
 /* i need to finish this function-- this is according to Reverse Polish notation algoritm*/
 Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
-    stack<string> operatorStack;
-    stack<Expression> operandStack;
-    bool pending_operand;
-    reverseContent(myQueue);
-    string token;
-    while(!myQueue.empty()){
+    stack <Expression*> exprStack;
 
-        token=myQueue.front();
-        //pops out the number/operator from queue
+    while(!myQueue.empty()){
+        //case if the next value in our postfix queue is a number
+        if(isValid_number(myQueue.front())){
+        Number* number= new Number(myQueue.front());
         myQueue.pop();
-        if(isOperator(token[0])){
-            string opr_toPush;
-            opr_toPush.push_back(token[0]);
-            pending_operand= false;
-            continue;
+
+            //caution for not popping out value
+        if(!myQueue.empty() && myQueue.front()==","){
+            //pop the delimeter value ","
+            myQueue.pop();
         }
-        else {
-            string operand;
-            while (!myQueue.empty() && myQueue.front() != ",") {
-                operand += myQueue.front();
-                double double_operand= stod(operand);
+
+        exprStack.push(number);
+        }
+        //this case is if the next value is an operator
+        else{
+            Expression* right_num = exprStack.top();
+            exprStack.pop();
+
+            //caution for not popping out value
+            if(!myQueue.empty() && myQueue.front()==","){
+                //pop the delimeter value ","
                 myQueue.pop();
             }
-            if (pending_operand) {
-                while(!operandStack.empty()){
-                    Number operand_left=operandStack.top();
-                    operandStack.pop();
-                    string curr_operator= operatorStack.top();
-                    operatorStack.pop();
-                    string operand_right=operandStack.top();
-                    operandStack.pop();
-                    //need to caclulate the current operand ---> do here calculation
-                }
-
-
+            Expression* left_num= exprStack.top();
+            exprStack.pop();
+            //caution for not popping out value
+            if(!myQueue.empty() && myQueue.front()==","){
+                //pop the delimeter value ","
+                myQueue.pop();
             }
-            //push here the operand into the operand stack ----> push here to stack
-            pending_operand=true;
-            //double double_expr = stod(operandStack.top());
-            //Expression num= new Number(operandStack.top());
 
+            char oper_toCalc= myQueue.front()[0];
 
+            switch(oper_toCalc){
+                case '+':{
+                    Plus* plus= new Plus(left_num,right_num);
+                    exprStack.push(plus);
+                    myQueue.pop();
+                    //caution for not popping out value
+                    if(!myQueue.empty() && myQueue.front()==","){
+                        //pop the delimeter value ","
+                        myQueue.pop();
+                    }
+
+                    break;
+                }
+                case '-':{
+                    Minus* minus= new Minus(left_num,right_num);
+                    exprStack.push(minus);
+                    myQueue.pop();
+                    //caution for not popping out value
+                    if(!myQueue.empty() && myQueue.front()==","){
+                        //pop the delimeter value ","
+                        myQueue.pop();
+                    }
+                    break;
+                }
+                case '*':{
+                    Multiply* multiply= new Multiply(left_num,right_num);
+                    exprStack.push(multiply);
+                    myQueue.pop();
+                    //caution for not popping out value
+                    if(!myQueue.empty() && myQueue.front()==","){
+                        //pop the delimeter value ","
+                        myQueue.pop();
+                    }
+                    break;
+                }
+                case '/':{
+                    Divide* divide= new Divide(left_num,right_num);
+                    exprStack.push(divide);
+                    myQueue.pop();
+                    //caution for not popping out value
+                    if(!myQueue.empty() && myQueue.front()==","){
+                        //pop the delimeter value ","
+                        myQueue.pop();
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
 
 
         }
-
-
-
-
-        //pops out the comma that seprates between values in queue
-        myQueue.pop();
     }
-
-
-    return nullptr;
+    return exprStack.top();
 }
 
 
 
-/*this function reverses all the content of the given queue*/
-void ShuntingYard::reverseContent(queue<string> &myQueue) {
-    stack<string> tmpStack;
-    while(!myQueue.empty()){
-        tmpStack.push(myQueue.front());
-        myQueue.pop();
+
+bool ShuntingYard::isValid_number(string number) {
+    bool ans=false;
+    for(int i = 0; i < number.length(); i++){
+        if(isNumber(number[i])){
+            ans=true;
+        }
     }
-    while(!tmpStack.empty()){
-        myQueue.push(tmpStack.top());
-        tmpStack.pop();
-    }
+    return ans;
 }
 
