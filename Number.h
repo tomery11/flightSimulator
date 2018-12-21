@@ -8,7 +8,7 @@
 
 #include "Expression.h"
 
-class Number : Expression {
+class Number : public Expression {
 
 private:
     double value;
