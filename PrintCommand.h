@@ -9,10 +9,10 @@
 #include <iostream>
 #include "SymbolsTable.h"
 
-class printCommand : public Command {
+class PrintCommand : public Command {
     SymbolsTable *symbols;
 public:
-    printCommand(SymbolsTable *symbols);
+    PrintCommand(SymbolsTable *symbols);
     virtual void doCommand(std::vector<string> *inputVec);
 };
 

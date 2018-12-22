@@ -2,14 +2,14 @@
 // Created by t on 22/12/18.
 //
 
-#include "printCommand.h"
+#include "PrintCommand.h"
 
-printCommand::printCommand(SymbolsTable *symbols) {
+PrintCommand::PrintCommand(SymbolsTable *symbols) {
     this->symbols = symbols;
 }
 
 //print
-void printCommand::doCommand(std::vector<string> *inputVec) {
+void PrintCommand::doCommand(std::vector<string> *inputVec) {
     //if need to print a string(start with "), print it
     if (inputVec->at(1)[0] == '"') {
         cout << inputVec->at(1).substr(1, inputVec->at(1).length() - 2) << endl;

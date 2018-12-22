@@ -11,6 +11,7 @@
 #include "SymbolsTable.h"
 #include "ConnectCommand.h"
 #include "VarCommand.h"
+#include "PrintCommand.h"
 
 using namespace std;
 
@@ -100,6 +101,10 @@ int main(int argc, char *argv[]) {
     VarCommand varCommand = VarCommand();
     varCommand.setSymbols(&symbols);
     commandMap["var"] = (Command *) &varCommand;
+    //print command
+    PrintCommand printCommand = PrintCommand(&symbols);
+    commandMap["print"] = (Command *) &printCommand;
+
 
     //run a script
     try {

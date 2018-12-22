@@ -1,0 +1,14 @@
+//
+// Created by t on 22/12/18.
+//
+
+#ifndef FLIGHTSIMULATOR_SLEEPCOMMAND_H
+#define FLIGHTSIMULATOR_SLEEPCOMMAND_H
+
+
+class SleepCommand {
+
+};
+
+
+#endif //FLIGHTSIMULATOR_SLEEPCOMMAND_H
