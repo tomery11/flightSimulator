@@ -1,6 +1,7 @@
 //
 // Created by Tomer Yona on 2018-12-19.
 //
+#define BUFFER_LENGTH 255
 
 #include "DataReaderServer.h"
 
@@ -8,7 +9,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
     try {
         this->port = port;
         this->frequency = frequency;
-        char buffer[256];
+        char buffer[BUFFER_LENGTH + 1];
         int newSocket, socketDescriptor, n;
         int opt = 1;
         //create socket
@@ -26,8 +27,6 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
         address.sin_family = AF_INET; //tcp
         address.sin_addr.s_addr = INADDR_ANY; //accept all addresses\clients
         address.sin_port = htons((uint16_t) this->port);
-
-        cout << "After setSockOpt. port: " << this->port << " port after htons: " << address.sin_port << endl;
         //bind socket to port and ip address
         if (bind(socketDescriptor, (struct sockaddr *) &address, sizeof(address)) < 0) {
             throw "server could not bind";
@@ -37,12 +36,10 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             cout << "loop " << endl;
             //listen
             int l = 0;
-            //while (l == 0) {
-
-                l = listen(socketDescriptor, 5);
-                if (l < 0) {
-                    throw "server listen failed";
-                }
+            l = listen(socketDescriptor, 5);
+            if (l < 0) {
+                throw "server listen failed";
+            }
             //}
             //accept
             newSocket = accept(socketDescriptor, (struct sockaddr *) &address, (socklen_t *) &addrlen);
@@ -51,11 +48,10 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             }
             //read and update
             memset(buffer, 0, 256);
-            n = (int) read(newSocket, buffer, 255);
+            n = (int) read(newSocket, buffer, BUFFER_LENGTH);
 
             if (n < 0) {
-                perror("ERROR reading from socket");
-                exit(1);
+                throw "read failed";
             }
 
             printf("Here is the message: %s\n", buffer);
@@ -63,11 +59,28 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             /* Write a response to the client */
             //n = write(newsockfd,"I got your message",18);
 
-            if (n < 0) {
-                perror("ERROR writing to socket");
-                exit(1);
-            }
             //parse
+            vector<double> inputVec;
+            string digits;
+            //go over the input and parse. delimiter is ','
+            for(int i = 0; i < BUFFER_LENGTH; i++) {
+                //if reached end of a number
+                if (buffer[i] == ',') {
+                    //if word is not empty, put in the vector
+                    if (!digits.empty()) {
+                        inputVec.push_back(stod(digits));
+                    }
+                } else {
+                    //if not end of number, add the digit to digits
+                    digits += buffer[i];
+                }
+            }
+
+            for(auto it=inputVec.begin(); it!=inputVec.end(); ++it){
+                cout << *it << ' ';
+            }
+            cout << endl;
+
             //update the binded vars
         }
     } catch (char *exception) {

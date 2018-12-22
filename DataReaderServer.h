@@ -13,6 +13,7 @@
 #include <string.h>
 #include "SymbolsTable.h"
 #include <iostream>
+#include <vector>
 
 
 class DataReaderServer {
