@@ -13,7 +13,7 @@ add_executable(flightSimulator
         Command.h
         OpenServerCommand.cpp
         OpenServerCommand.h
-        main.cpp VarCommand.cpp VarCommand.h DataReaderServer.cpp DataReaderServer.h var.cpp var.h Expression.cpp Expression.h
+        main.cpp VarCommand.cpp VarCommand.h DataReaderServer.cpp DataReaderServer.h Expression.cpp Expression.h
         BinaryExpression.cpp BinaryExpression.h Number.cpp Number.h Plus.cpp Plus.h Minus.cpp
         Minus.h Multiply.cpp Multiply.h Divide.cpp Divide.h ShuntingYard.cpp ShuntingYard.h
-        SymbolsTable.cpp SymbolsTable.h)
+        SymbolsTable.cpp SymbolsTable.h DataSetClient.cpp DataSetClient.h ConnectCommand.cpp ConnectCommand.h printCommand.cpp printCommand.h)

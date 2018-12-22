@@ -4,11 +4,14 @@
 #define FLIGHTSIMULATOR_VARCOMMAND_H
 
 #include "Command.h"
+#include "SymbolsTable.h"
 class VarCommand: public Command {
     string name;
-    int value;
+    string bind;
+    SymbolsTable *symbols;
 public:
-    void doCommand(std::vector<string> inputVec);
+    void doCommand(std::vector<string> *inputVec);
+    void setSymbols(SymbolsTable *symbols);
 };
 
 

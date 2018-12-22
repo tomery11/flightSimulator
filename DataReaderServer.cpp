@@ -33,7 +33,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             throw "server could not bind";
         }
         //infinite loop with updates for symbolTable
-        while (true) {
+        //while (true) {
             cout << "loop " << endl;
             //listen
             int l = 0;
@@ -54,36 +54,14 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             if (n < 0) {
                 throw "read failed";
             }
-
             printf("Here is the message: %s\n", buffer);
+            //update the vars
+            symbols->updateServer(buffer);
 
             /* Write a response to the client */
             //n = write(newsockfd,"I got your message",18);
 
-            //parse
-            vector<double> inputVec;
-            string digits;
-            //go over the input and parse. delimiter is ','
-            for(int i = 0; i < BUFFER_LENGTH; i++) {
-                //if reached end of a number
-                if (buffer[i] == ',') {
-                    //if word is not empty, put in the vector
-                    if (!digits.empty()) {
-                        inputVec.push_back(stod(digits));
-                    }
-                } else {
-                    //if not end of number, add the digit to digits
-                    digits += buffer[i];
-                }
-            }
-
-            for(auto it=inputVec.begin(); it!=inputVec.end(); ++it){
-                cout << *it << ' ';
-            }
-            cout << endl;
-
-            //update the binded vars
-        }
+        //}
     } catch (char *exception) {
         printf("%s",exception);
     }

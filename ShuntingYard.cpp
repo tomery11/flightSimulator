@@ -123,34 +123,34 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
     stack <Expression*> exprStack;
 
     while(!myQueue.empty()){
-        //case if the next value in our postfix queue is a number
+        //case if the next bind in our postfix queue is a number
         if(isValid_number(myQueue.front())){
         Number* number= new Number(myQueue.front());
         myQueue.pop();
 
-            //caution for not popping out value
+            //caution for not popping out bind
         if(!myQueue.empty() && myQueue.front()==","){
-            //pop the delimeter value ","
+            //pop the delimeter bind ","
             myQueue.pop();
         }
 
         exprStack.push(number);
         }
-        //this case is if the next value is an operator
+        //this case is if the next bind is an operator
         else{
             Expression* right_num = exprStack.top();
             exprStack.pop();
 
-            //caution for not popping out value
+            //caution for not popping out bind
             if(!myQueue.empty() && myQueue.front()==","){
-                //pop the delimeter value ","
+                //pop the delimeter bind ","
                 myQueue.pop();
             }
             Expression* left_num= exprStack.top();
             exprStack.pop();
-            //caution for not popping out value
+            //caution for not popping out bind
             if(!myQueue.empty() && myQueue.front()==","){
-                //pop the delimeter value ","
+                //pop the delimeter bind ","
                 myQueue.pop();
             }
 
@@ -161,9 +161,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     Plus* plus= new Plus(left_num,right_num);
                     exprStack.push(plus);
                     myQueue.pop();
-                    //caution for not popping out value
+                    //caution for not popping out bind
                     if(!myQueue.empty() && myQueue.front()==","){
-                        //pop the delimeter value ","
+                        //pop the delimeter bind ","
                         myQueue.pop();
                     }
 
@@ -173,9 +173,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     Minus* minus= new Minus(left_num,right_num);
                     exprStack.push(minus);
                     myQueue.pop();
-                    //caution for not popping out value
+                    //caution for not popping out bind
                     if(!myQueue.empty() && myQueue.front()==","){
-                        //pop the delimeter value ","
+                        //pop the delimeter bind ","
                         myQueue.pop();
                     }
                     break;
@@ -184,9 +184,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     Multiply* multiply= new Multiply(left_num,right_num);
                     exprStack.push(multiply);
                     myQueue.pop();
-                    //caution for not popping out value
+                    //caution for not popping out bind
                     if(!myQueue.empty() && myQueue.front()==","){
-                        //pop the delimeter value ","
+                        //pop the delimeter bind ","
                         myQueue.pop();
                     }
                     break;
@@ -195,9 +195,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     Divide* divide= new Divide(left_num,right_num);
                     exprStack.push(divide);
                     myQueue.pop();
-                    //caution for not popping out value
+                    //caution for not popping out bind
                     if(!myQueue.empty() && myQueue.front()==","){
-                        //pop the delimeter value ","
+                        //pop the delimeter bind ","
                         myQueue.pop();
                     }
                     break;

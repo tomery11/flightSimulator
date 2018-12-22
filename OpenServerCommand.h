@@ -5,12 +5,12 @@
 #ifndef FLIGHTSIMULATOR_OPENSERVERCOMMAND_H
 #define FLIGHTSIMULATOR_OPENSERVERCOMMAND_H
 
-
 #include "Command.h"
 #include <string>
 #include "DataReaderServer.h"
 #include <pthread.h>
 #include <iostream>
+
 //the struct the server thread will get
 struct ServerData {
     int port;
@@ -19,7 +19,7 @@ struct ServerData {
 };
 
 //the server thread function
-void* thread_func(void* serverData);
+void* serverThreadFunc(void* serverData);
 
 class OpenServerCommand : public Command {
     int frequency;

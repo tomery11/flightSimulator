@@ -9,6 +9,8 @@
 #include "DataReaderServer.h"
 #include "OpenServerCommand.h"
 #include "SymbolsTable.h"
+#include "ConnectCommand.h"
+#include "VarCommand.h"
 
 using namespace std;
 
@@ -67,9 +69,9 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
         c->doCommand(inputVec);
     } else { //find in variables
         if (symbols->exist(inputVec->at(0))) {
-            cout << "found in vars" << endl;
-            //todo set the variable value
-            //symbols->set(inputVec->at(0), inputVec->at(3)->)
+            cout << "found in varsOrder" << endl;
+            //set the variable bind
+            symbols->set(inputVec->at(0), stod(inputVec->at(2)));
         } else {
             throw "bad input: not a command or a variable";
         }
@@ -81,14 +83,22 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
 int main(int argc, char *argv[]) {
     std::string input;
     vector<string> inputVec;
-    //create symbol map - variable name and it's value
+    //create symbol map - variable name and it's bind
     SymbolsTable symbols;
     //create map string Command
     map<string, Command *> commandMap;
-    //add commands
+    //add commands: openServerCommand
     OpenServerCommand server = OpenServerCommand();
     server.setSymbolTable(&symbols);
     commandMap["openDataServer"] = (Command *) &server;
+    //connect command
+    ConnectCommand connect = ConnectCommand();
+    connect.setSymbolTable(&symbols);
+    commandMap["connect"] = (Command *) &connect;
+    //var command
+    VarCommand varCommand = VarCommand();
+    varCommand.setSymbols(&symbols);
+    commandMap["var"] = (Command *) &varCommand;
 
     //run a script
     try {
