@@ -17,4 +17,9 @@ Number::Number(string value) {
 Number::Number(int value) {
     this->value=value;
 
+
+}
+
+double Number::calculate() {
+    return 0;
 }

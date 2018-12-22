@@ -10,7 +10,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
         this->port = port;
         this->frequency = frequency;
         char buffer[BUFFER_LENGTH + 1];
-        int newSocket, socketDescriptor, n;
+        int newSocket, socketDescriptor, n, b;
         int opt = 1;
         //create socket
         socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
@@ -28,7 +28,8 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
         address.sin_addr.s_addr = INADDR_ANY; //accept all addresses\clients
         address.sin_port = htons((uint16_t) this->port);
         //bind socket to port and ip address
-        if (bind(socketDescriptor, (struct sockaddr *) &address, sizeof(address)) < 0) {
+        b = bind(socketDescriptor, (struct sockaddr *) &address, sizeof(address));
+        if (b < 0) {
             throw "server could not bind";
         }
         //infinite loop with updates for symbolTable
