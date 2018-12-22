@@ -16,4 +16,4 @@ add_executable(flightSimulator
         main.cpp VarCommand.cpp VarCommand.h DataReaderServer.cpp DataReaderServer.h var.cpp var.h Expression.cpp Expression.h
         BinaryExpression.cpp BinaryExpression.h Number.cpp Number.h Plus.cpp Plus.h Minus.cpp
         Minus.h Multiply.cpp Multiply.h Divide.cpp Divide.h ShuntingYard.cpp ShuntingYard.h
-        SymbolsTable.cpp SymbolsTable.h)
+        SymbolsTable.cpp SymbolsTable.h ConditionParser.cpp ConditionParser.h IfCondition.cpp IfCondition.h LoopCondition.cpp LoopCondition.h)
