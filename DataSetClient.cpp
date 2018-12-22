@@ -44,7 +44,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
             //check validity and send if real message
             if (!(message.first == "0" && message.second == 0)) {
                 memset(buffer, 0, 256);
-                string str = message.first + ' ' + to_string(message.second);
+                string str = message.first + ' ' + to_string(message.second) + "/r/n";
                 strcpy(buffer, str.c_str());
                 /* Send message to the server */
                 n = write(sockfd, buffer, strlen(buffer));

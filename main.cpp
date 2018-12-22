@@ -54,6 +54,7 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
         inputVec->at(inputVec->size()) != "}") {
                 return;
     }
+    cout << "parser1" << endl;
     //do the command
     //print test
 
