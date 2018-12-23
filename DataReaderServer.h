@@ -14,6 +14,8 @@
 #include "SymbolsTable.h"
 #include <iostream>
 #include <vector>
+#include <unistd.h>
+
 
 
 class DataReaderServer {
@@ -22,7 +24,6 @@ int frequency;
 int server_fd;
 public:
     DataReaderServer(int port, int frequency, SymbolsTable *symbols);
-    void update(SymbolsTable *symbolTable);
 };
 
 

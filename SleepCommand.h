@@ -5,6 +5,7 @@
 #ifndef FLIGHTSIMULATOR_SLEEPCOMMAND_H
 #define FLIGHTSIMULATOR_SLEEPCOMMAND_H
 
+#include <unistd.h>
 #include "Command.h"
 
 class SleepCommand : public Command {
