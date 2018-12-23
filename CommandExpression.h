@@ -7,9 +7,18 @@
 
 #include "Expression.h"
 #include "Command.h"
+#include <vector>
+#include <string>
+using namespace std;
 
 class CommandExpression : public Expression {
-    double calculate();
+public:
+    Command *c;
+    vector<string> *parameters;
+public:
+    explicit CommandExpression(Command *c, std::vector<string> *parameters);
+
+    double calculate() override;
 
 
 };
