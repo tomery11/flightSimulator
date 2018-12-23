@@ -22,6 +22,7 @@ public:
     ConditionParser (Expression *leftExpr, Expression *rightExpr, string condition_opr);
     bool meetsCondition();
 
+
 };
 
 

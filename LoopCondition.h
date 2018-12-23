@@ -9,7 +9,7 @@
 #include "ConditionParser.h"
 
 class LoopCondition : public ConditionParser{
-
+    void doCommand(std::vector<string> *inputVec);
 };
 
 
