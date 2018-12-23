@@ -225,3 +225,8 @@ bool ShuntingYard::isValid_number(string number) {
     return ans;
 }
 
+double ShuntingYard::evaluate(string &mathematical_exp) {
+    Expression *calcExp= algorithm(mathematical_exp);
+    return calcExp->calculate();
+}
+

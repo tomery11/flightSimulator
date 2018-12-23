@@ -26,6 +26,7 @@ private:
     Expression* postfix_calc(queue<string>& myQueue);
     void reverseContent(queue<string>& myQueue);
     bool isValid_number(string number);
+    double evaluate(string &mathematical_exp);
 
 
 };
