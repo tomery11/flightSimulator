@@ -18,4 +18,4 @@ add_executable(flightSimulator
         Minus.h Multiply.cpp Multiply.h Divide.cpp Divide.h ShuntingYard.cpp ShuntingYard.h
         SymbolsTable.cpp SymbolsTable.h DataSetClient.cpp DataSetClient.h ConnectCommand.cpp
         ConnectCommand.h PrintCommand.cpp PrintCommand.h SleepCommand.cpp SleepCommand.h ConditionParser.h ConditionParser.cpp
-        LoopCondition.cpp LoopCondition.h IfCondition.h IfCondition.cpp)
+        LoopCondition.cpp LoopCondition.h IfCondition.h IfCondition.cpp CommandExpression.h CommandExpression.cpp EntercCommand.cpp EntercCommand.h)
