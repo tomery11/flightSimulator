@@ -10,6 +10,7 @@
 #include "DataReaderServer.h"
 #include <pthread.h>
 #include <iostream>
+#include "ShuntingYard.h"
 
 //the struct the server thread will get
 struct ServerData {

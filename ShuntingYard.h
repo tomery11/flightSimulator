@@ -25,8 +25,10 @@ private:
     string prepareNumber(string expr, int i);
     Expression* postfix_calc(queue<string>& myQueue);
     bool isValid_number(string number);
-    double evaluate(string &mathematical_exp);
 
+
+public:
+    double evaluate(string &mathematical_exp);
 
 };
 
