@@ -24,6 +24,7 @@ public:
     void set(Expression *leftExpr, Expression *rightExpr, string condition_opr);
     bool meetsCondition();
 
+
 };
 
 

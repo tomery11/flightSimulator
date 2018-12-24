@@ -4,10 +4,13 @@
 
 #include "OpenServerCommand.h"
 
+/*the function recieves vector of strings and caculates the 2 arguments since they might be
+ * written as mathimatical expression*/
 void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
     //input validation
-    this->port = stoi(inputVec->at(1));
-    this->frequency = stoi(inputVec->at(2));
+    ShuntingYard myAlgo;
+    this->port = myAlgo.evaluate(inputVec->at(1));
+    this->frequency = myAlgo.evaluate(inputVec->at(2));
     //open thread and read a line in frequency, update symbol table
     pthread_t threadID;
     struct ServerData *serverData = new struct ServerData;

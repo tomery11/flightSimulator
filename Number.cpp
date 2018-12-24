@@ -21,5 +21,5 @@ Number::Number(int value) {
 }
 
 double Number::calculate() {
-    return 0;
+    return this->value;
 }

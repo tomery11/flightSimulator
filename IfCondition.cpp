@@ -4,9 +4,3 @@
 
 #include "IfCondition.h"
 
-void IfCondition::execute() {
-    if(meetsCondition()){
-
-    }
-
-}
