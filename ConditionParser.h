@@ -8,18 +8,20 @@
 
 #include "Command.h"
 #include "Expression.h"
+#include <vector>
 
 class ConditionParser : public Command {
 
     virtual void doCommand(std::vector<string> *inputVec)=0;
 
 protected:
+    vector<Command *> commands;
     Expression *leftExpr;
     Expression *rightExpr;
     string condition_opr;
 
 public:
-    ConditionParser (Expression *leftExpr, Expression *rightExpr, string condition_opr);
+    void set(Expression *leftExpr, Expression *rightExpr, string condition_opr);
     bool meetsCondition();
 
 };

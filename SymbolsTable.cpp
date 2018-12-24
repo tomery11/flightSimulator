@@ -37,6 +37,7 @@ void SymbolsTable::addVar(string name, string bind) {
     this->bindedVars.insert(pair<string,string>(name, bind));
     //add var and it's binded bind
     this->symbolsMap.insert(pair<string, double>(name, this->simulatorOutput.find(name)->second));
+    cout << "inserted name: " << name << " insterted bind " << bind << endl;
 }
 
 //check if a variable already exist

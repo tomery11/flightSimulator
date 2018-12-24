@@ -3,3 +3,7 @@
 //
 
 #include "LoopCondition.h"
+
+void LoopCondition::doCommand(std::vector<string> *inputVec) {
+    set()
+}

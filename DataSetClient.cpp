@@ -7,7 +7,7 @@
 DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) {
     try {
 
-        int sockfd, portno;
+        int portno;
         ssize_t n;
         struct sockaddr_in serv_addr;
         struct hostent *server;
@@ -15,7 +15,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
         char buffer[256];
 
         /* Create a socket point */
-        sockfd = socket(AF_INET, SOCK_STREAM, 0);
+        this->sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
         if (sockfd < 0) {
             throw "socket creation failed";
@@ -54,16 +54,23 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
                 }
 
                 /* todo Now read server response - is needed?*/
-                bzero(buffer, 256);
-                n = read(sockfd, buffer, 255);
+                //bzero(buffer, 256);
+                //n = read(sockfd, buffer, 255);
 
-                if (n < 0) {
-                    throw "reading from socket failed";
-                }
-                printf("%s\n", buffer);
+                //if (n < 0) {
+                //    throw "reading from socket failed";
+                //}
+                //printf("%s\n", buffer);
             }
         }
-    } catch (char *exception) {
+    } catch (char const *exception) {
         printf("%s",exception);
     }
 }
+
+DataSetClient::~DataSetClient() {
+    close(this->sockfd);
+}
+
+
+

@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
     //run a script
     try {
         //one argument to get the script from a file
-        if (argc == 2) { //todo
+        if (argc == 2) {
             //open the file
             fstream scriptFile(argv[1]);
             //if failed
@@ -135,7 +135,7 @@ int main(int argc, char *argv[]) {
                 lexer(&input, &inputVec);
                 parser(&inputVec, &commandMap, &symbols);
 
-            } while (input != "print \"done\"");
+            } while (input != "exit");
         } else { //two and more arguments are not allowed
             throw "bad argument number";
         }

@@ -10,7 +10,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
         this->port = port;
         this->frequency = frequency;
         char buffer[BUFFER_LENGTH + 1];
-        int newSocket, socketDescriptor, n, b;
+        int n, b;
         int opt = 1;
         //create socket
         socketDescriptor = socket(AF_INET, SOCK_STREAM, 0);
@@ -69,6 +69,11 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
     } catch (char *exception) {
         printf("%s",exception);
     }
+}
+
+DataReaderServer::~DataReaderServer() {
+    close(this->socketDescriptor);
+    close(this->newSocket);
 }
 
 

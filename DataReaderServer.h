@@ -21,9 +21,10 @@
 class DataReaderServer {
 int port;
 int frequency;
-int server_fd;
+int socketDescriptor, newSocket;
 public:
     DataReaderServer(int port, int frequency, SymbolsTable *symbols);
+    ~DataReaderServer();
 };
 
 

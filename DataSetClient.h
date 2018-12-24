@@ -19,8 +19,10 @@
 using namespace std;
 
 class DataSetClient {
+    int sockfd;
 public:
     DataSetClient(string ipAddress, int port, SymbolsTable *symbols);
+    ~DataSetClient();
 };
 
 

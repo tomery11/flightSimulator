@@ -5,6 +5,8 @@
 
 #include "Command.h"
 #include "SymbolsTable.h"
+#include <iostream>
+
 class VarCommand: public Command {
     string name;
     string bind;

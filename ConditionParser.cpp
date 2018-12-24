@@ -4,10 +4,11 @@
 
 #include "ConditionParser.h"
 
-ConditionParser::ConditionParser(Expression *leftExpr, Expression *rightExpr, string condition_opr) {
+void ConditionParser::set(Expression *leftExpr, Expression *rightExpr, string condition_opr) {
     this->leftExpr = leftExpr;
     this->rightExpr = rightExpr;
     this->condition_opr = condition_opr;
+    //commands inside
 
 }
 
