@@ -35,14 +35,25 @@ Expression *ShuntingYard::algorithm(string expr) {
          * anymore digits following the original digit and after we have found the complete number we
          * push it into the queue, if the number is negative then after we push the current number
          * into the queue we push also zero into the queue for example -4= 0-4*/
-        if ( isdigit(expr[i]) ){
+        if ( isNumber(expr[i])|| isChar(expr[i]) ){
 
-            //if(isNegative){
-              //  myQueue.push("0");
-            //}
-            string number = prepareNumber(expr,i);
-            i=i+number.length()-1;
-            myQueue.push(number);
+            string number;
+            if(isNumber(expr[i])){
+                number = prepareNumber(expr,i);
+                i=i+number.length()-1;
+                myQueue.push(number);
+            }
+            //in this case we take car of var type for example "roll"
+            else{
+                string var = prepareVariable(expr,i);
+                i=i+var.length()-1;
+                SymbolsTable currTable;
+                double d_number=currTable.getVarValue(var);
+
+                number= to_string(d_number);
+                myQueue.push(number);
+            }
+
             doubleOperator=false;
 
         }
@@ -135,7 +146,7 @@ Expression *ShuntingYard::algorithm(string expr) {
 string ShuntingYard::prepareNumber(string expr, int i) {
     string toReturn;
     int num_dot= 0;
-    while(isdigit(expr[i])||expr[i]=='.' && num_dot<2){
+    while(isdigit(expr[i])||(expr[i]=='.' && num_dot<2)){
         if(expr[i]=='.'){
             num_dot++;
         }
@@ -266,5 +277,22 @@ bool ShuntingYard::isValid_number(string number) {
 double ShuntingYard::evaluate(string &mathematical_exp) {
     Expression *calcExp= algorithm(mathematical_exp);
     return calcExp->calculate();
+}
+
+bool ShuntingYard::isChar(char a) {
+    bool ans=false;
+    if(a>96 && a<123)
+        ans=true;
+    return ans;
+}
+/*this function prepares a var from the given string and returns the string of it
+ * for example "roll/5" will return the string "roll"*/
+string ShuntingYard::prepareVariable(string expr, int i) {
+    string toReturn;
+    while(isChar(expr[i])){
+        toReturn+= expr[i];
+        i++;
+    }
+    return toReturn;
 }
 

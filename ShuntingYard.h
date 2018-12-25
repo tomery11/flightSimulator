@@ -14,6 +14,7 @@
 #include "Minus.h"
 #include "Multiply.h"
 #include "Divide.h"
+#include "SymbolsTable.h"
 using namespace std;
 class ShuntingYard {
 
@@ -25,6 +26,8 @@ private:
     string prepareNumber(string expr, int i);
     Expression* postfix_calc(queue<string>& myQueue);
     bool isValid_number(string number);
+    bool isChar(char a);
+    string prepareVariable(string expr,int i);
 
 public:
     double evaluate(string &mathematical_exp);
