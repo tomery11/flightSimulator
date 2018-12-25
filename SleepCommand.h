@@ -7,6 +7,7 @@
 
 #include <unistd.h>
 #include "Command.h"
+#include "ShuntingYard.h"
 
 class SleepCommand : public Command {
     virtual void doCommand(std::vector<string> *inputVec);
