@@ -18,12 +18,29 @@
 #include "LoopCondition.h"
 #include "IfCondition.h"
 #include "ConditionParser.h"
+//for shunting yard test
+#include "BinaryExpression.h"
+#include "Expression.h"
+#include "Number.h"
+#include "Plus.h"
+#include "Minus.h"
+#include "Multiply.h"
+#include "Divide.h"
+#include "ShuntingYard.h"
 ///home/t/CLionProjects/flightSimulator/script
 using namespace std;
 
 
 //get a file as argument or no arguments for getting lines from the user.
 int main(int argc, char *argv[]) {
+
+    ShuntingYard sh_test;
+    string test1="5-12";
+    double test1_ans= sh_test.evaluate(test1);
+    cout<<test1_ans<<endl;
+
+
+
     std::string input;
     vector<string> inputVec;
     //create symbol map - variable name and it's bind

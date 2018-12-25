@@ -25,7 +25,9 @@ Expression *ShuntingYard::algorithm(string expr) {
     queue<string> myQueue;
     /*the stack is for storing operators and brackets according to shunting yard algorithm*/
     stack<char> myStack;
-    bool isNegative=false;
+    //bool isNegative=false;
+    bool doubleOperator=false;
+    char oper_toSave;
     for(int i = 0; i < expr.length(); i++){
 
 
@@ -35,11 +37,13 @@ Expression *ShuntingYard::algorithm(string expr) {
          * into the queue we push also zero into the queue for example -4= 0-4*/
         if ( isdigit(expr[i]) ){
 
-            if(isNegative){
-                myQueue.push("0,");
-            }
+            //if(isNegative){
+              //  myQueue.push("0");
+            //}
             string number = prepareNumber(expr,i);
-            myQueue.push(number+",");
+            i=i+number.length()-1;
+            myQueue.push(number);
+            doubleOperator=false;
 
         }
 
@@ -48,30 +52,50 @@ Expression *ShuntingYard::algorithm(string expr) {
          * the stack is an operator that has a priority i.e: '*' has a priority over '+' so
          * if it has a priority then we push it into the queue otherwise we push it into the stack*/
         else if(isOperator(expr[i])){
+
             /*this case i take is whether the following number is negative such as -4
              * this also takes care of the priority*/
             if(expr[i] == '+' || expr[i] == '-' ){
-                if(expr[i]=='-'){
-                    isNegative=true;
+                if((expr[i]=='-'&& doubleOperator) || (expr[i]=='-' && i==0)){
+                   // myStack.push('(');
+                    myQueue.push("0");
+                    if((expr[i]=='-'&& doubleOperator)){
+                        oper_toSave=myStack.top();
+                        myStack.pop();
+                    }
+
+                    //myStack.push('(');
+                    //isNegative=true;
                 }
 
                 while( !myStack.empty() && (myStack.top() == '*' || myStack.top() == '/')){
                     string opr_toPush;
                     opr_toPush.push_back(myStack.top());
-                    myQueue.push(opr_toPush+",");
+                    myQueue.push(opr_toPush);
                     myStack.pop();
                 }
+
+                if(doubleOperator){
+                    myStack.push(oper_toSave);
+                }
+
                 myStack.push(expr[i]);
+
+
             }
             else if(expr[i] == '*' || expr[i] == '/'){
                 myStack.push(expr[i]);
             }
 
+            doubleOperator=true;
 
         }
+
+
         else if(expr[i] == '('){
             myStack.push(expr[i]);
-            isNegative=false;
+            doubleOperator=false;
+           // isNegative=false;
 
         }
 
@@ -81,16 +105,17 @@ Expression *ShuntingYard::algorithm(string expr) {
             while(!myStack.empty() && myStack.top()!= '(' && myStack.top() != ')'){
                 string opr_toPush;
                 opr_toPush.push_back(myStack.top());
-                myQueue.push(opr_toPush+",");
+                myQueue.push(opr_toPush);
                 myStack.pop();
             }
             myStack.pop();
-            isNegative=false;
+            //isNegative=false;
+            doubleOperator=false;
         }
         //I assumed that " " spaces splits the expressions
         else if(expr[i]==' '){
             expr.substr(1,expr.length());
-            isNegative=false;
+            //isNegative=false;
         }
 
     }
@@ -98,7 +123,8 @@ Expression *ShuntingYard::algorithm(string expr) {
     while(!myStack.empty()){
         string opr_toPush;
         opr_toPush.push_back(myStack.top());
-        myQueue.push(opr_toPush+",");
+        myStack.pop();
+        myQueue.push(opr_toPush);
     }
     return postfix_calc(myQueue);
 }
@@ -108,7 +134,13 @@ Expression *ShuntingYard::algorithm(string expr) {
  * keeps on running and in the end returns to caller the valid number as string*/
 string ShuntingYard::prepareNumber(string expr, int i) {
     string toReturn;
-    while(isdigit(expr[i])){
+    int num_dot= 0;
+    while(isdigit(expr[i])||expr[i]=='.' && num_dot<2){
+        if(expr[i]=='.'){
+            num_dot++;
+        }
+        if(num_dot==2)
+            throw ("illeagal expression");
         toReturn+= expr[i];
         i++;
     }
@@ -159,7 +191,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
             switch(oper_toCalc){
                 case '+':{
                     Plus* plus= new Plus(left_num,right_num);
-                    exprStack.push(plus);
+                    //i added this on 24.12 to check if 5+5=10 and is inserted into the stack
+                    Number* number= new Number(plus->calculate());
+                    exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
                     if(!myQueue.empty() && myQueue.front()==","){
@@ -171,6 +205,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 }
                 case '-':{
                     Minus* minus= new Minus(left_num,right_num);
+                    Number* number= new Number(minus->calculate());
                     exprStack.push(minus);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -182,6 +217,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 }
                 case '*':{
                     Multiply* multiply= new Multiply(left_num,right_num);
+                    Number* number= new Number(multiply->calculate());
                     exprStack.push(multiply);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -193,6 +229,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 }
                 case '/':{
                     Divide* divide= new Divide(left_num,right_num);
+                    Number* number= new Number(divide->calculate());
                     exprStack.push(divide);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -209,6 +246,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
 
         }
     }
+
     return exprStack.top();
 }
 
