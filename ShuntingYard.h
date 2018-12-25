@@ -26,7 +26,6 @@ private:
     Expression* postfix_calc(queue<string>& myQueue);
     bool isValid_number(string number);
 
-
 public:
     double evaluate(string &mathematical_exp);
 

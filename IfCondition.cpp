@@ -4,3 +4,6 @@
 
 #include "IfCondition.h"
 
+void IfCondition::doCommand(std::vector<string> *inputVec) {
+
+}

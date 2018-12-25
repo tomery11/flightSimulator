@@ -11,7 +11,6 @@
 class IfCondition : public ConditionParser{
 
 public:
-
     void doCommand(std::vector<string> *inputVec);
 
 };

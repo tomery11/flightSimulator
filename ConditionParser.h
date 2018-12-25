@@ -9,6 +9,10 @@
 #include "Command.h"
 #include "Expression.h"
 #include <vector>
+#include "parse_utils.h"
+#include <iostream>
+#include <sstream>
+#include <iterator>
 
 class ConditionParser : public Command {
 
@@ -16,12 +20,13 @@ class ConditionParser : public Command {
 
 protected:
     vector<Command *> commands;
+    vector<string> commandsVec;
     Expression *leftExpr;
     Expression *rightExpr;
     string condition_opr;
 
 public:
-    void set(Expression *leftExpr, Expression *rightExpr, string condition_opr);
+    void set(vector<string> *inputVec);
     bool meetsCondition();
 
 

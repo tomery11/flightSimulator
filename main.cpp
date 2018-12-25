@@ -14,64 +14,13 @@
 #include "PrintCommand.h"
 #include "SleepCommand.h"
 #include "EntercCommand.h"
+#include "parse_utils.h"
+#include "LoopCondition.h"
+#include "IfCondition.h"
+#include "ConditionParser.h"
 ///home/t/CLionProjects/flightSimulator/script
 using namespace std;
 
-
-void lexer(const string *input, vector<string> *inputVec){
-    string line;
-    std::istringstream iss(*input);
-    //if not in while loop or in if condition, delete the vector contents
-    if (!inputVec->empty() && (inputVec->at(0) != "while" || inputVec->at(0) != "if")) {
-        inputVec->clear();
-    }
-    //go over the line and parses according to to the token
-    while(std::getline(iss,line)){
-        std::size_t prev = 0, pos;
-        while ((pos = line.find_first_of(" \t", prev)) != string::npos) {
-            if (pos > prev) {
-                //remove
-                inputVec->push_back(line.substr(prev, pos - prev));
-            }
-            prev = pos + 1;
-        }
-        //add last word
-        if (prev < line.length()) {
-            inputVec->push_back(line.substr(prev, string::npos));
-        }
-    }
-    ///n?
-}
-
-void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, SymbolsTable *symbols){
-    //todo handle the case where { and } are not in their own lines
-    //if in while loop or in if condition and haven't reached end, return without doing the command
-    if (!inputVec->empty() && (inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
-        inputVec->at(inputVec->size()) != "}") {
-                return;
-    }
-    //do the command
-    //print test
-
-    for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
-        cout<<' '<<*it<<endl;
-    }
-
-    //find in commands
-    Command *c;
-    if (!inputVec->empty() && (mapCommand->count(inputVec->at(0)) > 0)) {
-        c = mapCommand->find(inputVec->at(0))->second;
-        c->doCommand(inputVec);
-    } else { //find in variables
-        if (!inputVec->empty() && symbols->exist(inputVec->at(0))) {
-            cout << "found in varsOrder" << endl;
-            //set the variable bind
-            symbols->set(inputVec->at(0), stod(inputVec->at(2)));
-        } else {
-            throw "bad input: not a command or a variable";
-        }
-    }
-}
 
 //get a file as argument or no arguments for getting lines from the user.
 int main(int argc, char *argv[]) {
@@ -102,6 +51,12 @@ int main(int argc, char *argv[]) {
     //enterc command
     EntercCommand entercCommand = EntercCommand();
     commandMap["enterc"] = (Command *) &entercCommand;
+    //while command
+    LoopCondition loopCommand = LoopCondition();
+    commandMap["while"] = (Command *) &loopCommand;
+    //if command
+    IfCondition ifCommand = IfCondition();
+    commandMap["if"] = (Command *) &ifCommand;
 
     //run a script
     try {
@@ -117,7 +72,7 @@ int main(int argc, char *argv[]) {
             if (scriptFile.is_open()) {
                 //parse the lines, one at a time
                 getline(scriptFile, input);
-                while (!input.empty()) { //todo: in case there is no new line at the end of the file there is a loop on the last line
+                while (!input.empty()) { //todo: stop loop on last line
                     cout << "line: " << input << endl;
                     //send for lexer and parser
                     lexer(&input, &inputVec);
