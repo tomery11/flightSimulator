@@ -1,16 +1,6 @@
-//
-// Created by Tomer Yona on 2018-12-22.
-//
 
 #include "ConditionParser.h"
 
-/*void ConditionParser::set(Expression *leftExpr, Expression *rightExpr, string condition_opr) {
-    this->leftExpr = leftExpr;
-    this->rightExpr = rightExpr;
-    this->condition_opr = condition_opr;
-    //commands inside
-
-}*/
 
 void ConditionParser::set(vector<string> *inputVec) {
     //handle the condition:
@@ -45,7 +35,7 @@ void ConditionParser::set(vector<string> *inputVec) {
         //after the operator, insert to second expression
         secondExp.insert(secondExp.length(), 1, condition[i]);
     }
-    //handle the commands:
+    //todo handle the commands:
 
 }
 
