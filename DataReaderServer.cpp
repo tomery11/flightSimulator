@@ -34,7 +34,6 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
         }
         //infinite loop with updates for symbolTable
         //while (true) {
-            cout << "loop " << endl;
             //listen
             int l = 0;
             l = listen(socketDescriptor, 5);
@@ -55,7 +54,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
                 if (n < 0) {
                     throw "read failed";
                 }
-                printf("Here is the message: %s\n", buffer);
+                //printf("Here is the message: %s\n", buffer);
                 //update the vars
                 symbols->updateServer(buffer);
                 //sleep for frequency
