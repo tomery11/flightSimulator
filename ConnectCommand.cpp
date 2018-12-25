@@ -8,8 +8,9 @@
 //create a thread and run connect
 void ConnectCommand::doCommand(std::vector<string> *inputVec) {
     //input validation
+    ShuntingYard myAlgo;
     this->ipAddress = inputVec->at(1);
-    this->port = stoi(inputVec->at(2));
+    this->port = myAlgo.evaluate(inputVec->at(2));
     //open thread and read a line in frequency, update symbol table
     pthread_t threadID;
     struct ClientData *clientData = new struct ClientData;

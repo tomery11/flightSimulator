@@ -18,6 +18,7 @@
 #include <string.h>
 #include "DataSetClient.h"
 #include "SymbolsTable.h"
+#include "ShuntingYard.h"
 
 using namespace std;
 
