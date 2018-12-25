@@ -28,7 +28,7 @@ void ConditionParser::set(vector<string> *inputVec) {
         //if found the operator already
         if (!found) {
             //for the operator
-            if(condition[i] == '>' || condition[i] == '<' || condition[i] == '=') {
+            if(condition[i] == '>' || condition[i] == '<' || condition[i] == '=' || condition[i] == '!') {
                 found = true;
                 //check for two chars operator and add them
                 if(condition[i + 1] == '=') {
@@ -47,8 +47,11 @@ void ConditionParser::set(vector<string> *inputVec) {
         secondExp.insert(secondExp.length(), 1, condition[i]);
     }
     //create the expressions
-    strToExpression(firstExp, this->leftExpr);
-    strToExpression(secondExp, this->rightExpr);
+    ShuntingYard myAlgo;
+    //this->port = myAlgo.evaluate(inputVec->at(1));
+    //this->frequency = myAlgo.evaluate(inputVec->at(2));
+    //strToExpression(firstExp, this->leftExpr);
+    //strToExpression(secondExp, this->rightExpr);
     //handle the commands:
 
 }
@@ -77,6 +80,9 @@ bool ConditionParser::meetsCondition() {
         return (leftNum <= rightNum);
     }
 
+    if(condition_opr == "!="){
+        return (leftNum <= rightNum);
+    }
     return false;
 }
 

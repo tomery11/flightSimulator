@@ -13,6 +13,7 @@
 #include <iostream>
 #include <sstream>
 #include <iterator>
+#include "ShuntingYard.h"
 
 class ConditionParser : public Command {
 

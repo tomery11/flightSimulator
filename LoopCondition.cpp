@@ -5,7 +5,7 @@
 #include "LoopCondition.h"
 
 void LoopCondition::doCommand(vector<string> *inputVec) {
-    //set(inputVec);
+    set(inputVec);
     unsigned long i;
     while (meetsCondition()) {
         for(i = 0; i < commands.size(); i++){

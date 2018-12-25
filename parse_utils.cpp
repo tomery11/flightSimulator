@@ -66,7 +66,3 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
     }
 }
 
-//create an expression from a string
-void strToExpression(string &input, Expression *expression) {
-
-}
