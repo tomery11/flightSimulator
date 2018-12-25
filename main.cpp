@@ -34,10 +34,10 @@ using namespace std;
 //get a file as argument or no arguments for getting lines from the user.
 int main(int argc, char *argv[]) {
 
-    ShuntingYard sh_test;
-    string test1="5-12";
-    double test1_ans= sh_test.evaluate(test1);
-    cout<<test1_ans<<endl;
+    //ShuntingYard sh_test;
+    //string test1="5 - 12";
+    //double test1_ans= sh_test.evaluate(test1);
+    //cout<<test1_ans<<endl;
 
 
 
