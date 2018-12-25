@@ -22,8 +22,11 @@ class ConditionParser : public Command {
 protected:
     vector<Command *> commands;
     vector<string> commandsVec;
-    Expression *leftExpr;
-    Expression *rightExpr;
+    string firstExp;
+    string secondExp;
+    ShuntingYard myAlgo;
+    //Expression *leftExpr;
+    //Expression *rightExpr;
     string condition_opr;
 
 public:

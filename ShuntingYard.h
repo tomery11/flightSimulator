@@ -31,7 +31,6 @@ private:
 
 public:
     double evaluate(string &mathematical_exp);
-
 };
 
 

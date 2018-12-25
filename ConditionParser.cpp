@@ -22,8 +22,7 @@ void ConditionParser::set(vector<string> *inputVec) {
     cout << "condition: " << condition << endl;
     //create the expressions and condition operation
     bool found = false;
-    string firstExp;
-    string secondExp;
+
     for (int i = 0; i < condition.length(); i++) {
         //if found the operator already
         if (!found) {
@@ -46,19 +45,13 @@ void ConditionParser::set(vector<string> *inputVec) {
         //after the operator, insert to second expression
         secondExp.insert(secondExp.length(), 1, condition[i]);
     }
-    //create the expressions
-    ShuntingYard myAlgo;
-    //this->port = myAlgo.evaluate(inputVec->at(1));
-    //this->frequency = myAlgo.evaluate(inputVec->at(2));
-    //strToExpression(firstExp, this->leftExpr);
-    //strToExpression(secondExp, this->rightExpr);
     //handle the commands:
 
 }
 
 bool ConditionParser::meetsCondition() {
-    double leftNum = leftExpr->calculate();
-    double rightNum = rightExpr->calculate();
+    double leftNum = myAlgo.evaluate(this->firstExp);
+    double rightNum = myAlgo.evaluate(this->secondExp);
 
     if(condition_opr == ">"){
         return (leftNum > rightNum);
