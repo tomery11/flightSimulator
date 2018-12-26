@@ -9,3 +9,7 @@ void EntercCommand::doCommand(std::vector<string> *inputVec) {
     cout << "press enter to continue: " << endl;
     char c = getc(stdin);
 }
+
+void EntercCommand::setSymbolTable(SymbolsTable *symbols) {
+
+}

@@ -7,7 +7,9 @@
 
 
 #include "ConditionParser.h"
+
 #include <vector>
+
 
 class LoopCondition : public ConditionParser{
 public:

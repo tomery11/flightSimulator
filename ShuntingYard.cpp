@@ -12,7 +12,7 @@ bool ShuntingYard::isNumber(char a) {
         ans = true;
     return ans;
 }
-
+/*this funtion check if the given char is a math operator*/
 bool ShuntingYard::isOperator(char a) {
     bool ans = false;
     if ( a == '+' || a == '-' || a == '*' || a == '/' )
@@ -20,7 +20,7 @@ bool ShuntingYard::isOperator(char a) {
     return ans;
 }
 /*this funtion will eventually return the final expression after all caculations*/
-Expression *ShuntingYard::algorithm(string expr) {
+Expression *ShuntingYard::algorithm(string expr, SymbolsTable currTable) {
     /* the queue is for storing mostly numbers according to shunting yard algorithm*/
     queue<string> myQueue;
     /*the stack is for storing operators and brackets according to shunting yard algorithm*/
@@ -29,8 +29,6 @@ Expression *ShuntingYard::algorithm(string expr) {
     bool doubleOperator=false;
     char oper_toSave;
     for(int i = 0; i < expr.length(); i++){
-
-
         /*in this condition we check whether the givin char is a digit if it is, we keep on checking if there are
          * anymore digits following the original digit and after we have found the complete number we
          * push it into the queue, if the number is negative then after we push the current number
@@ -47,7 +45,6 @@ Expression *ShuntingYard::algorithm(string expr) {
             else{
                 string var = prepareVariable(expr,i);
                 i=i+var.length()-1;
-                SymbolsTable currTable;
                 double d_number=currTable.getVarValue(var);
 
                 number= to_string(d_number);
@@ -75,8 +72,6 @@ Expression *ShuntingYard::algorithm(string expr) {
                         myStack.pop();
                     }
 
-                    //myStack.push('(');
-                    //isNegative=true;
                 }
 
                 while( !myStack.empty() && (myStack.top() == '*' || myStack.top() == '/')){
@@ -274,11 +269,12 @@ bool ShuntingYard::isValid_number(string number) {
     return ans;
 }
 
-double ShuntingYard::evaluate(string &mathematical_exp) {
-    Expression *calcExp= algorithm(mathematical_exp);
+double ShuntingYard::evaluate(string &mathematical_exp, SymbolsTable currTable) {
+    Expression *calcExp= algorithm(mathematical_exp, currTable);
     return calcExp->calculate();
 }
 
+/*checks if the char is a letter*/
 bool ShuntingYard::isChar(char a) {
     bool ans=false;
     if(a>96 && a<123)

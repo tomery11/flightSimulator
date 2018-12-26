@@ -17,7 +17,7 @@ void VarCommand::doCommand(std::vector<string> *inputVec) {
                 throw "bad input var name";
         }
     }
-    this->bind = inputVec->at(3).substr(1, inputVec->at(3).length() - 2);
+    this->bind = inputVec->at(4).substr(1, inputVec->at(4).length() - 2);
     //add to symbols
     if (this->symbols == NULL) {
         throw "symbols is null";
@@ -26,6 +26,6 @@ void VarCommand::doCommand(std::vector<string> *inputVec) {
     cout << "added var" << endl;
 }
 
-void VarCommand::setSymbols(SymbolsTable *symbols) {
+void VarCommand::setSymbolTable(SymbolsTable *symbols) {
     this->symbols = symbols;
 }

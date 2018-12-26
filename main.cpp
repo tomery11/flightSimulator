@@ -14,7 +14,7 @@
 #include "PrintCommand.h"
 #include "SleepCommand.h"
 #include "EntercCommand.h"
-#include "parse_utils.h"
+#include "ParseUtils.h"
 #include "LoopCondition.h"
 #include "IfCondition.h"
 #include "ConditionParser.h"
@@ -34,46 +34,15 @@ using namespace std;
 //get a file as argument or no arguments for getting lines from the user.
 int main(int argc, char *argv[]) {
 
-    //ShuntingYard sh_test;
-    //string test1="5 - 12";
-    //double test1_ans= sh_test.evaluate(test1);
-    //cout<<test1_ans<<endl;
-
 
 
     std::string input;
     vector<string> inputVec;
     //create symbol map - variable name and it's bind
     SymbolsTable symbols;
-    //create map string Command
-    map<string, Command *> commandMap;
-    //add commands: openServerCommand
-    OpenServerCommand server = OpenServerCommand();
-    server.setSymbolTable(&symbols);
-    commandMap["openDataServer"] = (Command *) &server;
-    //connect command
-    ConnectCommand connect = ConnectCommand();
-    connect.setSymbolTable(&symbols);
-    commandMap["connect"] = (Command *) &connect;
-    //var command
-    VarCommand varCommand = VarCommand();
-    varCommand.setSymbols(&symbols);
-    commandMap["var"] = (Command *) &varCommand;
-    //print command
-    PrintCommand printCommand = PrintCommand(&symbols);
-    commandMap["print"] = (Command *) &printCommand;
-    //sleep command
-    SleepCommand sleepCommand = SleepCommand();
-    commandMap["sleep"] = (Command *) &sleepCommand;
-    //enterc command
-    EntercCommand entercCommand = EntercCommand();
-    commandMap["enterc"] = (Command *) &entercCommand;
-    //while command
-    LoopCondition loopCommand = LoopCondition();
-    commandMap["while"] = (Command *) &loopCommand;
-    //if command
-    IfCondition ifCommand = IfCondition();
-    commandMap["if"] = (Command *) &ifCommand;
+
+
+    ParseUtils parseUtils(&symbols);
 
     //run a script
     try {
@@ -92,8 +61,8 @@ int main(int argc, char *argv[]) {
                 while (!input.empty()) { //todo: stop loop on last line
                     cout << "line: " << input << endl;
                     //send for lexer and parser
-                    lexer(&input, &inputVec);
-                    parser(&inputVec, &commandMap, &symbols);
+                    parseUtils.lexer(&input, &inputVec);
+                    parseUtils.parser(&inputVec, &symbols);
                     //get the next line from the file
                     getline(scriptFile, input);
                 }
@@ -104,8 +73,8 @@ int main(int argc, char *argv[]) {
                 //get the next line from the user
                 getline(std::cin, input);
                 //send for lexer and parser
-                lexer(&input, &inputVec);
-                parser(&inputVec, &commandMap, &symbols);
+                parseUtils.lexer(&input, &inputVec);
+                parseUtils.parser(&inputVec, &symbols);
 
             } while (input != "exit");
         } else { //two and more arguments are not allowed

@@ -20,3 +20,7 @@ void PrintCommand::doCommand(std::vector<string> *inputVec) {
     throw "bad print command";
 }
 
+void PrintCommand::setSymbolTable(SymbolsTable *symbols) {
+
+}
+

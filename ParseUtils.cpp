@@ -2,10 +2,16 @@
 // Created by t on 24/12/18.
 //
 
-#include "parse_utils.h"
+
+
+#include "LoopCondition.h"
+#include "IfCondition.h"
+
+
+
 
 //parse by delimiter. input is string to delimit, token and vector for output
-void parseByDelimiter(string inputStr, string token, vector<string> *outputVec) {
+void ParseUtils::parseByDelimiter(string inputStr, string token, vector<string> *outputVec) {
     //go over the inputStr and parses according to to the token
     std::size_t prev = 0, pos;
     while ((pos = inputStr.find_first_of(token, prev)) != string::npos) {
@@ -22,7 +28,7 @@ void parseByDelimiter(string inputStr, string token, vector<string> *outputVec) 
 }
 
 //lexer. perform the commands in the string input
-void lexer(const string *input, vector<string> *inputVec){
+void ParseUtils::lexer(const string *input, vector<string> *inputVec){
     string line;
     std::istringstream iss(*input);
     //if not in while loop or in if condition, delete the vector contents
@@ -36,7 +42,7 @@ void lexer(const string *input, vector<string> *inputVec){
 }
 
 //parser. perform the commands in the string vector input
-void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, SymbolsTable *symbols){
+void ParseUtils::parser(vector <string> *inputVec,  SymbolsTable *symbols){
     //todo handle the case where { and } are not in their own lines
     //if in while loop or in if condition and haven't reached end, return without doing the command
     if (!inputVec->empty() && (inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
@@ -52,8 +58,9 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
 
     //find in commands
     Command *c;
-    if (!inputVec->empty() && (mapCommand->count(inputVec->at(0)) > 0)) {
-        c = mapCommand->find(inputVec->at(0))->second;
+    if (!inputVec->empty() && (this->commandMap.count(inputVec->at(0)) > 0)) {
+        c = this->commandMap.find(inputVec->at(0))->second;
+        c->setSymbolTable(symbols);
         c->doCommand(inputVec);
     } else { //find in variables
         if (!inputVec->empty() && symbols->exist(inputVec->at(0))) {
@@ -66,3 +73,33 @@ void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, S
     }
 }
 
+ParseUtils::ParseUtils(SymbolsTable *symbols) {
+    //add commands: openServerCommand
+    OpenServerCommand server = OpenServerCommand();
+    server.setSymbolTable(symbols);
+    commandMap["openDataServer"] = (Command *) &server;
+    //connect command
+    ConnectCommand connect = ConnectCommand();
+    connect.setSymbolTable(symbols);
+    commandMap["connect"] = (Command *) &connect;
+    //var command
+    VarCommand varCommand = VarCommand();
+    varCommand.setSymbolTable(symbols);
+    commandMap["var"] = (Command *) &varCommand;
+    //print command
+    PrintCommand printCommand = PrintCommand(symbols);
+    commandMap["print"] = (Command *) &printCommand;
+    //sleep command
+    SleepCommand sleepCommand = SleepCommand();
+    commandMap["sleep"] = (Command *) &sleepCommand;
+    //enterc command
+    EntercCommand entercCommand = EntercCommand();
+    commandMap["enterc"] = (Command *) &entercCommand;
+    //while command
+    LoopCondition loopCommand = LoopCondition();
+    commandMap["while"] = (Command *) &loopCommand;
+    //if command
+    IfCondition ifCommand = IfCondition();
+    commandMap["if"] = (Command *) &ifCommand;
+
+}

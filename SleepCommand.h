@@ -10,7 +10,11 @@
 #include "ShuntingYard.h"
 
 class SleepCommand : public Command {
+private:
+    SymbolsTable *symbolTable;
+public:
     virtual void doCommand(std::vector<string> *inputVec);
+    void setSymbolTable(SymbolsTable *symbolTable);
 };
 
 
