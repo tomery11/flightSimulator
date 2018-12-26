@@ -6,6 +6,7 @@
 
 
 SymbolsTable::SymbolsTable() {
+    this->symbolsExist = true;
     varsOrder.push_back("/instrumentation/airspeed-indicator/indicated-speed-kt");
     varsOrder.push_back("/instrumentation/altimeter/indicated-altitude-ft");
     varsOrder.push_back("/instrumentation/altimeter/pressure-alt-ft");
@@ -31,6 +32,15 @@ SymbolsTable::SymbolsTable() {
     varsOrder.push_back("/engines/engine/rpm");
 }
 
+//get the symbols singleton
+SymbolsTable* SymbolsTable::getSymbols() {
+    if(symbolsExist) {
+        return this->symbolsSingleton;
+    }
+    this->symbolsSingleton = new SymbolsTable();
+    return this->symbolsSingleton;
+}
+
 //add a binded variable
 void SymbolsTable::addVar(string name, string bind) {
     //add bind
@@ -38,6 +48,12 @@ void SymbolsTable::addVar(string name, string bind) {
     //add var and it's binded bind
     this->symbolsMap.insert(pair<string, double>(name, this->simulatorOutput.find(name)->second));
     cout << "inserted name: " << name << " insterted bind " << bind << endl;
+}
+
+void SymbolsTable::addVar(string name, double value) {
+    //add var and it's value
+    this->symbolsMap.insert(pair<string, double>(name, value));
+    cout << "inserted name: " << name << " insterted value " << value << endl;
 }
 
 //check if a variable already exist
@@ -77,7 +93,7 @@ void SymbolsTable::set(string var, double value) {
         //push to the set queue
         this->setQueue.push(make_pair(var, value));
     } else {
-        throw "no such variable";
+        throw "no such variable ";
     }
 }
 
@@ -98,7 +114,14 @@ double SymbolsTable::getVarValue(string name) {
     if (exist(name)) {
         return this->symbolsMap.find(name)->second;
     }
+    for(auto it=symbolsMap.begin(); it!=symbolsMap.end(); ++it){
+        cout<<' '<<(*it).first << ' ' << (*it).second <<endl;
+    }
     throw "no such variable";
+}
+
+~SymbolsTable::SymbolsTable() {
+    delete this->
 }
 
 

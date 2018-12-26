@@ -37,18 +37,25 @@ void lexer(const string *input, vector<string> *inputVec){
 
 //parser. perform the commands in the string vector input
 void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, SymbolsTable *symbols){
+    cout << "lexer" << endl;
     //todo handle the case where { and } are not in their own lines
     //if in while loop or in if condition and haven't reached end, return without doing the command
-    if (!inputVec->empty() && (inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
-        inputVec->at(inputVec->size() - 1) != "}") {
+    if (!inputVec->empty() && ((inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
+        inputVec->at(inputVec->size() - 1) != "}")) {
+        if (inputVec->size() > 2) {
+            //add \n as a delimiter to the vector
+            inputVec->push_back("\n");
+        }
+        for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
+            cout<<' '<<*it<<endl;
+        }
         return;
     }
     //do the command
-    //print test
-
     for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
         cout<<' '<<*it<<endl;
     }
+
 
     //find in commands
     Command *c;

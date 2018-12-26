@@ -6,6 +6,7 @@
 #include "Command.h"
 #include "SymbolsTable.h"
 #include <iostream>
+#include "ShuntingYard.h"
 
 class VarCommand: public Command {
     string name;

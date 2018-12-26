@@ -18,7 +18,6 @@
 using namespace std;
 class ShuntingYard {
 
-
 private:
     bool isNumber(char a);
     bool isOperator(char a);
