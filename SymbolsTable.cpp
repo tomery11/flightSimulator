@@ -6,7 +6,6 @@
 
 
 SymbolsTable::SymbolsTable() {
-    this->symbolsExist = true;
     varsOrder.push_back("/instrumentation/airspeed-indicator/indicated-speed-kt");
     varsOrder.push_back("/instrumentation/altimeter/indicated-altitude-ft");
     varsOrder.push_back("/instrumentation/altimeter/pressure-alt-ft");
@@ -32,14 +31,6 @@ SymbolsTable::SymbolsTable() {
     varsOrder.push_back("/engines/engine/rpm");
 }
 
-//get the symbols singleton
-SymbolsTable* SymbolsTable::getSymbols() {
-    if(symbolsExist) {
-        return this->symbolsSingleton;
-    }
-    this->symbolsSingleton = new SymbolsTable();
-    return this->symbolsSingleton;
-}
 
 //add a binded variable
 void SymbolsTable::addVar(string name, string bind) {
@@ -120,9 +111,7 @@ double SymbolsTable::getVarValue(string name) {
     throw "no such variable";
 }
 
-~SymbolsTable::SymbolsTable() {
-    delete this->
-}
+
 
 
 

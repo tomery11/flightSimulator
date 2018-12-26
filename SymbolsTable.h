@@ -12,10 +12,7 @@
 
 using namespace std;
 
-//a singleton
 class SymbolsTable {
-    bool symbolsExist = false;
-    static SymbolsTable *symbolsSingleton;
     //vars that exist in program
     map<string,double> symbolsMap;
     //all vars from simulation
@@ -26,9 +23,8 @@ class SymbolsTable {
     map<string, string> bindedVars;
     //queue of values to be set to simulation
     queue<pair<string,int>> setQueue;
-    SymbolsTable();
 public:
-    static SymbolsTable* getSymbols();
+    SymbolsTable();
     void addVar(string name, string bind);
     void addVar(string name, double value);
     bool exist(string var);
@@ -36,7 +32,6 @@ public:
     void set(string var, double value);
     pair<string, double> getMessage();
     double getVarValue(string name);
-    ~SymbolsTable();
 
 };
 
