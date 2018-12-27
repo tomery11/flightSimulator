@@ -29,9 +29,10 @@ void ConditionParser::set(vector<string> *inputVec) {
                     //if one char operation, add it
                     this->condition_opr.insert(0, 1, condition[i]);
                 }
+            } else {
+                //not operator - add to first expression
+                firstExp.insert(firstExp.length(), 1, condition[i]);
             }
-            //not operator - add to first expression
-            firstExp.insert(firstExp.length(), 1, condition[i]);
         }
         //after the operator, insert to second expression
         secondExp.insert(secondExp.length(), 1, condition[i]);
@@ -43,6 +44,8 @@ void ConditionParser::set(vector<string> *inputVec) {
 bool ConditionParser::meetsCondition() {
     double leftNum = myAlgo.evaluate(this->firstExp,*symbolsTable);
     double rightNum = myAlgo.evaluate(this->secondExp,*symbolsTable);
+    cout << firstExp << endl;
+    cout << symbolsTable->getVarValue(firstExp) << endl;
     cout << leftNum << condition_opr << rightNum << endl;
     if(condition_opr == ">"){
         return (leftNum > rightNum);
