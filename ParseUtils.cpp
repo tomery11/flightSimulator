@@ -6,8 +6,7 @@
 
 #include "LoopCondition.h"
 #include "IfCondition.h"
-
-
+#include "ParseUtils.h"
 
 
 //parse by delimiter. input is string to delimit, token and vector for output
@@ -42,7 +41,7 @@ void ParseUtils::lexer(const string *input, vector<string> *inputVec){
 }
 
 //parser. perform the commands in the string vector input
-void ParseUtils::parser(vector <string> *inputVec,  SymbolsTable *symbols){
+void ParseUtils::parser(vector <string> *inputVec){
     //todo handle the case where { and } are not in their own lines
     //if in while loop or in if condition and haven't reached end, return without doing the command
     if (!inputVec->empty() && (inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
@@ -59,8 +58,9 @@ void ParseUtils::parser(vector <string> *inputVec,  SymbolsTable *symbols){
     //find in commands
     Command *c;
     if (!inputVec->empty() && (this->commandMap.count(inputVec->at(0)) > 0)) {
+        cout << this->commandMap.find(inputVec->at(0))->first <<endl;
         c = this->commandMap.find(inputVec->at(0))->second;
-        c->setSymbolTable(symbols);
+        //c->setSymbolTable(this->symbols);
         c->doCommand(inputVec);
     } else { //find in variables
         if (!inputVec->empty() && symbols->exist(inputVec->at(0))) {
@@ -73,33 +73,45 @@ void ParseUtils::parser(vector <string> *inputVec,  SymbolsTable *symbols){
     }
 }
 
-ParseUtils::ParseUtils(SymbolsTable *symbols) {
+ParseUtils::ParseUtils(SymbolsTable *symbols1) {
+
+    this->symbols = symbols1;
+    cout << this->symbols->exist("g") << endl;
     //add commands: openServerCommand
-    OpenServerCommand server = OpenServerCommand();
-    server.setSymbolTable(symbols);
-    commandMap["openDataServer"] = (Command *) &server;
+    OpenServerCommand *server = new OpenServerCommand();
+    server->setSymbolTable(symbols);
+    commandMap["openDataServer"] = (Command *) server;
     //connect command
-    ConnectCommand connect = ConnectCommand();
-    connect.setSymbolTable(symbols);
-    commandMap["connect"] = (Command *) &connect;
+    ConnectCommand *connect = new ConnectCommand();
+    connect->setSymbolTable(symbols);
+    commandMap["connect"] = (Command *) connect;
     //var command
-    VarCommand varCommand = VarCommand();
-    varCommand.setSymbolTable(symbols);
-    commandMap["var"] = (Command *) &varCommand;
+    VarCommand *varCommand = new VarCommand();
+    varCommand->setSymbolTable(symbols);
+    commandMap["var"] = (Command *) varCommand;
     //print command
-    PrintCommand printCommand = PrintCommand(symbols);
-    commandMap["print"] = (Command *) &printCommand;
+    PrintCommand *printCommand = new PrintCommand(symbols);
+    commandMap["print"] = (Command *) printCommand;
     //sleep command
-    SleepCommand sleepCommand = SleepCommand();
-    commandMap["sleep"] = (Command *) &sleepCommand;
+    SleepCommand *sleepCommand = new SleepCommand();
+    commandMap["sleep"] = (Command *) sleepCommand;
     //enterc command
-    EntercCommand entercCommand = EntercCommand();
-    commandMap["enterc"] = (Command *) &entercCommand;
+    EntercCommand *entercCommand = new EntercCommand();
+    commandMap["enterc"] = (Command *) entercCommand;
     //while command
-    LoopCondition loopCommand = LoopCondition();
-    commandMap["while"] = (Command *) &loopCommand;
+    LoopCondition *loopCommand = new LoopCondition();
+    commandMap["while"] = (Command *) loopCommand;
     //if command
-    IfCondition ifCommand = IfCondition();
-    commandMap["if"] = (Command *) &ifCommand;
+    IfCondition *ifCommand = new IfCondition();
+    commandMap["if"] = (Command *) ifCommand;
 
 }
+
+ParseUtils::~ParseUtils() {
+    cout << "end of parse utils" << endl;
+    for(auto it=this->commandMap.begin(); it!=commandMap.end(); ++it){
+        delete (*it).second;
+        (*it).second = NULL;
+    }
+}
+

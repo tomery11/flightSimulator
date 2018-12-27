@@ -85,7 +85,7 @@ void ConditionParser::doTheCommands() {
         }
         else{
             parseUtils1->lexer(&input, &inputVec);
-            parseUtils1->parser(&inputVec,symbolsTable);
+            parseUtils1->parser(&inputVec);
             cout<<input<<' ';
             input="";
         }

@@ -34,15 +34,11 @@ using namespace std;
 //get a file as argument or no arguments for getting lines from the user.
 int main(int argc, char *argv[]) {
 
-
-
     std::string input;
     vector<string> inputVec;
     //create symbol map - variable name and it's bind
-    SymbolsTable symbols;
-
-
-    ParseUtils parseUtils(&symbols);
+    SymbolsTable symbols;// = new SymbolsTable();
+    ParseUtils *parseUtils = new ParseUtils(&symbols);
 
     //run a script
     try {
@@ -59,10 +55,10 @@ int main(int argc, char *argv[]) {
                 //parse the lines, one at a time
                 getline(scriptFile, input);
                 while (!input.empty()) { //todo: stop loop on last line
-                    cout << "line: " << input << endl;
+                    cout << "line1: " << input << endl;
                     //send for lexer and parser
-                    parseUtils.lexer(&input, &inputVec);
-                    parseUtils.parser(&inputVec, &symbols);
+                    parseUtils->lexer(&input, &inputVec);
+                    parseUtils->parser(&inputVec);
                     //get the next line from the file
                     getline(scriptFile, input);
                 }
@@ -73,8 +69,8 @@ int main(int argc, char *argv[]) {
                 //get the next line from the user
                 getline(std::cin, input);
                 //send for lexer and parser
-                parseUtils.lexer(&input, &inputVec);
-                parseUtils.parser(&inputVec, &symbols);
+                parseUtils->lexer(&input, &inputVec);
+                parseUtils->parser(&inputVec);
 
             } while (input != "exit");
         } else { //two and more arguments are not allowed
@@ -82,6 +78,10 @@ int main(int argc, char *argv[]) {
         }
     } catch (char const *exception) {
         printf("%s", exception);
+    }
+    while(true) {
+        cout << "sleep" << endl;
+        sleep(900);
     }
     return 0;
 }
