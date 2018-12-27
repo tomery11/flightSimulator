@@ -14,7 +14,7 @@ class VarCommand: public Command {
     SymbolsTable *symbols;
 public:
     void doCommand(std::vector<string> *inputVec);
-    void setSymbols(SymbolsTable *symbols);
+    void setSymbolTable(SymbolsTable *symbols);
 };
 
 

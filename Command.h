@@ -7,11 +7,13 @@
 
 #include <string>
 #include <vector>
+#include "SymbolsTable.h"
 using namespace std;
 
 class Command {
 public:
     virtual void doCommand(std::vector<string> *inputVec)=0;
+    virtual void setSymbolTable(SymbolsTable *symbolsTable)=0;
 };
 
 

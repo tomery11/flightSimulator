@@ -1,22 +1,14 @@
 
 #include "ConditionParser.h"
 
+
 void ConditionParser::set(vector<string> *inputVec) {
-    parseUtils = new ParseUtils(&symbols);
-    cout << "condition parser" << endl;
-    for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
-        cout<<*it;
-    }
+    parseUtils1=new ParseUtils(symbolsTable);
     //handle the condition:
     string condition;
     //extract the condition
-    auto it=inputVec->begin() + 1;
-    for(; (*it) != "{"; ++it){
+    for(auto it=inputVec->begin() + 1; (*it) != "{"; ++it){
         condition += (*it);
-    }
-    //extract the commands strings
-    for(it=it + 1; (*it) != "}"; ++it){
-            this->commandsVec.push_back(*it);
     }
     cout << "condition: " << condition << endl;
     //create the expressions and condition operation
@@ -49,9 +41,8 @@ void ConditionParser::set(vector<string> *inputVec) {
 }
 
 bool ConditionParser::meetsCondition() {
-    cout << firstExp << condition_opr << secondExp << endl;
-    double leftNum = myAlgo.evaluate(this->firstExp);
-    double rightNum = myAlgo.evaluate(this->secondExp);
+    double leftNum = myAlgo.evaluate(this->firstExp,*symbolsTable);
+    double rightNum = myAlgo.evaluate(this->secondExp,*symbolsTable);
 
     if(condition_opr == ">"){
         return (leftNum > rightNum);
@@ -79,25 +70,33 @@ bool ConditionParser::meetsCondition() {
     return false;
 }
 
+void ConditionParser::setSymbolTable(SymbolsTable *symbolsTable) {
+    this->symbolsTable=symbolsTable;
+}
+
 void ConditionParser::doTheCommands() {
     string input;
     vector<string> inputVec;
-    cout << "do the commands!" << endl;
+    cout <<"do the Commands!" << endl;
     for(auto it=commandsVec.begin(); it!=commandsVec.end(); ++it){
-        if ((*it) != "\n") { //build a line to make a single command of
-            input += (*it) += " ";
+        if((*it)!="\n"){
+            input += (*it)+=" ";
             continue;
-        } else { //end of line, make the command
-            parseUtils.lexer(&input, &inputVec);
-            parseUtils.parser(&inputVec, &symbols);
-            cout << input << ' ';
-            input = "";
+        }
+        else{
+            parseUtils1->lexer(&input, &inputVec);
+            parseUtils1->parser(&inputVec,symbolsTable);
+            cout<<input<<' ';
+            input="";
         }
     }
-    cout << "end do the commands!" << endl;
+    cout<<"end do the commands!"<<endl;
 }
 
 ConditionParser::~ConditionParser() {
-    delete this->parseUtils;
-    this->parseUtils = NULL;
+    delete this->parseUtils1;
+    this->parseUtils1=NULL;
 }
+
+
+

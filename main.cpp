@@ -6,9 +6,18 @@
 #include "Command.h"
 #include <map>
 #include <fstream>
+#include "DataReaderServer.h"
+#include "OpenServerCommand.h"
 #include "SymbolsTable.h"
-#include "parse_utils.h"
-
+#include "ConnectCommand.h"
+#include "VarCommand.h"
+#include "PrintCommand.h"
+#include "SleepCommand.h"
+#include "EntercCommand.h"
+#include "ParseUtils.h"
+#include "LoopCondition.h"
+#include "IfCondition.h"
+#include "ConditionParser.h"
 //for shunting yard test
 #include "BinaryExpression.h"
 #include "Expression.h"
@@ -25,11 +34,6 @@ using namespace std;
 //get a file as argument or no arguments for getting lines from the user.
 int main(int argc, char *argv[]) {
 
-    ShuntingYard sh_test;
-    string test1="5-12";
-    double test1_ans= sh_test.evaluate(test1);
-    cout<<test1_ans<<endl;
-
 
 
     std::string input;
@@ -37,8 +41,8 @@ int main(int argc, char *argv[]) {
     //create symbol map - variable name and it's bind
     SymbolsTable symbols;
 
-    ParseUtils parseUtils(&symbols);
 
+    ParseUtils parseUtils(&symbols);
 
     //run a script
     try {

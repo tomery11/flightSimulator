@@ -7,22 +7,35 @@
 #include <string>
 #include <vector>
 #include <map>
+
 #include "Command.h"
 #include "SymbolsTable.h"
 #include <sstream>
 #include "Expression.h"
 #include "BinaryExpression.h"
 #include "Number.h"
-//all the commands
+#include "ParseUtils.h"
+#include "ConditionParser.h"
+
+#include "ConnectCommand.h"
+#include "VarCommand.h"
+#include "PrintCommand.h"
+#include "SleepCommand.h"
+
+#include "EntercCommand.h"
+#include "OpenServerCommand.h"
 
 using namespace std;
 
-class ParseUtils {
-    map<string, Command *> commandMap;
+class ParseUtils{
+    map <string, Command*> commandMap;
 public:
     ParseUtils(SymbolsTable *symbols);
     void parseByDelimiter(string inputStr, string token, vector<string> *outputVec);
     void lexer(const string *input, vector<string> *inputVec);
-    void parser(vector<string> *inputVec, SymbolsTable *symbols);
+    void parser(vector <string> *inputVec,  SymbolsTable *symbols);
 };
+
+
+
 #endif //FLIGHTSIMULATOR_PARSE_UTILS_H
