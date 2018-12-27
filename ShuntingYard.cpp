@@ -203,7 +203,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '-':{
                     Minus* minus= new Minus(left_num,right_num);
                     Number* number= new Number(minus->calculate());
-                    exprStack.push(minus);
+                    exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
                     if(!myQueue.empty() && myQueue.front()==","){
@@ -215,7 +215,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '*':{
                     Multiply* multiply= new Multiply(left_num,right_num);
                     Number* number= new Number(multiply->calculate());
-                    exprStack.push(multiply);
+                    exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
                     if(!myQueue.empty() && myQueue.front()==","){
@@ -227,7 +227,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '/':{
                     Divide* divide= new Divide(left_num,right_num);
                     Number* number= new Number(divide->calculate());
-                    exprStack.push(divide);
+                    exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
                     if(!myQueue.empty() && myQueue.front()==","){
