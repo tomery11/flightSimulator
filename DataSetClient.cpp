@@ -36,9 +36,9 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
         if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
             throw "bad connection";
         }
+        cout << "client accepted" << endl;
         //loop to send to simulator
         while (true) {
-            cout << "client loop" << endl;
             //get a message for the simulator
             pair<string, double> message = symbols->getMessage();
             //check validity and send if real message
@@ -62,6 +62,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
                 //}
                 //printf("%s\n", buffer);
             }
+            sleep(10/60);
         }
     } catch (char const *exception) {
         printf("%s",exception);

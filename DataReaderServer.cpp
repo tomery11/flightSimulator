@@ -46,6 +46,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             if (newSocket < 0) {
                 throw "server accept failed";
             }
+            cout << "server accepted" <<endl;
             while (true) {
                 //read and update
                 memset(buffer, 0, 256);

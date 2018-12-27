@@ -83,5 +83,7 @@ int main(int argc, char *argv[]) {
         cout << "sleep" << endl;
         sleep(900);
     }
+    delete parseUtils;
+    parseUtils = NULL;
     return 0;
 }

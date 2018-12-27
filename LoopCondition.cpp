@@ -8,5 +8,6 @@ void LoopCondition::doCommand(vector<string> *inputVec) {
     set(inputVec);
     while (meetsCondition()) {
         doTheCommands();
+        cout << "end of loop" << endl;
     }
 }

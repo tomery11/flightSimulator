@@ -77,7 +77,6 @@ void ConditionParser::setSymbolTable(SymbolsTable *symbolsTable) {
 void ConditionParser::doTheCommands() {
     string input;
     vector<string> inputVec;
-    cout <<"do the Commands!" << endl;
     for(auto it=commandsVec.begin(); it!=commandsVec.end(); ++it){
         if((*it)!="\n"){
             input += (*it)+=" ";
@@ -90,7 +89,6 @@ void ConditionParser::doTheCommands() {
             input="";
         }
     }
-    cout<<"end do the commands!"<<endl;
 }
 
 ConditionParser::~ConditionParser() {

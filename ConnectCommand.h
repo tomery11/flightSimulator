@@ -37,8 +37,8 @@ class ConnectCommand : public Command {
     int port;
     SymbolsTable *symbolTable;
 public:
-    void doCommand(std::vector<string> *inputVec);
-    void setSymbolTable(SymbolsTable *symbolTable);
+    virtual void doCommand(std::vector<string> *inputVec);
+    virtual void setSymbolTable(SymbolsTable *symbolTable);
 };
 
 
