@@ -37,8 +37,8 @@ int main(int argc, char *argv[]) {
     std::string input;
     vector<string> inputVec;
     //create symbol map - variable name and it's bind
-    SymbolsTable symbols;// = new SymbolsTable();
-    ParseUtils *parseUtils = new ParseUtils(&symbols);
+    SymbolsTable *symbols = new SymbolsTable();
+    ParseUtils *parseUtils = new ParseUtils(symbols);
 
     //run a script
     try {
@@ -79,10 +79,12 @@ int main(int argc, char *argv[]) {
     } catch (char const *exception) {
         printf("%s", exception);
     }
+    cout << "sleep" << endl;
     while(true) {
-        cout << "sleep" << endl;
         sleep(900);
     }
+    delete symbols;
+    symbols = NULL;
     delete parseUtils;
     parseUtils = NULL;
     return 0;
