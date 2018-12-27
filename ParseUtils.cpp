@@ -60,7 +60,7 @@ void ParseUtils::parser(vector <string> *inputVec){
     if (!inputVec->empty() && (this->commandMap.count(inputVec->at(0)) > 0)) {
         cout << this->commandMap.find(inputVec->at(0))->first <<endl;
         c = this->commandMap.find(inputVec->at(0))->second;
-        //c->setSymbolTable(this->symbols);
+        c->setSymbolTable(this->symbols);
         c->doCommand(inputVec);
     } else { //find in variables
         if (!inputVec->empty() && symbols->exist(inputVec->at(0))) {
