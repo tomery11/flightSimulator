@@ -15,12 +15,15 @@
 #include <iterator>
 #include "ShuntingYard.h"
 
+class ParseUtils;
+
 class ConditionParser : public Command {
 
     virtual void doCommand(std::vector<string> *inputVec)=0;
 
 protected:
-    vector<Command *> commands;
+    ParseUtils *parseUtils;
+    //vector<Command *> commands;
     vector<string> commandsVec;
     string firstExp;
     string secondExp;
@@ -32,8 +35,8 @@ protected:
 public:
     void set(vector<string> *inputVec);
     bool meetsCondition();
-
-
+    void doTheCommands();
+    ~ConditionParser();
 };
 
 

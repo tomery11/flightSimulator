@@ -13,11 +13,16 @@
 #include "Expression.h"
 #include "BinaryExpression.h"
 #include "Number.h"
+//all the commands
 
 using namespace std;
 
-void parseByDelimiter(string inputStr, string token, vector<string> *outputVec);
-void lexer(const string *input, vector<string> *inputVec);
-void parser(vector <string> *inputVec, const map<string,Command*> *mapCommand, SymbolsTable *symbols);
-
+class ParseUtils {
+    map<string, Command *> commandMap;
+public:
+    ParseUtils(SymbolsTable *symbols);
+    void parseByDelimiter(string inputStr, string token, vector<string> *outputVec);
+    void lexer(const string *input, vector<string> *inputVec);
+    void parser(vector<string> *inputVec, SymbolsTable *symbols);
+};
 #endif //FLIGHTSIMULATOR_PARSE_UTILS_H

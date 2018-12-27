@@ -1,13 +1,22 @@
 
 #include "ConditionParser.h"
 
-
 void ConditionParser::set(vector<string> *inputVec) {
+    parseUtils = new ParseUtils(&symbols);
+    cout << "condition parser" << endl;
+    for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
+        cout<<*it;
+    }
     //handle the condition:
     string condition;
     //extract the condition
-    for(auto it=inputVec->begin() + 1; (*it) != "{"; ++it){
+    auto it=inputVec->begin() + 1;
+    for(; (*it) != "{"; ++it){
         condition += (*it);
+    }
+    //extract the commands strings
+    for(it=it + 1; (*it) != "}"; ++it){
+            this->commandsVec.push_back(*it);
     }
     cout << "condition: " << condition << endl;
     //create the expressions and condition operation
@@ -40,6 +49,7 @@ void ConditionParser::set(vector<string> *inputVec) {
 }
 
 bool ConditionParser::meetsCondition() {
+    cout << firstExp << condition_opr << secondExp << endl;
     double leftNum = myAlgo.evaluate(this->firstExp);
     double rightNum = myAlgo.evaluate(this->secondExp);
 
@@ -69,5 +79,25 @@ bool ConditionParser::meetsCondition() {
     return false;
 }
 
+void ConditionParser::doTheCommands() {
+    string input;
+    vector<string> inputVec;
+    cout << "do the commands!" << endl;
+    for(auto it=commandsVec.begin(); it!=commandsVec.end(); ++it){
+        if ((*it) != "\n") { //build a line to make a single command of
+            input += (*it) += " ";
+            continue;
+        } else { //end of line, make the command
+            parseUtils.lexer(&input, &inputVec);
+            parseUtils.parser(&inputVec, &symbols);
+            cout << input << ' ';
+            input = "";
+        }
+    }
+    cout << "end do the commands!" << endl;
+}
 
-
+ConditionParser::~ConditionParser() {
+    delete this->parseUtils;
+    this->parseUtils = NULL;
+}
