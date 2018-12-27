@@ -43,7 +43,7 @@ void ConditionParser::set(vector<string> *inputVec) {
 bool ConditionParser::meetsCondition() {
     double leftNum = myAlgo.evaluate(this->firstExp,*symbolsTable);
     double rightNum = myAlgo.evaluate(this->secondExp,*symbolsTable);
-
+    cout << leftNum << condition_opr << rightNum << endl;
     if(condition_opr == ">"){
         return (leftNum > rightNum);
     }
