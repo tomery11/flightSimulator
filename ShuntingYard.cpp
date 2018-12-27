@@ -249,7 +249,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
 
 bool ShuntingYard::isValid_number(string number) {
     bool ans=false;
-    for(int i = 0; i < number.length(); i++){
+    for(unsigned int i = 0; i < number.length(); i++){
         if(isNumber(number[i])){
             ans=true;
         }
