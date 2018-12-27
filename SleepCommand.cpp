@@ -7,7 +7,7 @@
 void SleepCommand::doCommand(std::vector<string> *inputVec) {
     //there is no stou function
     ShuntingYard myAlgo;
-    unsigned int milisec = myAlgo.evaluate(inputVec->at(1),*this->symbolTable);
+    unsigned int milisec = myAlgo.evaluate(inputVec->at(1), this->symbolTable);
 
     sleep(milisec / 1000);
 }

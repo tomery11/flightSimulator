@@ -11,8 +11,8 @@ void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
     //input validation
     ShuntingYard myAlgo;
     //todo add another variable in algorithm
-    this->port = myAlgo.evaluate(inputVec->at(1),*this->symbolTable);
-    this->frequency = myAlgo.evaluate(inputVec->at(2),*this->symbolTable);
+    this->port = myAlgo.evaluate(inputVec->at(1), this->symbolTable);
+    this->frequency = myAlgo.evaluate(inputVec->at(2), this->symbolTable);
     //open thread and read a line in frequency, update symbol table
     pthread_t threadID;
     struct ServerData *serverData = new struct ServerData;

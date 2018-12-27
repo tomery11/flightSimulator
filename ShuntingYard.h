@@ -21,7 +21,7 @@ class ShuntingYard {
 private:
     bool isNumber(char a);
     bool isOperator(char a);
-    Expression* algorithm(string expr, SymbolsTable currTable);
+    Expression* algorithm(string expr, SymbolsTable *currTable);
     string prepareNumber(string expr, int i);
     Expression* postfix_calc(queue<string>& myQueue);
     bool isValid_number(string number);
@@ -29,7 +29,7 @@ private:
     string prepareVariable(string expr,int i);
 
 public:
-    double evaluate(string &mathematical_exp, SymbolsTable currTable);
+    double evaluate(string &mathematical_exp, SymbolsTable *currTable);
 };
 
 

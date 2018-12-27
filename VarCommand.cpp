@@ -5,9 +5,11 @@
 #include "VarCommand.h"
 
 void VarCommand::doCommand(std::vector<string> *inputVec) {
-
+    //input validation
+    if (this->symbols == NULL) {
+        throw "symbols is null";
+    }
     this->name = inputVec->at(1);
-    //get the subset with no ""
     bool varValid= false;
     if(name[0]>47 && name[0] < 58)
         throw "bad input var name";
@@ -17,12 +19,16 @@ void VarCommand::doCommand(std::vector<string> *inputVec) {
                 throw "bad input var name";
         }
     }
-    this->bind = inputVec->at(4).substr(1, inputVec->at(4).length() - 2);
     //add to symbols
-    if (this->symbols == NULL) {
-        throw "symbols is null";
+    if(inputVec->at(3) == "bind") { //if the var declaration is bind
+        //get the subset with no ""
+        this->bind = inputVec->at(4).substr(1, inputVec->at(4).length() - 2);
+        this->symbols->addVar(this->name, this->bind);
+    } else { //no bind
+        ShuntingYard shunt;
+        double value = shunt.evaluate(inputVec->at(3), symbols);
+        this->symbols->addVar(this->name, value);
     }
-    this->symbols->addVar(this->name, this->bind);
     cout << "added var" << endl;
 }
 

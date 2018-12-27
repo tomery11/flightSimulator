@@ -20,7 +20,7 @@ bool ShuntingYard::isOperator(char a) {
     return ans;
 }
 /*this funtion will eventually return the final expression after all caculations*/
-Expression *ShuntingYard::algorithm(string expr, SymbolsTable currTable) {
+Expression *ShuntingYard::algorithm(string expr, SymbolsTable *currTable) {
     /* the queue is for storing mostly numbers according to shunting yard algorithm*/
     queue<string> myQueue;
     /*the stack is for storing operators and brackets according to shunting yard algorithm*/
@@ -45,7 +45,7 @@ Expression *ShuntingYard::algorithm(string expr, SymbolsTable currTable) {
             else{
                 string var = prepareVariable(expr,i);
                 i=i+var.length()-1;
-                double d_number=currTable.getVarValue(var);
+                double d_number=currTable->getVarValue(var);
 
                 number= to_string(d_number);
                 myQueue.push(number);
@@ -269,7 +269,7 @@ bool ShuntingYard::isValid_number(string number) {
     return ans;
 }
 
-double ShuntingYard::evaluate(string &mathematical_exp, SymbolsTable currTable) {
+double ShuntingYard::evaluate(string &mathematical_exp, SymbolsTable *currTable) {
     Expression *calcExp= algorithm(mathematical_exp, currTable);
     return calcExp->calculate();
 }
