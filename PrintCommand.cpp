@@ -24,3 +24,4 @@ void PrintCommand::setSymbolTable(SymbolsTable *symbols) {
 
 }
 
+

@@ -7,7 +7,7 @@
 DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) {
     try {
 
-        int portno;
+        //int portno;
         ssize_t n;
         struct sockaddr_in serv_addr;
         struct hostent *server;

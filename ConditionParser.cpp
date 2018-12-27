@@ -1,6 +1,6 @@
 
 #include "ConditionParser.h"
-
+#include "ShuntingYard.h"
 
 void ConditionParser::set(vector<string> *inputVec) {
     parseUtils1=new ParseUtils(symbolsTable);
@@ -14,7 +14,7 @@ void ConditionParser::set(vector<string> *inputVec) {
     //create the expressions and condition operation
     bool found = false;
 
-    for (int i = 0; i < condition.length(); i++) {
+    for (unsigned int i = 0; i < condition.length(); i++) {
         //if found the operator already
         if (!found) {
             //for the operator

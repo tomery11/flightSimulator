@@ -16,8 +16,6 @@
 #include <vector>
 #include <unistd.h>
 
-
-
 class DataReaderServer {
 int port;
 int frequency;

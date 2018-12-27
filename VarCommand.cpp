@@ -3,6 +3,7 @@
 //
 
 #include "VarCommand.h"
+#include "ShuntingYard.h"
 
 void VarCommand::doCommand(std::vector<string> *inputVec) {
     //input validation
@@ -10,12 +11,11 @@ void VarCommand::doCommand(std::vector<string> *inputVec) {
         throw "symbols is null";
     }
     this->name = inputVec->at(1);
-    bool varValid= false;
     if(name[0]>47 && name[0] < 58)
         throw "bad input var name";
-    for(int i = 0; i<name.length(); i++){
-        if((name[i]<=47 && name[i]>=58) && ( name[i]<=64 && name[i]>=91 )||
-        ( name[i]<=96 && name[i]>=123 ) && (name[i] != '_') ){
+    for(unsigned int i = 0; i<name.length(); i++){
+        if(((name[i]<=47 && name[i]>=58) && (name[i]<=64 && name[i]>=91))
+                ||((name[i]<=96 && name[i]>=123 ) && (name[i] != '_'))){
                 throw "bad input var name";
         }
     }
@@ -35,3 +35,4 @@ void VarCommand::doCommand(std::vector<string> *inputVec) {
 void VarCommand::setSymbolTable(SymbolsTable *symbols) {
     this->symbols = symbols;
 }
+

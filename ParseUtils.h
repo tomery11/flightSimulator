@@ -7,23 +7,9 @@
 #include <string>
 #include <vector>
 #include <map>
-
 #include "Command.h"
 #include "SymbolsTable.h"
 #include <sstream>
-#include "Expression.h"
-#include "BinaryExpression.h"
-#include "Number.h"
-#include "ParseUtils.h"
-#include "ConditionParser.h"
-
-#include "ConnectCommand.h"
-#include "VarCommand.h"
-#include "PrintCommand.h"
-#include "SleepCommand.h"
-
-#include "EntercCommand.h"
-#include "OpenServerCommand.h"
 
 using namespace std;
 

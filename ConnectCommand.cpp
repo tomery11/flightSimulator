@@ -3,6 +3,8 @@
 //
 
 #include "ConnectCommand.h"
+#include "ShuntingYard.h"
+#include "DataSetClient.h"
 
 
 //create a thread and run connect
@@ -22,7 +24,8 @@ void ConnectCommand::doCommand(std::vector<string> *inputVec) {
     }
     clientData->symbolTable = this->symbolTable;
     //start the thread
-    int rc = pthread_create(&threadID, NULL, clientThreadFunc, (void *)clientData);
+    //int rc = pthread_create(&threadID, NULL, clientThreadFunc, (void *)clientData);
+    pthread_create(&threadID, NULL, clientThreadFunc, (void *)clientData);
 }
 
 void ConnectCommand::setSymbolTable(SymbolsTable *symbolTable) {

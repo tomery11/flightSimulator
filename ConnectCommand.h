@@ -6,7 +6,6 @@
 #define FLIGHTSIMULATOR_CONNECTCOMMAND_H
 
 #include "Command.h"
-#include "SymbolsTable.h"
 #include <iostream>
 #include <pthread.h>
 #include <stdio.h>
@@ -16,9 +15,7 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <string.h>
-#include "DataSetClient.h"
 #include "SymbolsTable.h"
-#include "ShuntingYard.h"
 
 using namespace std;
 
@@ -39,6 +36,7 @@ class ConnectCommand : public Command {
 public:
     virtual void doCommand(std::vector<string> *inputVec);
     virtual void setSymbolTable(SymbolsTable *symbolTable);
+    virtual ~ConnectCommand(){}
 };
 
 

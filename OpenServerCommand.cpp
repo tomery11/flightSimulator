@@ -3,6 +3,8 @@
 //
 
 #include "OpenServerCommand.h"
+#include "ShuntingYard.h"
+#include "DataReaderServer.h"
 
 /*the function recieves vector of strings and caculates the 2 arguments since they might be
  * written as mathimatical expression*/
@@ -24,13 +26,13 @@ void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
     }
     serverData->symbolTable = this->symbolTable;
     //start the thread
-    int rc = pthread_create(&threadID, NULL, serverThreadFunc, (void *)serverData);
+    //int rc = pthread_create(&threadID, NULL, serverThreadFunc, (void *)serverData);
+    pthread_create(&threadID, NULL, serverThreadFunc, (void *)serverData);
 }
 
 void OpenServerCommand::setSymbolTable(SymbolsTable *symbolTable) {
     this->symbolTable = symbolTable;
 }
-
 
 //run in the thread. open a a dataReaderServer and in an infinite loop update the symbol table
 //argument: ServerData struct with 0.int port 1.int frequency 2.pointer to symbolTable

@@ -17,10 +17,7 @@ public:
     vector<string> *parameters;
 public:
     explicit CommandExpression(Command *c, std::vector<string> *parameters);
-
     double calculate() override;
-
-
 };
 
 

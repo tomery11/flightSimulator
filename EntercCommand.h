@@ -11,6 +11,7 @@
 class EntercCommand : public Command {
     virtual void doCommand(std::vector<string> *inputVec);
     void setSymbolTable(SymbolsTable *symbols);
+    virtual ~EntercCommand(){}
 };
 
 

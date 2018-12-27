@@ -7,10 +7,8 @@
 
 #include "Command.h"
 #include <string>
-#include "DataReaderServer.h"
 #include <pthread.h>
 #include <iostream>
-#include "ShuntingYard.h"
 
 //the struct the server thread will get
 struct ServerData {
@@ -29,6 +27,7 @@ class OpenServerCommand : public Command {
 public:
     void doCommand(std::vector<string> *inputVec);
     void setSymbolTable(SymbolsTable *symbolTable);
+    virtual ~OpenServerCommand(){}
 };
 
 

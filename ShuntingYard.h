@@ -9,12 +9,8 @@
 #include <stack>
 #include <string>
 #include "Expression.h"
-#include "Number.h"
-#include "Plus.h"
-#include "Minus.h"
-#include "Multiply.h"
-#include "Divide.h"
 #include "SymbolsTable.h"
+
 using namespace std;
 class ShuntingYard {
 

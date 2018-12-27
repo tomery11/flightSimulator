@@ -14,4 +14,5 @@ CommandExpression::CommandExpression(Command *c, std::vector<string> *parameters
 
 double CommandExpression::calculate() {
     c->doCommand(parameters);
+    return 0;
 }

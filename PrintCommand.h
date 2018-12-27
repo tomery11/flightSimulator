@@ -15,6 +15,7 @@ public:
     PrintCommand(SymbolsTable *symbols);
     virtual void doCommand(std::vector<string> *inputVec);
     void setSymbolTable(SymbolsTable *symbols);
+    virtual ~PrintCommand(){}
 };
 
 

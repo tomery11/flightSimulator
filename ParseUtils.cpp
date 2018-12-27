@@ -2,12 +2,16 @@
 // Created by t on 24/12/18.
 //
 
-
-
+#include "ParseUtils.h"
+#include "ConditionParser.h"
+#include "ConnectCommand.h"
+#include "VarCommand.h"
+#include "PrintCommand.h"
+#include "SleepCommand.h"
+#include "EntercCommand.h"
+#include "OpenServerCommand.h"
 #include "LoopCondition.h"
 #include "IfCondition.h"
-#include "ParseUtils.h"
-
 
 //parse by delimiter. input is string to delimit, token and vector for output
 void ParseUtils::parseByDelimiter(string inputStr, string token, vector<string> *outputVec) {

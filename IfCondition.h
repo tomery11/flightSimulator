@@ -8,7 +8,7 @@
 
 #include "ConditionParser.h"
 
-class IfCondition : public ConditionParser{
+class IfCondition : public ConditionParser {
 
 public:
     void doCommand(std::vector<string> *inputVec);

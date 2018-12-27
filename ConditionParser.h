@@ -5,18 +5,13 @@
 #ifndef FLIGHTSIMULATOR_CONDITIONPARSER_H
 #define FLIGHTSIMULATOR_CONDITIONPARSER_H
 
-
 #include "Command.h"
-#include "Expression.h"
 #include "ParseUtils.h"
 #include <vector>
-
-//#include "parse_utils.h"
 #include <iostream>
 #include <sstream>
 #include <iterator>
 #include "ShuntingYard.h"
-
 
 class ParseUtils;
 class ConditionParser : public Command {

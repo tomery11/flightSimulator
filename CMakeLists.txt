@@ -19,4 +19,4 @@ add_executable(flightSimulator
         SymbolsTable.cpp SymbolsTable.h DataSetClient.cpp DataSetClient.h ConnectCommand.cpp
         ConnectCommand.h PrintCommand.cpp PrintCommand.h SleepCommand.cpp SleepCommand.h ConditionParser.h ConditionParser.cpp
         LoopCondition.cpp LoopCondition.h IfCondition.h IfCondition.cpp CommandExpression.h CommandExpression.cpp EntercCommand.cpp
-        EntercCommand.h ParseUtils.cpp ParseUtils.h)
+        EntercCommand.h ParseUtils.cpp ParseUtils.h Command.cpp)

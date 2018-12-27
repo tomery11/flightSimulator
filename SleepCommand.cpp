@@ -3,6 +3,8 @@
 //
 
 #include "SleepCommand.h"
+#include "ShuntingYard.h"
+
 
 void SleepCommand::doCommand(std::vector<string> *inputVec) {
     //there is no stou function
@@ -15,3 +17,5 @@ void SleepCommand::doCommand(std::vector<string> *inputVec) {
 void SleepCommand::setSymbolTable(SymbolsTable *symbolTable) {
     this->symbolTable=symbolTable;
 }
+
+

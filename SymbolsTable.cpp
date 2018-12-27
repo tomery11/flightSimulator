@@ -58,7 +58,7 @@ void SymbolsTable::updateServer(string values) {
     string digits;
     unsigned long varNum = 0;
     //go over the input and parse. delimiter is ',' and '\n'
-    for(int i = 0; i < values.length(); i++) {
+    for(unsigned int i = 0; i < values.length(); i++) {
         //if reached end of a number
         if (values[i] == ',' || values[i] == '\n') {
             //if word is not empty, put in the map

@@ -6,7 +6,6 @@
 #include "Command.h"
 #include "SymbolsTable.h"
 #include <iostream>
-#include "ShuntingYard.h"
 
 class VarCommand: public Command {
     string name;
@@ -15,6 +14,7 @@ class VarCommand: public Command {
 public:
     void doCommand(std::vector<string> *inputVec);
     void setSymbolTable(SymbolsTable *symbols);
+    virtual ~VarCommand() {}
 };
 
 
