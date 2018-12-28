@@ -1,5 +1,5 @@
 openDataServer 5400 10
-connect 192.168.1.26 5402
+connect 127.0.0.1 5402
 var warp = bind "/sim/time/warp"
 var magnetos = bind "/controls/switches/magnetos"
 var throttle = bind "/controls/engines/current-engine/throttle"
@@ -11,7 +11,7 @@ var brakeparking = bind "/sim/model/c172p/brake-parking"
 var primer = bind "/controls/engines/engine/primer"
 var starter = bind "/controls/switches/starter"
 var autostart = bind "/engines/active-engine/auto-start"
-var brake = bind "/controls/flight/speedbrake"
+var breaks = bind "/controls/flight/speedbrake"
 var heading = bind "/instrumentation/heading-indicator/offset-deg"
 var airspeed = bind "/instrumentation/airspeed-indicator/indicated-speed-kt"
 var roll = bind "/instrumentation/attitude-indicator/indicated-roll-deg"
