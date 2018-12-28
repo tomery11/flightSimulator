@@ -51,16 +51,20 @@ int main(int argc, char *argv[]) {
                 throw "bad file";
             }
             //if open
+
             if (scriptFile.is_open()) {
                 //parse the lines, one at a time
                 getline(scriptFile, input);
-                while (!input.empty()) { //todo: stop loop on last line
+                while ( !input.empty()) { //todo: stop loop on last line
                     cout << "line1: " << input << endl;
                     //send for lexer and parser
                     parseUtils->lexer(&input, &inputVec);
                     parseUtils->parser(&inputVec);
                     //get the next line from the file
                     getline(scriptFile, input);
+                    if(scriptFile.eof()){
+                        break;
+                    }
                 }
                 scriptFile.close();
             }
