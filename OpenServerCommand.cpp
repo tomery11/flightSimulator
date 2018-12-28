@@ -9,7 +9,7 @@
 /*the function recieves vector of strings and caculates the 2 arguments since they might be
  * written as mathimatical expression*/
 void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
-    cout << "open server com" << endl;
+    //cout << "open server com" << endl;
     //input validation
     ShuntingYard myAlgo;
     //todo add another variable in algorithm

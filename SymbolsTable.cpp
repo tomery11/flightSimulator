@@ -6,7 +6,47 @@
 
 
 SymbolsTable::SymbolsTable() {
-    varsOrder.push_back("/instrumentation/airspeed-indicator/indicated-speed-kt");
+    varsOrder.push_back("instrumentation/airspeed-indicator/indicated-speed-kt");
+    varsOrder.push_back("/instrumentation/altimeter/indicated-altitude-ft");
+    varsOrder.push_back("/instrumentation/altimeter/pressure-alt-ft");
+    varsOrder.push_back("/instrumentation/attitude-indicator/indicated-pitch-deg");
+    varsOrder.push_back("/instrumentation/attitude-indicator/indicated-roll-deg");
+    varsOrder.push_back("/instrumentation/attitude-indicator/internal-pitch-deg");
+    varsOrder.push_back("/instrumentation/attitude-indicator/internal-roll-deg");
+    varsOrder.push_back("/instrumentation/encoder/indicated-altitude-ft");
+    varsOrder.push_back("/instrumentation/encoder/pressure-alt-ft");
+    varsOrder.push_back("/instrumentation/gps/indicated-altitude-ft");
+    varsOrder.push_back("/instrumentation/gps/indicated-ground-speed-kt");
+    varsOrder.push_back("/instrumentation/gps/indicated-vertical-speed");
+    varsOrder.push_back("/instrumentation/heading-indicator/indicated-heading-deg");
+    varsOrder.push_back("/instrumentation/magnetic-compass/indicated-heading-deg");
+    varsOrder.push_back("/instrumentation/slip-skid-ball/indicated-slip-skid");
+    varsOrder.push_back("/instrumentation/turn-indicator/indicated-turn-rate");
+    varsOrder.push_back("/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
+    varsOrder.push_back("/controls/flight/aileron");
+    varsOrder.push_back("/controls/flight/elevator");
+    varsOrder.push_back("/controls/flight/rudder");
+    varsOrder.push_back("/controls/flight/flaps");
+    varsOrder.push_back("/controls/engines/current-engine/throttle");
+    varsOrder.push_back("/engines/engine/rpm");
+    varsOrder.push_back("/sim/time/warp");
+    varsOrder.push_back("/controls/switches/magnetos");
+    varsOrder.push_back("/controls/switches/master-bat");
+    varsOrder.push_back("/controls/switches/master-alt");
+    varsOrder.push_back("/controls/switches/master-avionics");
+    varsOrder.push_back("/sim/model/c172p/brake-parking");
+    varsOrder.push_back("/controls/engines/engine/primer");
+    varsOrder.push_back("/controls/switches/starter");
+    varsOrder.push_back("/engines/active-engine/auto-start");
+    varsOrder.push_back("/controls/flight/speedbrake");
+    varsOrder.push_back("/controls/engines/current-engine/mixture");
+    varsOrder.push_back("/instrumentation/heading-indicator/offset-deg");
+    varsOrder.push_back("/instrumentation/heading-indicator/offset-deg");
+
+
+
+    /*
+     varsOrder.push_back("instrumentation/airspeed-indicator/indicated-speed-kt");
     varsOrder.push_back("/instrumentation/altimeter/indicated-altitude-ft");
     varsOrder.push_back("/instrumentation/altimeter/pressure-alt-ft");
     varsOrder.push_back("/instrumentation/attitude-indicator/indicated-pitch-deg");
@@ -29,6 +69,7 @@ SymbolsTable::SymbolsTable() {
     varsOrder.push_back("/controls/flight/flaps");
     varsOrder.push_back("/controls/engines/engine/throttle");
     varsOrder.push_back("/engines/engine/rpm");
+     */
 }
 
 
@@ -38,13 +79,13 @@ void SymbolsTable::addVar(string name, string bind) {
     this->bindedVars.insert(pair<string,string>(name, bind));
     //add var and it's binded bind
     this->symbolsMap.insert(pair<string, double>(name, this->simulatorOutput.find(name)->second));
-    cout << "inserted name: " << name << " insterted bind " << bind << endl;
+    //cout << "inserted name: " << name << " insterted bind " << bind << endl;
 }
 
 void SymbolsTable::addVar(string name, double value) {
     //add var and it's value
     this->symbolsMap.insert(pair<string, double>(name, value));
-    cout << "inserted name: " << name << " insterted value " << value << endl;
+    //cout << "inserted name: " << name << " insterted value " << value << endl;
 }
 
 //check if a variable already exist
@@ -57,6 +98,7 @@ void SymbolsTable::updateServer(string values) {
     //parse and put in simulatorOutput map and update binded var
     string digits;
     unsigned long varNum = 0;
+    //cout << "updates from simulator:" << values << endl;
     //go over the input and parse. delimiter is ',' and '\n'
     for(unsigned int i = 0; i < values.length(); i++) {
         //if reached end of a number
@@ -106,7 +148,7 @@ double SymbolsTable::getVarValue(string name) {
         return this->symbolsMap.find(name)->second;
     }
     for(auto it=symbolsMap.begin(); it!=symbolsMap.end(); ++it){
-        cout<<' '<<(*it).first << ' ' << (*it).second <<endl;
+        //cout<<' '<<(*it).first << ' ' << (*it).second <<endl;
     }
     throw "no such variable";
 }

@@ -56,19 +56,19 @@ void ParseUtils::parser(vector <string> *inputVec){
     //print test
 
     for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
-        cout<<' '<<*it<<endl;
+        //cout<<' '<<*it<<endl;
     }
 
     //find in commands
     Command *c;
     if (!inputVec->empty() && (this->commandMap.count(inputVec->at(0)) > 0)) {
-        cout << this->commandMap.find(inputVec->at(0))->first <<endl;
+        //cout << this->commandMap.find(inputVec->at(0))->first <<endl;
         c = this->commandMap.find(inputVec->at(0))->second;
         c->setSymbolTable(this->symbols);
         c->doCommand(inputVec);
     } else { //find in variables
         if (!inputVec->empty() && symbols->exist(inputVec->at(0))) {
-            cout << "found in varsOrder" << endl;
+            //cout << "found in varsOrder" << endl;
             //set the variable bind
             symbols->set(inputVec->at(0), stod(inputVec->at(2)));
         } else {
@@ -80,7 +80,7 @@ void ParseUtils::parser(vector <string> *inputVec){
 ParseUtils::ParseUtils(SymbolsTable *symbols1) {
 
     this->symbols = symbols1;
-    cout << this->symbols->exist("g") << endl;
+    //cout << this->symbols->exist("g") << endl;
     //add commands: openServerCommand
     OpenServerCommand *server = new OpenServerCommand();
     server->setSymbolTable(symbols);
@@ -112,7 +112,7 @@ ParseUtils::ParseUtils(SymbolsTable *symbols1) {
 }
 
 ParseUtils::~ParseUtils() {
-    cout << "end of parse utils" << endl;
+    //cout << "end of parse utils" << endl;
     for(auto it=this->commandMap.begin(); it!=commandMap.end(); ++it){
         delete (*it).second;
         (*it).second = NULL;
