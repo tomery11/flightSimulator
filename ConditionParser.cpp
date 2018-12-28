@@ -10,7 +10,7 @@ void ConditionParser::set(vector<string> *inputVec) {
     for(auto it=inputVec->begin() + 1; (*it) != "{"; ++it){
         condition += (*it);
     }
-    cout << "condition: " << condition << endl;
+    //cout << "condition: " << condition << endl;
     //create the expressions and condition operation
     bool found = false;
 
@@ -44,9 +44,9 @@ void ConditionParser::set(vector<string> *inputVec) {
 bool ConditionParser::meetsCondition() {
     double leftNum = myAlgo.evaluate(this->firstExp, symbolsTable);
     double rightNum = myAlgo.evaluate(this->secondExp, symbolsTable);
-    cout << firstExp << endl;
-    cout << symbolsTable->getVarValue(firstExp) << endl;
-    cout << leftNum << condition_opr << rightNum << endl;
+    //cout << firstExp << endl;
+    //cout << symbolsTable->getVarValue(firstExp) << endl;
+    //cout << leftNum << condition_opr << rightNum << endl;
     if(condition_opr == ">"){
         return (leftNum > rightNum);
     }
@@ -88,7 +88,7 @@ void ConditionParser::doTheCommands() {
         else{
             parseUtils1->lexer(&input, &inputVec);
             parseUtils1->parser(&inputVec);
-            cout<<input<<' ';
+            //cout<<input<<' ';
             input="";
         }
     }

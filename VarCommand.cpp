@@ -29,7 +29,7 @@ void VarCommand::doCommand(std::vector<string> *inputVec) {
         double value = shunt.evaluate(inputVec->at(3), symbols);
         this->symbols->addVar(this->name, value);
     }
-    cout << "added var" << endl;
+    //cout << "added var" << endl;
 }
 
 void VarCommand::setSymbolTable(SymbolsTable *symbols) {

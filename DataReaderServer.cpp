@@ -42,6 +42,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             }
             //}
             //accept
+            cout << "server try to accept" << endl;
             newSocket = accept(socketDescriptor, (struct sockaddr *) &address, (socklen_t *) &addrlen);
             if (newSocket < 0) {
                 throw "server accept failed";

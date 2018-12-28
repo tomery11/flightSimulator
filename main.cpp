@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
                 //parse the lines, one at a time
                 getline(scriptFile, input);
                 while (!input.empty()) { //todo: stop loop on last line
-                    cout << "line1: " << input << endl;
+                    //cout << "line1: " << input << endl;
                     //send for lexer and parser
                     parseUtils->lexer(&input, &inputVec);
                     parseUtils->parser(&inputVec);
