@@ -40,8 +40,6 @@ print "engine is warming..."
 while rpm <= 750 {
 print rpm
 }
-sleep 1000
-}
 sleep 5000
 print "let's fly"
 var h0 = heading
@@ -51,6 +49,5 @@ while alt < 1000 {
 rudder = (h0 - heading)/80
 aileron = -roll / 70
 elevator = pitch / 50
-print "alt = " alt
 sleep 250
 }
