@@ -33,8 +33,8 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
         serv_addr.sin_port = htons((uint16_t)port);
 
         /* Now connect to the server */
-        if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-            throw "bad connection";
+        while (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
+            sleep(1);
         }
         cout << "client accepted" << endl;
         //loop to send to simulator
@@ -44,7 +44,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
             //check validity and send if real message
             if (!(message.first == "0" && message.second == 0)) {
                 memset(buffer, 0, 256);
-                string str = message.first + ' ' + to_string(message.second) + "/r/n";
+                string str = "set " + message.first + " " + to_string(message.second) + "\r\n";
                 strcpy(buffer, str.c_str());
                 /* Send message to the server */
                 n = write(sockfd, buffer, strlen(buffer));
@@ -52,7 +52,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
                 if (n < 0) {
                     throw "write to socket failed";
                 }
-                cout << "sent: " << message.first << " " << message.second << endl;
+                cout << "sent: " << str << endl;
                 /* todo Now read server response - is needed?*/
                 //bzero(buffer, 256);
                 //n = read(sockfd, buffer, 255);

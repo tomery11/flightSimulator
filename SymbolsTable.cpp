@@ -137,7 +137,8 @@ pair<string, double> SymbolsTable::getMessage() {
         message.first = "0";
         message.second = 0;
     } else {
-        message = this->setQueue.front();
+        message.first = this->bindedVars.find(this->setQueue.front().first)->second;
+        message.second = this->setQueue.front().second;
         this->setQueue.pop();
     }
     return message;

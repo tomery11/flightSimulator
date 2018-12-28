@@ -19,7 +19,7 @@ class SymbolsTable {
     map<string,double> simulatorOutput;
     //vars order in simulation output
     vector<string> varsOrder;
-    //binded vars in program
+    //binded vars in program. name var first, bind path second
     map<string, string> bindedVars;
     //queue of values to be set to simulation
     queue<pair<string,int>> setQueue;
