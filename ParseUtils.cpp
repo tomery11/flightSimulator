@@ -35,7 +35,9 @@ void ParseUtils::lexer(const string *input, vector<string> *inputVec){
     string line;
     std::istringstream iss(*input);
     //if not in while loop or in if condition, delete the vector contents
-    if (!inputVec->empty() && !(inputVec->at(0) == "while" || inputVec->at(0) == "if")) {
+    if (!inputVec->empty() && ((!(inputVec->at(0) == "while" || inputVec->at(0) == "if"))
+                                || ((inputVec->at(0) == "while" || inputVec->at(0) == "if")
+                                        && inputVec->at(inputVec->size() - 1) == "}"))) {
         inputVec->clear();
     }
     //go over the line and parses according to to the token
