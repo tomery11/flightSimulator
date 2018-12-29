@@ -31,7 +31,7 @@ Expression *ShuntingYard::algorithm(string expr, SymbolsTable *currTable) {
     queue<string> myQueue;
     /*the stack is for storing operators and brackets according to shunting yard algorithm*/
     stack<char> myStack;
-    //bool isNegative=false;
+
     bool doubleOperator=false;
     char oper_toSave;
     for(unsigned int i = 0; i < expr.length(); i++){
@@ -96,7 +96,7 @@ Expression *ShuntingYard::algorithm(string expr, SymbolsTable *currTable) {
         else if(expr[i] == '('){
             myStack.push(expr[i]);
             doubleOperator=false;
-           // isNegative=false;
+
         }
         /* this case is if expr[i]==')' */
         else if(expr[i]==')'){
