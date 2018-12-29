@@ -104,7 +104,7 @@ void SymbolsTable::updateServer(string values) {
         //if reached end of a number
         if (values[i] == ',' || values[i] == '\n') {
             //if word is not empty, put in the map
-            if (!digits.empty()) {
+            if (!digits.empty() && varNum < varsOrder.size()) {
                 simulatorOutput[varsOrder.at(varNum)] = stod(digits);
                 //if in binded varsOrder, update the var in symbolMap as well
                 if (this->bindedVars.count(varsOrder.at(varNum)) > 0) {
@@ -156,9 +156,9 @@ double SymbolsTable::getVarValue(string name) {
         }
         return this->symbolsMap.find(name)->second;
     }
-    for(auto it=symbolsMap.begin(); it!=symbolsMap.end(); ++it){
+    //for(auto it=symbolsMap.begin(); it!=symbolsMap.end(); ++it){
         //cout<<' '<<(*it).first << ' ' << (*it).second <<endl;
-    }
+    //}
     throw "no such variable";
 }
 
