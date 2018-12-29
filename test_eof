@@ -1,0 +1,5 @@
+var throttle = bind "/controls/engines/current-engine/throttle"
+throttle = 0.2
+print "done"
+enterc
+
