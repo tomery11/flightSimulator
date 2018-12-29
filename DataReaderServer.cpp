@@ -55,11 +55,11 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             if (n < 0) {
                 throw "read failed";
             }
-            if(i % 200 == 0) {
-            cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-            printf("%s\n", buffer);
-            cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-            }
+            //if(i % 200 == 0) {
+            //cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            //printf("%s\n", buffer);
+            //cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            //}
             //update the vars
             symbols->updateServer(buffer);
             //sleep for frequency

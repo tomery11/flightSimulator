@@ -94,37 +94,33 @@ bool SymbolsTable::exist(string var) {
 }
 
 //get a string with values delimited by ',' and update the simulatorOutput and binded varsOrder
-void SymbolsTable::updateServer(string values) {
+void SymbolsTable::updateServer(char *buffer) {
+    string values(buffer);
     //parse and put in simulatorOutput map and update binded var
-    string digits;
+    string digits = "";
     unsigned long varNum = 0;
-    //cout << "updates from simulator:" << values << endl;
     //go over the input and parse. delimiter is ',' and '\n'
-    cout << "-------------------------" << endl;
     for(unsigned int i = 0; i < values.length(); i++) {
         //if reached end of a number
         if (values[i] == ',' || values[i] == '\n') {
             //if word is not empty, put in the map
-            if (!digits.empty() && varNum < varsOrder.size()) {
+            if (!digits.empty() && (varNum < varsOrder.size())) {
                 simulatorOutput[varsOrder.at(varNum)] = stod(digits);
                 //if in binded varsOrder, update the var in symbolMap as well
-                if (this->bindedVars.count(varsOrder.at(varNum)) > 0) {
-                    cout << "varNUm: " << varNum << " value: " << digits << endl; 
-                    this->symbolsMap.find(varsOrder.at(varNum))->second = stod(digits);
-                    //test rpm
-                    if(stod(digits) != 0 && varNum == 22) {
-                        cout << "rpm is not zero in update from server: " << digits << endl;
+                for (auto it = bindedVars.begin(); it != bindedVars.end(); ++it) {
+                    if ((*it).second == varsOrder.at(varNum)) {
+                        //cout << "var: " << (*it).first << " value: " << digits << endl; 
+                        this->symbolsMap.find((*it).first)->second = stod(digits);
                     }
                 }
                 varNum++;
             }
+            digits = "";
         } else {
             //if not end of number, add the digit to digits
             digits += values[i];
         }
     }
-    cout << "-------------------------" << endl;
-    //cout << "throttle value: " << this->symbolsMap.find("throttle")->second << endl;
 }
 
 
@@ -154,9 +150,9 @@ pair<string, double> SymbolsTable::getMessage() {
 
 double SymbolsTable::getVarValue(string name) {
     if (exist(name)) {
-        if(name == "rpm" && this->symbolsMap.find(name)->second != 0) {
-            cout << "rpm not zero in get var value: " << this->symbolsMap.find(name)->second << endl;;
-        }
+        //if(name == "rpm" && this->symbolsMap.find(name)->second != 0) {
+        //    cout << "rpm not zero in get var value: " << this->symbolsMap.find(name)->second << endl;;
+        //}
         return this->symbolsMap.find(name)->second;
     }
     //for(auto it=symbolsMap.begin(); it!=symbolsMap.end(); ++it){

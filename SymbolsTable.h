@@ -28,7 +28,7 @@ public:
     void addVar(string name, string bind);
     void addVar(string name, double value);
     bool exist(string var);
-    void updateServer(string values);
+    void updateServer(char *buffer);
     void set(string var, double value);
     pair<string, double> getMessage();
     double getVarValue(string name);
