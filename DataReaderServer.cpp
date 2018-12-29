@@ -1,7 +1,7 @@
 //
 // Created by Tomer Yona on 2018-12-19.
 //
-#define BUFFER_LENGTH 255
+#define BUFFER_LENGTH 512
 
 #include "DataReaderServer.h"
 
@@ -32,47 +32,49 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
         if (b < 0) {
             throw "server could not bind";
         }
-        //infinite loop with updates for symbolTable
-        //while (true) {
-            //listen
-            int l = 0;
-            l = listen(socketDescriptor, 5);
-            if (l < 0) {
-                throw "server listen failed";
-            }
-            //}
-            //accept
-            cout << "server try to accept" << endl;
-            newSocket = accept(socketDescriptor, (struct sockaddr *) &address, (socklen_t *) &addrlen);
-            if (newSocket < 0) {
-                throw "server accept failed";
-            }
-            cout << "server accepted" <<endl;
-            while (true) {
-                //read and update
-                memset(buffer, 0, 256);
-                n = (int) read(newSocket, buffer, BUFFER_LENGTH);
-
-                if (n < 0) {
-                    throw "read failed";
-                }
-                //printf("Here is the message: %s\n", buffer);
-                //update the vars
-                symbols->updateServer(buffer);
-                //sleep for frequency
-                sleep(frequency/60);
-
-                /* Write a response to the client */
-                //n = write(newsockfd,"I got your message",18);
-            }
-
+        int l = 0;
+        l = listen(socketDescriptor, 5);
+        if (l < 0) {
+            throw "server listen failed";
+        }
         //}
+        //accept
+        cout << "server try to accept" << endl;
+        newSocket = accept(socketDescriptor, (struct sockaddr *) &address, (socklen_t *) &addrlen);
+        if (newSocket < 0) {
+            throw "server accept failed";
+        }
+        cout << "server accepted" <<endl;
+        int i = 0;
+        while (true) {
+            i++;
+            //read and update
+            memset(buffer, 0, BUFFER_LENGTH);
+            n = (int) read(newSocket, buffer, BUFFER_LENGTH);
+
+            if (n < 0) {
+                throw "read failed";
+            }
+            if(i % 100 == 0) {
+            cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            printf("Here is the message: %s\n", buffer);
+            cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+            }
+            //update the vars
+            symbols->updateServer(buffer);
+            //sleep for frequency
+            sleep(frequency/60);
+            //newsockfd.flush();
+            /* Write a response to the client */
+            //n = write(newsockfd,"I got your message",18);
+        }
     } catch (char *exception) {
         printf("%s",exception);
     }
 }
 
 DataReaderServer::~DataReaderServer() {
+    cout << "server socket closed" << endl;
     close(this->socketDescriptor);
     close(this->newSocket);
 }

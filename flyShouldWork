@@ -37,6 +37,7 @@ primer = 3
 starter = 1
 autostart = 1
 print "engine is warming..."
+print rpm
 while rpm <= 750 {
 print rpm
 }
