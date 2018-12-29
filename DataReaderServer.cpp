@@ -55,9 +55,9 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             if (n < 0) {
                 throw "read failed";
             }
-            if(i % 100 == 0) {
+            if(i % 200 == 0) {
             cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-            printf("Here is the message: %s\n", buffer);
+            printf("%s\n", buffer);
             cout << endl << "~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
             }
             //update the vars

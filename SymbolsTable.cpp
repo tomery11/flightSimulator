@@ -100,6 +100,7 @@ void SymbolsTable::updateServer(string values) {
     unsigned long varNum = 0;
     //cout << "updates from simulator:" << values << endl;
     //go over the input and parse. delimiter is ',' and '\n'
+    cout << "-------------------------" << endl;
     for(unsigned int i = 0; i < values.length(); i++) {
         //if reached end of a number
         if (values[i] == ',' || values[i] == '\n') {
@@ -108,6 +109,7 @@ void SymbolsTable::updateServer(string values) {
                 simulatorOutput[varsOrder.at(varNum)] = stod(digits);
                 //if in binded varsOrder, update the var in symbolMap as well
                 if (this->bindedVars.count(varsOrder.at(varNum)) > 0) {
+                    cout << "varNUm: " << varNum << " value: " << digits << endl; 
                     this->symbolsMap.find(varsOrder.at(varNum))->second = stod(digits);
                     //test rpm
                     if(stod(digits) != 0 && varNum == 22) {
@@ -121,6 +123,7 @@ void SymbolsTable::updateServer(string values) {
             digits += values[i];
         }
     }
+    cout << "-------------------------" << endl;
     //cout << "throttle value: " << this->symbolsMap.find("throttle")->second << endl;
 }
 
