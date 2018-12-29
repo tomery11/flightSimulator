@@ -52,7 +52,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
                 if (n < 0) {
                     throw "write to socket failed";
                 }
-                cout << "sent: " << str << endl;
+                //cout << "sent: " << str << endl;
                 /* todo Now read server response - is needed?*/
                 //bzero(buffer, 256);
                 //n = read(sockfd, buffer, 255);

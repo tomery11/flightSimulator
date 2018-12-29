@@ -104,11 +104,15 @@ void SymbolsTable::updateServer(string values) {
         //if reached end of a number
         if (values[i] == ',' || values[i] == '\n') {
             //if word is not empty, put in the map
-            if (!digits.empty()) {
+            if (!digits.empty() && varNum < varsOrder.size()) {
                 simulatorOutput[varsOrder.at(varNum)] = stod(digits);
                 //if in binded varsOrder, update the var in symbolMap as well
                 if (this->bindedVars.count(varsOrder.at(varNum)) > 0) {
                     this->symbolsMap.find(varsOrder.at(varNum))->second = stod(digits);
+                    //test rpm
+                    if(stod(digits) != 0 && varNum == 22) {
+                        cout << "rpm is not zero in update from server: " << digits << endl;
+                    }
                 }
                 varNum++;
             }
@@ -117,6 +121,7 @@ void SymbolsTable::updateServer(string values) {
             digits += values[i];
         }
     }
+    //cout << "throttle value: " << this->symbolsMap.find("throttle")->second << endl;
 }
 
 
@@ -146,11 +151,14 @@ pair<string, double> SymbolsTable::getMessage() {
 
 double SymbolsTable::getVarValue(string name) {
     if (exist(name)) {
+        if(name == "rpm" && this->symbolsMap.find(name)->second != 0) {
+            cout << "rpm not zero in get var value: " << this->symbolsMap.find(name)->second << endl;;
+        }
         return this->symbolsMap.find(name)->second;
     }
-    for(auto it=symbolsMap.begin(); it!=symbolsMap.end(); ++it){
+    //for(auto it=symbolsMap.begin(); it!=symbolsMap.end(); ++it){
         //cout<<' '<<(*it).first << ' ' << (*it).second <<endl;
-    }
+    //}
     throw "no such variable";
 }
 
