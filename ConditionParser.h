@@ -21,7 +21,7 @@ class ConditionParser : public Command {
 protected:
     ParseUtils *parseUtils1;
     //vector<Command *> commands;
-    vector<string> commandsVec;
+    string lineCommands;
     string firstExp;
     string secondExp;
     ShuntingYard myAlgo;

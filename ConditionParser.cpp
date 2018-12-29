@@ -7,7 +7,8 @@ void ConditionParser::set(vector<string> *inputVec) {
     //handle the condition:
     string condition;
     //extract the condition
-    for(auto it=inputVec->begin() + 1; (*it) != "{"; ++it){
+    auto it=inputVec->begin() + 1;
+    for(; (*it) != "{"; ++it){
         condition += (*it);
     }
     //cout << "condition: " << condition << endl;
@@ -37,7 +38,11 @@ void ConditionParser::set(vector<string> *inputVec) {
         //after the operator, insert to second expression
         secondExp.insert(secondExp.length(), 1, condition[i]);
     }
-    //todo handle the commands:
+    //handle the commands:
+    for(it = it + 1; (*it) != "}"; ++it){
+        this->lineCommands += (*it);
+        this->lineCommands+=" ";
+    }
 
 }
 
@@ -78,20 +83,31 @@ void ConditionParser::setSymbolTable(SymbolsTable *symbolsTable) {
 }
 
 void ConditionParser::doTheCommands() {
+    vector<string> inputVec;
+   
+        //cout << "sent to parser from loop: " << (*it) << endl;
+        parseUtils1->lexer(&lineCommands, &inputVec);
+        parseUtils1->parser(&inputVec);
+    
+    /*
+    cout << "doing the commands" <<endl;
     string input;
     vector<string> inputVec;
     for(auto it=commandsVec.begin(); it!=commandsVec.end(); ++it){
         if((*it)!="\n"){
+            cout << input<<endl;
             input += (*it)+=" ";
             continue;
         }
         else{
+            cout << "should be a full line command: " << input << endl;
             parseUtils1->lexer(&input, &inputVec);
             parseUtils1->parser(&inputVec);
             //cout<<input<<' ';
             input="";
         }
     }
+    */
 }
 
 ConditionParser::~ConditionParser() {
