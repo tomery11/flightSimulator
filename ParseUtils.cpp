@@ -57,9 +57,9 @@ void ParseUtils::parser(vector <string> *inputVec){
     //do the command
     //print test
 
-    for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
+    //for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
         //cout<<' '<<*it<<endl;
-    }
+    //}
 
     //find in commands
     Command *c;

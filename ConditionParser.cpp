@@ -9,7 +9,9 @@ void ConditionParser::set(vector<string> *inputVec) {
     //extract the condition
     auto it=inputVec->begin() + 1;
     for(; (*it) != "{"; ++it){
-        condition += (*it);
+        if ((*it) != " ") {
+            condition += (*it);
+        }
     }
     //cout << "condition: " << condition << endl;
     //create the expressions and condition operation
