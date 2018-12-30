@@ -43,16 +43,19 @@ Expression *ShuntingYard::algorithm(string expr, SymbolsTable *currTable) {
             string number;
             if(isNumber(expr[i])){
                 number = prepareNumber(expr,i);
-                i=i+number.length()-1;
+                i = i + number.length() - 1;
                 myQueue.push(number);
             }
-            //in this case we take car of var type for example "roll"
+            //in this case we take care of var type for example "roll"
             else{
+                //cout << "shunt input: " << expr << endl;
                 string var = prepareVariable(expr,i);
-                i=i+var.length()-1;
-                double d_number=currTable->getVarValue(var);
+                //cout << "shunt middle: " << var << endl;
+                i = i + var.length() - 1;
+                //cout << "shunting yard: to get var value" << endl;
+                double d_number = currTable->getVarValue(var);
 
-                number= to_string(d_number);
+                number = to_string(d_number);
                 myQueue.push(number);
             }
 
@@ -273,7 +276,7 @@ bool ShuntingYard::isChar(char a) {
  * for example "roll/5" will return the string "roll"*/
 string ShuntingYard::prepareVariable(string expr, int i) {
     string toReturn;
-    while(isChar(expr[i])){
+    while(isChar(expr[i]) || isNumber(expr[i])){
         toReturn+= expr[i];
         i++;
     }

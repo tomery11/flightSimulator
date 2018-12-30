@@ -20,11 +20,12 @@ void PrintCommand::doCommand(std::vector<string> *inputVec) {
         }
         print += " ";
         print += inputVec->at(inputVec->size() - 1).substr(0, inputVec->at(inputVec->size() - 1).length() - 1);
-        cout << print << endl;
+        //cout << print << endl;
     } else if (this->symbols->exist(inputVec->at(1))) {
         //if need to print a var, print it's value
+        //cout << "print command: to get var value" << endl;
         double print = this->symbols->getVarValue(inputVec->at(1));
-        cout << print << endl;
+        //cout << print << endl;
     } else {
     	throw "bad print command";
     }

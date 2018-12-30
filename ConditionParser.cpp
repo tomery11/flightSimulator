@@ -3,14 +3,14 @@
 #include "ShuntingYard.h"
 
 void ConditionParser::set(vector<string> *inputVec) {
-    cout << "loop start =====================" << endl;
-    for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
-        cout << (*it);
-    }
+    //cout << "loop start =====================" << endl;
+    //for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
+    //    cout << (*it) << " ";
+    //}
     firstExp = "";
     secondExp = "";
     condition_opr = "";
-    lineCommands = "";
+    lineCommandsVec.clear();
     parseUtils1 = new ParseUtils(symbolsTable);
     //handle the condition:
     string condition = "";
@@ -49,15 +49,19 @@ void ConditionParser::set(vector<string> *inputVec) {
         }
     }
     //handle the commands:
-    for(it = it + 1; (*it) != "}"; ++it){
-        this->lineCommands += (*it);
-        this->lineCommands+=" ";
+    string line = "";
+    for (it = it + 1; (*it) != "}"; ++it){
+        if ((*it) == "\n") {
+            this->lineCommandsVec.push_back(line);
+            line = "";
+        } else {
+            line += (*it) += " ";
+            //cout << line << endl;
+        }
     }
-
 }
 
 bool ConditionParser::meetsCondition() {
-    cout << "condition: " << "first: " << firstExp << " condition: " << condition_opr << " second: " << secondExp << endl;
     double leftNum = myAlgo.evaluate(this->firstExp, symbolsTable);
     double rightNum = myAlgo.evaluate(this->secondExp, symbolsTable);
     //cout << firstExp << endl;
@@ -95,12 +99,17 @@ void ConditionParser::setSymbolTable(SymbolsTable *symbolsTable) {
 
 void ConditionParser::doTheCommands() {
     vector<string> inputVec;
-        cout << "line commands: " << lineCommands << endl;
-        //lineCommands = lineCommands.substr(1,lineCommands.length() - 1);
-        //cout << "line commands: " << lineCommands << endl;
-        //cout << "sent to parser from loop: " << (*it) << endl;
-        parseUtils1->lexer(&lineCommands, &inputVec);
+    //cout << "do the commands------------------------";
+    for(auto it = lineCommandsVec.begin() + 1; it != lineCommandsVec.end(); ++it){
+        //cout << "line: " << (*it) << endl;
+        parseUtils1->lexer(&(*it), &inputVec);
         parseUtils1->parser(&inputVec);
+    }
+        //cout << "line commands: " << lineCommandsVec << endl;
+        //lineCommandsVec = lineCommandsVec.substr(1,lineCommandsVec.length() - 1);
+        //cout << "line commands: " << lineCommandsVec << endl;
+        //cout << "sent to parser from loop: " << (*it) << endl;
+
     
     /*
     cout << "doing the commands" <<endl;

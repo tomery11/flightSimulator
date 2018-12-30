@@ -130,7 +130,7 @@ void SymbolsTable::set(string var, double value) {
         //push to the set queue
         this->setQueue.push(make_pair(var, value));
     } else {
-        throw "no such variable ";
+        throw "symbol set: no such variable ";// + var; + to_string(value);
     }
 }
 
@@ -149,6 +149,7 @@ pair<string, double> SymbolsTable::getMessage() {
 }
 
 double SymbolsTable::getVarValue(string name) {
+    //cout << "get var value";
     if (exist(name)) {
         //if(name == "rpm" && this->symbolsMap.find(name)->second != 0) {
         //    cout << "rpm not zero in get var value: " << this->symbolsMap.find(name)->second << endl;;
@@ -158,7 +159,7 @@ double SymbolsTable::getVarValue(string name) {
     //for(auto it=symbolsMap.begin(); it!=symbolsMap.end(); ++it){
         //cout<<' '<<(*it).first << ' ' << (*it).second <<endl;
     //}
-    throw "no such variable";
+    throw "symbol get: no such variable ";// + name;
 }
 
 

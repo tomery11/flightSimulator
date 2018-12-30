@@ -12,6 +12,7 @@
 #include "OpenServerCommand.h"
 #include "LoopCondition.h"
 #include "IfCondition.h"
+#include "ShuntingYard.h"
 
 //parse by delimiter. input is string to delimit, token and vector for output
 void ParseUtils::parseByDelimiter(string inputStr, string token, vector<string> *outputVec) {
@@ -30,7 +31,7 @@ void ParseUtils::parseByDelimiter(string inputStr, string token, vector<string> 
     }
 }
 
-//lexer. perform the commands in the string input
+//lexer. perform the commands in the string input. get a single line
 void ParseUtils::lexer(const string *input, vector<string> *inputVec){
     string line;
     std::istringstream iss(*input);
@@ -46,7 +47,7 @@ void ParseUtils::lexer(const string *input, vector<string> *inputVec){
     }
 }
 
-//parser. perform the commands in the string vector input
+//parser. perform the commands in the string vector input. get a single line
 void ParseUtils::parser(vector <string> *inputVec){
     //todo handle the case where { and } are not in their own lines
     //if in while loop or in if condition and haven't reached end, return without doing the command
@@ -73,7 +74,14 @@ void ParseUtils::parser(vector <string> *inputVec){
         if (!inputVec->empty() && symbols->exist(inputVec->at(0))) {
             //cout << "found in varsOrder" << endl;
             //set the variable bind
-            symbols->set(inputVec->at(0), stod(inputVec->at(2)));
+            string valueStr = "";
+            for (auto it =inputVec->begin() + 2; it != inputVec->end(); ++it) {
+                valueStr += (*it);
+            }
+            ShuntingYard shunt;
+            double value = shunt.evaluate(valueStr, this->symbols);
+            //cout << "var to set: " << inputVec->at(0) << " value: " << value << endl;
+            symbols->set(inputVec->at(0), value);
         } else {
             throw "bad input: not a command or a variable";
         }
