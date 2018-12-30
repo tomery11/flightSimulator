@@ -52,6 +52,7 @@ void ParseUtils::parser(vector <string> *inputVec){
     //if in while loop or in if condition and haven't reached end, return without doing the command
     if (!inputVec->empty() && (inputVec->at(0) == "while" || inputVec->at(0) == "if") &&
         inputVec->at(inputVec->size() - 1) != "}") {
+        inputVec->push_back("\n");
         return;
     }
     //do the command

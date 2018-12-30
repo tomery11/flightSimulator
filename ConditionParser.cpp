@@ -3,11 +3,19 @@
 #include "ShuntingYard.h"
 
 void ConditionParser::set(vector<string> *inputVec) {
-    parseUtils1=new ParseUtils(symbolsTable);
+    cout << "loop start =====================" << endl;
+    for(auto it=inputVec->begin(); it!=inputVec->end(); ++it){
+        cout << (*it);
+    }
+    firstExp = "";
+    secondExp = "";
+    condition_opr = "";
+    lineCommands = "";
+    parseUtils1 = new ParseUtils(symbolsTable);
     //handle the condition:
-    string condition;
+    string condition = "";
     //extract the condition
-    auto it=inputVec->begin() + 1;
+    auto it = inputVec->begin() + 1;
     for(; (*it) != "{"; ++it){
         if ((*it) != " ") {
             condition += (*it);
@@ -16,7 +24,6 @@ void ConditionParser::set(vector<string> *inputVec) {
     //cout << "condition: " << condition << endl;
     //create the expressions and condition operation
     bool found = false;
-
     for (unsigned int i = 0; i < condition.length(); i++) {
         //if found the operator already
         if (!found) {
@@ -36,9 +43,10 @@ void ConditionParser::set(vector<string> *inputVec) {
                 //not operator - add to first expression
                 firstExp.insert(firstExp.length(), 1, condition[i]);
             }
+        } else {
+            //after the operator, insert to second expression
+            secondExp.insert(secondExp.length(), 1, condition[i]);
         }
-        //after the operator, insert to second expression
-        secondExp.insert(secondExp.length(), 1, condition[i]);
     }
     //handle the commands:
     for(it = it + 1; (*it) != "}"; ++it){
@@ -49,6 +57,7 @@ void ConditionParser::set(vector<string> *inputVec) {
 }
 
 bool ConditionParser::meetsCondition() {
+    cout << "condition: " << "first: " << firstExp << " condition: " << condition_opr << " second: " << secondExp << endl;
     double leftNum = myAlgo.evaluate(this->firstExp, symbolsTable);
     double rightNum = myAlgo.evaluate(this->secondExp, symbolsTable);
     //cout << firstExp << endl;
@@ -86,7 +95,9 @@ void ConditionParser::setSymbolTable(SymbolsTable *symbolsTable) {
 
 void ConditionParser::doTheCommands() {
     vector<string> inputVec;
-   
+        cout << "line commands: " << lineCommands << endl;
+        //lineCommands = lineCommands.substr(1,lineCommands.length() - 1);
+        //cout << "line commands: " << lineCommands << endl;
         //cout << "sent to parser from loop: " << (*it) << endl;
         parseUtils1->lexer(&lineCommands, &inputVec);
         parseUtils1->parser(&inputVec);
@@ -113,6 +124,7 @@ void ConditionParser::doTheCommands() {
 }
 
 ConditionParser::~ConditionParser() {
+    cout << "ConditionParser deleted" << endl;
     delete this->parseUtils1;
     this->parseUtils1=NULL;
 }
