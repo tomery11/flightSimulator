@@ -2,7 +2,6 @@
 // Created by Tomer Yona on 2018-12-19.
 //
 #define BUFFER_LENGTH 512
-
 #include "DataReaderServer.h"
 
 DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbols) {
