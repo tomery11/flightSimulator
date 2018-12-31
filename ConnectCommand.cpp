@@ -26,6 +26,7 @@ void ConnectCommand::doCommand(std::vector<string> *inputVec) {
     //start the thread
     //int rc = pthread_create(&threadID, NULL, clientThreadFunc, (void *)clientData);
     pthread_create(&threadID, NULL, clientThreadFunc, (void *)clientData);
+    pthread_join(threadID, NULL);
 }
 
 void ConnectCommand::setSymbolTable(SymbolsTable *symbolTable) {

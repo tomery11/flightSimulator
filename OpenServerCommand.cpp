@@ -28,6 +28,7 @@ void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
     //start the thread
     //int rc = pthread_create(&threadID, NULL, serverThreadFunc, (void *)serverData);
     pthread_create(&threadID, NULL, serverThreadFunc, (void *)serverData);
+    pthread_join(threadID, NULL);
 }
 
 void OpenServerCommand::setSymbolTable(SymbolsTable *symbolTable) {
