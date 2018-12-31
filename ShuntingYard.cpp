@@ -193,7 +193,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     Plus* plus= new Plus(left_num,right_num);
                     //i added this on 24.12 to check if 5+5=10 and is inserted into the stack
                     double add_toStack = plus->calculate();
-                    free(plus);
+                    delete (plus);
                     Number* number= new Number(add_toStack);
                     exprStack.push(number);
                     myQueue.pop();
@@ -208,7 +208,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '-':{
                     Minus* minus= new Minus(left_num,right_num);
                     double add_toStack = minus->calculate();
-                    free(minus);
+                    delete (minus);
                     Number* number= new Number(add_toStack);
                     exprStack.push(number);
                     myQueue.pop();
@@ -222,7 +222,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '*':{
                     Multiply* multiply= new Multiply(left_num,right_num);
                     double add_toStack = multiply->calculate();
-                    free(multiply);
+                    delete (multiply);
                     Number* number= new Number(add_toStack);
                     exprStack.push(number);
                     myQueue.pop();
@@ -236,7 +236,7 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '/':{
                     Divide* divide= new Divide(left_num,right_num);
                     double add_toStack = divide->calculate();
-                    free(divide);
+                    delete (divide);
                     Number* number= new Number(add_toStack);
                     exprStack.push(number);
                     myQueue.pop();
@@ -271,7 +271,7 @@ bool ShuntingYard::isValid_number(string number) {
 double ShuntingYard::evaluate(string &mathematical_exp, SymbolsTable *currTable) {
     Expression *calcExp= algorithm(mathematical_exp, currTable);
     double toReturn = calcExp->calculate();
-    free(calcExp);
+    delete(calcExp);
     return toReturn;
 }
 
