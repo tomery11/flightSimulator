@@ -192,7 +192,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '+':{
                     Plus* plus= new Plus(left_num,right_num);
                     //i added this on 24.12 to check if 5+5=10 and is inserted into the stack
-                    Number* number= new Number(plus->calculate());
+                    double add_toStack = plus->calculate();
+                    free(plus);
+                    Number* number= new Number(add_toStack);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -205,7 +207,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 }
                 case '-':{
                     Minus* minus= new Minus(left_num,right_num);
-                    Number* number= new Number(minus->calculate());
+                    double add_toStack = minus->calculate();
+                    free(minus);
+                    Number* number= new Number(add_toStack);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -217,7 +221,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 }
                 case '*':{
                     Multiply* multiply= new Multiply(left_num,right_num);
-                    Number* number= new Number(multiply->calculate());
+                    double add_toStack = multiply->calculate();
+                    free(multiply);
+                    Number* number= new Number(add_toStack);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -229,7 +235,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 }
                 case '/':{
                     Divide* divide= new Divide(left_num,right_num);
-                    Number* number= new Number(divide->calculate());
+                    double add_toStack = divide->calculate();
+                    free(divide);
+                    Number* number= new Number(add_toStack);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -262,7 +270,9 @@ bool ShuntingYard::isValid_number(string number) {
 
 double ShuntingYard::evaluate(string &mathematical_exp, SymbolsTable *currTable) {
     Expression *calcExp= algorithm(mathematical_exp, currTable);
-    return calcExp->calculate();
+    double toReturn = calcExp->calculate();
+    free(calcExp);
+    return toReturn;
 }
 
 /*checks if the char is a letter*/
