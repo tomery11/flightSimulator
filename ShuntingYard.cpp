@@ -283,3 +283,4 @@ string ShuntingYard::prepareVariable(string expr, int i) {
     return toReturn;
 }
 
+
