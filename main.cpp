@@ -27,7 +27,7 @@
 #include "Multiply.h"
 #include "Divide.h"
 #include "ShuntingYard.h"
-///home/t/CLionProjects/flightSimulator/script
+///home/t/CLionProjects/flightSimulator/flyShouldWork
 using namespace std;
 
 
@@ -59,30 +59,33 @@ int main(int argc, char *argv[]) {
                     //send for lexer and parser
                     parseUtils->lexer(&input, &inputVec);
                     parseUtils->parser(&inputVec);
+                    if (scriptFile.eof()) {
+                        break;
+                    }
                     //get the next line from the file
                     getline(scriptFile, input);
                 }
                 scriptFile.close();
             }
         } else if (argc == 1) { //no argument for per line parsing
-            do {
-                //get the next line from the user
-                getline(std::cin, input);
+            getline(std::cin, input);
+            while (input != "exit") {
                 //send for lexer and parser
                 parseUtils->lexer(&input, &inputVec);
                 parseUtils->parser(&inputVec);
-
-            } while (input != "exit");
+                //get the next line from the user
+                getline(std::cin, input);
+            }
         } else { //two and more arguments are not allowed
             throw "bad argument number";
         }
     } catch (char const *exception) {
         printf("%s", exception);
     }
-    cout << "sleep" << endl;
-    while(true) {
-        sleep(900);
-    }
+    //cout << "sleep" << endl;
+    //while(true) {
+    //    sleep(900);
+    //}
     delete symbols;
     symbols = NULL;
     delete parseUtils;
