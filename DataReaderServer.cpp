@@ -45,7 +45,8 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
         }
         cout << "server accepted" <<endl;
         int i = 0;
-        while (true) {
+        //loop until quit
+        while (!symbols->getQuitFlag()) {
             i++;
             //read and update
             memset(buffer, 0, BUFFER_LENGTH);
@@ -62,7 +63,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             //update the vars
             symbols->updateServer(buffer);
             //sleep for frequency
-            sleep(frequency/60);
+            this_thread::sleep_for(chrono::milliseconds(1000 / frequency));
             //newsockfd.flush();
             /* Write a response to the client */
             //n = write(newsockfd,"I got your message",18);

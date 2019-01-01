@@ -12,7 +12,7 @@ void ConnectCommand::doCommand(std::vector<string> *inputVec) {
     //input validation
     ShuntingYard myAlgo;
     this->ipAddress = inputVec->at(1);
-    this->port = myAlgo.evaluate(inputVec->at(2),this->symbolTable);
+    this->port = (int)myAlgo.evaluate(inputVec->at(2),this->symbolTable);
     //open thread and read a line in frequency, update symbol table
     pthread_t threadID;
     this->clientData = new struct ClientData;
@@ -26,7 +26,7 @@ void ConnectCommand::doCommand(std::vector<string> *inputVec) {
     //start the thread
     //int rc = pthread_create(&threadID, NULL, clientThreadFunc, (void *)clientData);
     pthread_create(&threadID, NULL, clientThreadFunc, (void *)clientData);
-    pthread_join(threadID, NULL);
+    //pthread_join(threadID, NULL);
 }
 
 void ConnectCommand::setSymbolTable(SymbolsTable *symbolTable) {
@@ -34,6 +34,7 @@ void ConnectCommand::setSymbolTable(SymbolsTable *symbolTable) {
 }
 
 ConnectCommand::~ConnectCommand() {
+    cout << "connect command quit" << endl;
     delete this->clientData;
     this->clientData = NULL;
 }

@@ -11,6 +11,6 @@ BinaryExpression::BinaryExpression(Expression *leftExp, Expression *rightExp) {
 
 }
 BinaryExpression::~BinaryExpression() {
-    free(this->left);
-    free(this->right);
+    delete(this->left);
+    delete(this->right);
 }

@@ -3,6 +3,8 @@
 //
 
 #include "SymbolsTable.h"
+#include <chrono>
+#include <thread>
 
 
 SymbolsTable::SymbolsTable() {
@@ -127,7 +129,13 @@ void SymbolsTable::updateServer(char *buffer) {
 //set a variable's bind to be sent to the simulation
 void SymbolsTable::set(string var, double value) {
     if (exist(var)) {
+        //push only if the queue has 1 or less enties for coordination between the speed of different threads
+        while (setQueue.size() > 1) {
+            this_thread::sleep_for(chrono::milliseconds(10));
+        }
         //push to the set queue
+        cout << "size of queue: " << setQueue.size() << endl;
+        cout << this << " set: " << var << " " << value << endl;
         this->setQueue.push(make_pair(var, value));
     } else {
         throw "symbol set: no such variable ";// + var; + to_string(value);
@@ -143,6 +151,7 @@ pair<string, double> SymbolsTable::getMessage() {
     } else {
         message.first = this->bindedVars.find(this->setQueue.front().first)->second;
         message.second = this->setQueue.front().second;
+        cout << this << " getMessage: " << message.first << " " << message.second << endl;
         this->setQueue.pop();
     }
     return message;
@@ -160,6 +169,14 @@ double SymbolsTable::getVarValue(string name) {
         //cout<<' '<<(*it).first << ' ' << (*it).second <<endl;
     //}
     throw "symbol get: no such variable ";// + name;
+}
+
+void SymbolsTable::setQuitFlag(bool flag) {
+    this->quitFlag = flag;
+}
+
+bool SymbolsTable::getQuitFlag() {
+    return this->quitFlag;
 }
 
 
