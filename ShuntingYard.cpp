@@ -126,6 +126,7 @@ Expression *ShuntingYard::algorithm(string expr, SymbolsTable *currTable) {
         myStack.pop();
         myQueue.push(opr_toPush);
     }
+
     return postfix_calc(myQueue);
 }
 
@@ -150,23 +151,24 @@ string ShuntingYard::prepareNumber(string expr, int i) {
 
 
 
-/* i need to finish this function-- this is according to Reverse Polish notation algoritm*/
+/* this function computes the mathimatical expression when is in postfix notation*/
 Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
     stack <Expression*> exprStack;
 
     while(!myQueue.empty()){
         //case if the next bind in our postfix queue is a number
         if(isValid_number(myQueue.front())){
-        Number* number= new Number(myQueue.front());
-        myQueue.pop();
+            Number* number= new Number(myQueue.front());
+            addToDeleteVec(number);
+             myQueue.pop();
 
             //caution for not popping out bind
-        if(!myQueue.empty() && myQueue.front()==","){
-            //pop the delimeter bind ","
-            myQueue.pop();
-        }
+            if(!myQueue.empty() && myQueue.front()==","){
+                 //pop the delimeter bind ","
+                 myQueue.pop();
+            }
 
-        exprStack.push(number);
+            exprStack.push(number);
         }
         //this case is if the next bind is an operator
         else{
@@ -193,8 +195,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     Plus* plus= new Plus(left_num,right_num);
                     //i added this on 24.12 to check if 5+5=10 and is inserted into the stack
                     double add_toStack = plus->calculate();
-                    delete (plus);
+                    delete(plus);
                     Number* number= new Number(add_toStack);
+                    addToDeleteVec(number);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -208,8 +211,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '-':{
                     Minus* minus= new Minus(left_num,right_num);
                     double add_toStack = minus->calculate();
-                    delete (minus);
+                    delete(minus);
                     Number* number= new Number(add_toStack);
+                    addToDeleteVec(number);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -222,8 +226,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '*':{
                     Multiply* multiply= new Multiply(left_num,right_num);
                     double add_toStack = multiply->calculate();
-                    delete (multiply);
+                    delete(multiply);
                     Number* number= new Number(add_toStack);
+                    addToDeleteVec(number);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -236,8 +241,9 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                 case '/':{
                     Divide* divide= new Divide(left_num,right_num);
                     double add_toStack = divide->calculate();
-                    delete (divide);
+                    delete(divide);
                     Number* number= new Number(add_toStack);
+                    addToDeleteVec(number);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -252,6 +258,8 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
             }
         }
     }
+
+
     return exprStack.top();
 }
 
@@ -291,5 +299,9 @@ string ShuntingYard::prepareVariable(string expr, int i) {
         i++;
     }
     return toReturn;
+}
+/*in this function we put the "new" objects created in a vector and when destructor is called data will be deleted*/
+void ShuntingYard::addToDeleteVec(Expression *exp) {
+    this->vecToDelete.push_back(exp);
 }
 
