@@ -11,8 +11,12 @@
 #include "Expression.h"
 #include "SymbolsTable.h"
 
+
 using namespace std;
 class ShuntingYard {
+
+private:
+    vector<Expression*> vecToDelete;
 
 private:
     bool isNumber(char a);
@@ -23,10 +27,18 @@ private:
     bool isValid_number(string number);
     bool isChar(char a);
     string prepareVariable(string expr,int i);
+    void addToDeleteVec(Expression* exp);
+
 
 public:
     double evaluate(string &mathematical_exp, SymbolsTable *currTable);
-    ~ShuntingYard() {}
+    ~ShuntingYard(){
+        vector<Expression*>::iterator it = this->vecToDelete.begin();
+        for(it;it!=this->vecToDelete.end();++it){
+            delete (*it);
+        }
+    }
+
 };
 
 
