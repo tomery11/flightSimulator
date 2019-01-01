@@ -34,7 +34,7 @@ public:
     double evaluate(string &mathematical_exp, SymbolsTable *currTable);
     ~ShuntingYard(){
         vector<Expression*>::iterator it = this->vecToDelete.begin();
-        for(it;it!=this->vecToDelete.end();++it){
+        for(;it!=this->vecToDelete.end();++it){
             delete (*it);
         }
     }

@@ -37,7 +37,6 @@ sig_atomic_t stopFlag = 0;
 SymbolsTable *symbols;
 ParseUtils *parseUtils;
 
-
 //exit main in the case of ctrl-c etc
 void handleExit(int signum) {
     //quit the threads
