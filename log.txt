@@ -1,0 +1,762 @@
+commit 55b3374ed7cac69f1665ce36e54c7d52aa000adc
+Author: tairch <tairch@gmail.com>
+Date:   Wed Jan 2 21:35:42 2019 +0200
+
+    fix git
+
+commit 861b797f48f7dedafdb05019f04bae31e9c36122
+Merge: f75d81d 80f5b94
+Author: tairch <tairch@gmail.com>
+Date:   Wed Jan 2 20:55:50 2019 +0200
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       PrintCommand.cpp
+    #       SleepCommand.cpp
+    #       SymbolsTable.cpp
+    #       SymbolsTable.h
+    #       main.cpp
+
+commit f75d81d7bda33ad9c35c2a23a9b4891eed938ca5
+Author: tairch <tairch@gmail.com>
+Date:   Wed Jan 2 20:54:52 2019 +0200
+
+    cond and detailes in git
+
+commit e81d2ae57e71bbf91001438e565b31ef075cb855
+Author: tairch <tairch@gmail.com>
+Date:   Wed Jan 2 20:53:23 2019 +0200
+
+    vars, sleep, eof and print fixed
+
+commit 80f5b94e02e434a06bc082d8b9862115485b6244
+Author: tairch <tairch@gmail.com>
+Date:   Wed Jan 2 07:07:22 2019 +0200
+
+    no delete vec in shanting yard
+
+commit 28f48f276cda151747d54b255421ccf1fc49d915
+Author: tairch <tairch@gmail.com>
+Date:   Tue Jan 1 19:34:18 2019 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       ShuntingYard.h
+
+commit 08f47a6d63e09109688975294f60ab8ac927c453
+Merge: 0cfe1c4 c246f18
+Author: tairch <tairch@gmail.com>
+Date:   Tue Jan 1 18:44:33 2019 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       ShuntingYard.h
+
+commit c246f182afb072450499eb88086d47f8e4689bcd
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Tue Jan 1 21:11:34 2019 +0200
+
+    memory leaks
+
+commit 0cfe1c43d57296935c4aeac37650225c8204c953
+Author: tairch <tairch@gmail.com>
+Date:   Tue Jan 1 18:43:57 2019 +0200
+
+    added nice close, vars are better in time betwwen threads
+
+commit 5653fd625466e73fd0487c35ce251b958dde2d0d
+Merge: 7bd18f8 19fd86a
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 31 20:09:41 2018 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+
+commit 19fd86a2d8365fdd71e4ea2ccc5cf0f471f0f3bd
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Mon Dec 31 20:02:54 2018 +0200
+
+    delete memory from heap
+
+commit 7bd18f89a315a0c1db69d5ff7eabf77dbe218aae
+Merge: f0f5998 4f948bc
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 31 20:00:10 2018 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+
+commit f0f5998483d2d4ba2ca642c365c81aab2a5243a9
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 31 19:59:45 2018 +0200
+
+    joined threades
+
+commit 4f948bc325c838efa1907577f77047d1207a9c92
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Mon Dec 31 19:52:19 2018 +0200
+
+    delete memory from heap
+
+commit 0c15901fa4ea1a95c73a390db9415ea6f131514f
+Merge: 8a87889 6e62639
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 31 19:16:30 2018 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+
+commit 8a87889a8aa34ac5a44c2fc3756482a6c7298718
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 31 19:16:14 2018 +0200
+
+    not needed changes
+
+commit ab7ce71495914e7650f66703fc06e8bb4f64d322
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 31 19:15:16 2018 +0200
+
+    more delete, fixed print and main
+
+commit 6e62639df07c0e2361f7d7f18ce859f31d78bbbf
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Mon Dec 31 13:18:39 2018 +0200
+
+    free memory from heap
+
+commit 24ffe15c81dc7e147b9f5f33561eae2411d6b03e
+Author: tairch <tairch@gmail.com>
+Date:   Sun Dec 30 21:15:07 2018 +0200
+
+    fixed loop
+
+commit bca191687b6184541e21e174de4e614091f76643
+Author: tairch <tairch@gmail.com>
+Date:   Sun Dec 30 16:49:27 2018 +0200
+
+    fixed loop
+
+commit 6547c6f4ce70883786b3faa5ba010d53990a3c02
+Author: tairch <tairch@gmail.com>
+Date:   Sun Dec 30 01:19:40 2018 +0200
+
+    fixed loop
+
+commit 36304b3ecf6869dd98dfedd8f666d80cb56de573
+Merge: 860059f d3b3672
+Author: tairch <tairch@gmail.com>
+Date:   Sun Dec 30 00:35:57 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 860059f7b75e83d20b03406b258c058ce9e0506d
+Author: tairch <tairch@gmail.com>
+Date:   Sun Dec 30 00:34:22 2018 +0200
+
+    fixed server
+
+commit d3b36720647e021bd351216b4ac6005b0d370145
+Merge: 7aeb02d dd32475
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sat Dec 29 23:58:24 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 7aeb02d940100c567292c0a74e32cdcf5ad37412
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sat Dec 29 23:57:43 2018 +0200
+
+    comments
+
+commit dd32475981659daf40a09fe7d38c160e5e8ab801
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 29 23:43:55 2018 +0200
+
+    fixed server
+
+commit c96589862c20422125782987c2bba219e7ecd63a
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 29 22:31:18 2018 +0200
+
+    fixed server
+
+commit 0aa5157061fd1c5755d168f102c87c6515a06353
+Merge: a725a7a 06530eb
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 29 21:01:07 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit a725a7aeee4aab19f516dac53dd1ccc79db68d6c
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 29 20:54:02 2018 +0200
+
+    fixed server
+
+commit 06530eb5630ce9340cb82c2ae7c84aab00ebf54b
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sat Dec 29 20:23:30 2018 +0200
+
+    Bug fix
+
+commit 0fb4787ab1614b32d37d147ed8e507781c2efba7
+Merge: 7a7e991 6852a6c
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sat Dec 29 20:23:07 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       SymbolsTable.h
+
+commit 7a7e991ce6d00dfb5616f86e66f9124f3c905b33
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sat Dec 29 20:20:34 2018 +0200
+
+    Bug fix
+
+commit 6852a6c86f3c5f09b4045c9a29246454bea26ff2
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 29 20:11:19 2018 +0200
+
+    fixed server
+
+commit 57afedfe89bcf496ab9f51aecaabb6e46de35d09
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 29 19:37:23 2018 +0200
+
+    fixed server
+
+commit f698ba1bf22def00e5aec4f5d4228b38f766b726
+Author: tairch <tairch@gmail.com>
+Date:   Fri Dec 28 22:50:45 2018 +0200
+
+    added updated xml
+
+commit 36d86dceeec1de57e65d2654cf902f8a5c849dca
+Author: tairch <tairch@gmail.com>
+Date:   Fri Dec 28 22:30:08 2018 +0200
+
+    fixed script
+
+commit cbb3e1b456e5d54add096b7d93159fb2a652d52d
+Merge: f09571e 91b6c44
+Author: tairch <tairch@gmail.com>
+Date:   Fri Dec 28 21:45:00 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit f09571e53a149beb95cffb1f31a6edcf8304196e
+Author: tairch <tairch@gmail.com>
+Date:   Fri Dec 28 21:44:28 2018 +0200
+
+    fixed client and print
+
+commit 91b6c44dd8030fec65f64d373783b07979b70d3f
+Merge: 2975745 2e5496b
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Fri Dec 28 18:59:32 2018 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       main.cpp
+
+commit 297574591ff8968e1a514d8fb4e10262eb98cf2e
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Fri Dec 28 18:58:05 2018 +0200
+
+    push number instead of operator
+
+commit 2e5496b72004a30110d1071980bdde4ff88804cc
+Author: tairch <tairch@gmail.com>
+Date:   Fri Dec 28 18:36:07 2018 +0200
+
+    various little fixes
+
+commit 6a25e3a04a5b33d90dd8698fa417b5cb37e28d30
+Author: tairch <tairch@gmail.com>
+Date:   Fri Dec 28 18:33:53 2018 +0200
+
+    various little fixes
+
+commit c676fdf491b00e3a967b8ecaf87861da393b1e97
+Merge: 8d9cb9f 800e9d8
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 22:09:58 2018 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+
+commit 8d9cb9f5af30f92dad39315a0306ddf5f181c3b1
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 22:09:03 2018 +0200
+
+    various little fixes
+
+commit 800e9d8f6ac115498d57909fdb84489e53e9d3cc
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Thu Dec 27 22:03:35 2018 +0200
+
+    push number instead of operator
+
+commit afe45ea04f44aecd83b915db30b585c380565537
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 21:55:30 2018 +0200
+
+    various little fixes
+
+commit 53f6923b350fb829b7f33107ecbdd73b99bee676
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 20:43:12 2018 +0200
+
+    fixed shunting table get symbols, fixed var command
+
+commit e2b56625ea5dd8f543b97ec6008306f721049249
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 20:00:56 2018 +0200
+
+    changes to help with debugging
+
+commit 25cf1af857917795a61fd275f36f34fa8d443934
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 19:24:11 2018 +0200
+
+    changes to help with debugging
+
+commit d4edca5fe937a04ab69344bca0ab126b8f082865
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 18:52:21 2018 +0200
+
+    changes to help with debugging
+
+commit f3b19ceea61f0c14411679d83c825ea06e0fbc4b
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 18:17:46 2018 +0200
+
+    changes to help with debugging
+
+commit 6a7869cc4b668e82b3b70cdefb1ef746cf630458
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 16:58:20 2018 +0200
+
+    problem in while is gone; need to check with simulator next
+
+commit 1546535a54b3a6deca90ad112bcdde171ef091f9
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 16:50:46 2018 +0200
+
+    now things are on the heap; still problem in while
+
+commit 9b772117e9bcdd976838ce1e73b36d78eb4a162a
+Merge: 593830d 377d310
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 14:47:42 2018 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       ConditionParser.cpp
+    #       ConditionParser.h
+    #       ParseUtils.cpp
+    #       VarCommand.cpp
+    #       main.cpp
+    #       parse_utils.h
+
+commit 593830d630bef9b5a367dad51645428b72b37543
+Author: tairch <tairch@gmail.com>
+Date:   Thu Dec 27 14:36:58 2018 +0200
+
+    while- continued work. need to do the function in parse_utils
+
+commit 377d3106ba4664440ff50cb82965263fdb8735a4
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Wed Dec 26 23:32:38 2018 +0200
+
+    alot of design fixing and modifications!
+
+commit ddf7628e750e6806c7f02562e8bd72da6afb3c35
+Author: tairch <tairch@gmail.com>
+Date:   Wed Dec 26 17:11:20 2018 +0200
+
+    while- continued work. need to do the function in parse_utils
+
+commit 4bbaeb3aa0ec3dfc61bd78cbffc2970f2f4b1e67
+Author: tairch <tairch@gmail.com>
+Date:   Wed Dec 26 16:55:37 2018 +0200
+
+    while- continued work. need to do the function in parse_utils
+
+commit 958495770a3c2f130e9edbf8e383d0ef4454c4f3
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Wed Dec 26 14:22:38 2018 +0200
+
+    add fly script
+    fixed bug in varcommand
+
+commit cffd7d6420cd37a835b5451745d18b3c8a9d0bf3
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Wed Dec 26 14:10:40 2018 +0200
+
+    checks that var has valid name
+
+commit 8b7ac55e8a79143e413a0054cf6f9e5ac40a4203
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Tue Dec 25 22:57:15 2018 +0200
+
+    put some lines as comment (shunting yard test)
+
+commit 277ebe1169aff29bc5cd24e53cef47a793b9bbd0
+Merge: 9f5140d f21cb3f
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Tue Dec 25 22:18:04 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 9f5140d120e3291c7723253246203239ed04fba9
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Tue Dec 25 22:09:36 2018 +0200
+
+    SleepCommand supports mathimatical expression type string
+
+commit f21cb3fdf17649b8d13cf17e23eb0830f4039b4b
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 25 21:37:06 2018 +0200
+
+    while- continued work. need to do the function in parse_utils
+
+commit 974e84e66625cb01c97b7dda398332ae94761b3c
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 25 21:35:36 2018 +0200
+
+    while- continued work. need to do the function in parse_utils
+
+commit 6808cea0deb7e01151031ce8d441ca93a07e75db
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Tue Dec 25 20:35:19 2018 +0200
+
+    ConnectCommand, port supports mathimatical exp. string
+
+commit e4ffaf82d9663abdc39900642bc3a4da57b9b7cc
+Merge: adda228 d1ba2d6
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 25 20:22:58 2018 +0200
+
+    Merge branch 'master' of https://github.com/tomery11/flightSimulator
+
+commit adda228d94b87f746f9dd988b9ec578d1130213e
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 25 20:22:30 2018 +0200
+
+    while- continued work. need to do the function in parse_utils
+
+commit d1ba2d672af8a292c2ff66e03f4d2a1fb7c0183c
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Tue Dec 25 20:21:35 2018 +0200
+
+    Shunting yard supports var
+
+commit 4d44cc2237926b0285818a180afbda5115de9f99
+Merge: 3d07477 c950970
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 25 18:23:12 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       main.cpp
+
+commit 3d07477107bbde28a8d3717eeed850a6ca906fde
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 25 18:21:05 2018 +0200
+
+    while- continued work. need to do the function in parse_utils
+
+commit c9509705bacebad1989d36e6320d9b386d30c25c
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Tue Dec 25 01:45:45 2018 +0200
+
+    Shunting yard deubugged, one case not perfect yet
+
+commit 859f0af3044c775fd349af72f216288c74377a21
+Merge: bbbd4db 52d58da
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 24 20:41:51 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       LoopCondition.h
+
+commit bbbd4dbdb6bcc39c37eb16a92a8d65eab7a9200e
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 24 20:39:53 2018 +0200
+
+    merged
+
+commit 52d58dab7d1bc9156d218d33114532e72272476d
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Mon Dec 24 01:44:47 2018 +0200
+
+    Open Server Command- now deals with arguments that might be mathimatical expressions
+
+commit 65fb1f4026aa2fd6d5ddfb780c6e006208e535c2
+Merge: 245ec05 871a22e
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sun Dec 23 23:12:07 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 245ec05f6fb1f6ad089cb990f070d42797112953
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sun Dec 23 23:11:44 2018 +0200
+
+    changes in condition parser and his subclasses
+    shunting yard minor updates
+
+commit 9d5c33d61f1786bf2d5aa164bdd8ff48aafedbf0
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sun Dec 23 23:08:37 2018 +0200
+
+    changes in condition parser and his subclasses
+    shunting yard minor updates
+
+commit 871a22e366ae8983459f6e685331a889389e7cb1
+Merge: c2b3a4a ddefa97
+Author: tairch <tairch@gmail.com>
+Date:   Sun Dec 23 21:32:48 2018 +0200
+
+    Merge remote-tracking branch 'origin/master'
+
+commit c2b3a4a9d66103fbc916846b0eae7db2078aa63d
+Merge: cf08490 c8bab53
+Author: tairch <tairch@gmail.com>
+Date:   Sun Dec 23 20:14:42 2018 +0200
+
+    sleep enterc server works now
+
+commit ddefa971c24d2e5f21462f0d9cf985add5cb92e4
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sun Dec 23 16:23:57 2018 +0200
+
+    Shunting yard- added function evaluate()
+
+commit cf08490ac56d8b4093d6fbb1c20038d1625bf100
+Author: tairch <tairch@gmail.com>
+Date:   Sun Dec 23 15:59:43 2018 +0200
+
+    merged
+
+commit c8bab5341bcbffc3aa3e949d142d339b18013356
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sun Dec 23 15:43:20 2018 +0200
+
+    CommandExpression
+
+commit 9fb3ec077af780cdbea8d9be413ba9ec040b5566
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 22 20:02:40 2018 +0200
+
+    merged
+
+commit 68c4c88dc26cca81b3abbcfd68022f95b77b3768
+Merge: 7d46626 1b48fd0
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 22 19:25:09 2018 +0200
+
+    merged
+
+commit 7d46626771eed572dc5a2077c126e669325f5421
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 22 19:22:58 2018 +0200
+
+    lots of stuff, server client vars print
+
+commit 1b48fd090600da65708f7b8769a7033959511fb6
+Author: Tomer Yona <tomeryona92@gmail.com>
+Date:   Sat Dec 22 19:21:54 2018 +0200
+
+    Condition Parser, ifCondition, loopCondition
+
+commit e45288f01a33f5641b67a8b2f015efd5ad17dc8c
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 22 18:51:05 2018 +0200
+
+    lots of stuff, server client vars print
+
+commit 00cafc5ae3ab419815841e488416ce714dbce52a
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 22 18:01:30 2018 +0200
+
+    lots of stuff, server client vars print
+
+commit 0c86ed7e50b698609ffbcc014069ef2806e1f17a
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 22 14:17:40 2018 +0200
+
+    Merge branches 'master' and 'test' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       CMakeLists.txt
+
+commit 9ed90917dc6ca7cbcc5386b785ef68b3fcbd623d
+Author: tairch <tairch@gmail.com>
+Date:   Sat Dec 22 13:49:04 2018 +0200
+
+    Merge branches 'master' and 'test' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       CMakeLists.txt
+
+commit facaa0b81ab40244f60058429898430db7b920ee
+Merge: d50c662 177d1b7
+Author: tairch <tairch@gmail.com>
+Date:   Fri Dec 21 19:48:10 2018 +0200
+
+    Merge branches 'master' and 'test' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       CMakeLists.txt
+
+commit 177d1b7e89d5d70c84468b96818f6b47370c48f6
+Author: Tomer Yona <tomeryona92@gmail.com>
+Date:   Fri Dec 21 19:25:13 2018 +0200
+
+    Shunting yard Algorithm-updated, need to debug
+
+commit d50c66249d1ead2025f551515c6581fe1c84bd8c
+Merge: d7a3063 2c51455
+Author: tairch <tairch@gmail.com>
+Date:   Fri Dec 21 16:50:26 2018 +0200
+
+    Merge branches 'master' and 'test' of https://github.com/tomery11/flightSimulator
+
+commit 2c51455d51d0259745b90db1af961f8b2d44c0fe
+Author: Tomer Yona <tomeryona92@gmail.com>
+Date:   Fri Dec 21 16:46:41 2018 +0200
+
+    Shunting yard Algorithm
+
+commit fe50e01d766f5c4beef7e7355d0877485306b4a3
+Author: Tomer Yona <tomeryona92@gmail.com>
+Date:   Fri Dec 21 16:45:41 2018 +0200
+
+    Expression interface
+    Binary Expression class and subclasses: Plus, Minus, Mul, Div
+    Number Class
+    Shunting Yard Algo- *not finished yet*
+
+commit d8d49c3c7781023dc2211814b11dd396122775cb
+Author: Tomer Yona <tomeryona92@gmail.com>
+Date:   Fri Dec 21 01:48:56 2018 +0200
+
+    Expression interface
+    Binary Expression class and subclasses: Plus, Minus, Mul, Div
+    Number Class
+    Shunting Yard Algo- *not finished yet*
+
+commit 2ea9f6b4789e0663b4130e8a8771773c01e97c84
+Author: Tomer Yona <tomeryona92@gmail.com>
+Date:   Wed Dec 19 15:22:23 2018 +0200
+
+    test commit
+
+commit 1a8cfdab90c13a558108ad78d1359e68c1bb6655
+Author: Tomer Yona <tomeryona92@gmail.com>
+Date:   Wed Dec 19 15:08:14 2018 +0200
+
+    second commit
+
+commit d7a30637cbc6ac1d45aa4de1ef8b982b5fcfe60b
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 18 16:46:02 2018 +0200
+
+    Merge branches 'master' and 'test' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       CMakeLists.txt
+
+commit 366fba0c797a735ef5c18535b85511d54615eb04
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 18 16:41:42 2018 +0200
+
+    Merge branches 'master' and 'test' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       CMakeLists.txt
+
+commit c2cf4cdb2bcab8112cdd48ab81495e9ba1afbfdd
+Merge: 029a63c d8d49c3
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 18 16:04:09 2018 +0200
+
+    Merge branches 'master' and 'test' of https://github.com/tomery11/flightSimulator
+    
+    # Conflicts:
+    #       CMakeLists.txt
+
+commit 029a63c68818700a1d31b42c355205f7ee4fb67c
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 18 15:16:24 2018 +0200
+
+    threads, symbols, connect start of work, still some problems
+
+commit 53e09f4ac447eaf463bc05c01a5e60ba85487556
+Author: tairch <tairch@gmail.com>
+Date:   Tue Dec 18 11:52:04 2018 +0200
+
+    threads, symbols, connect start of work, still some problems
+
+commit c7bcba00197603bc6bc09ba715f6807d978f53c6
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 17 16:17:05 2018 +0200
+
+    threads, symbols, connect start of work, still a lot of problems
+
+commit cde9d31094727a19a36f1608de56666335659d43
+Merge: 8b19612 2ea9f6b
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 17 07:15:02 2018 +0200
+
+    merged!
+
+commit 8b19612ab793f8481a31e1150d94432d6734b94b
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 17 06:35:16 2018 +0200
+
+    added file as parameter
+
+commit 772c7a856911193773fbda110f334eaa1fc4f30d
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 17 06:32:56 2018 +0200
+
+    added file as parameter
+
+commit 81656f60eddeb2d791e27fd1d90946a3b958e1c6
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 17 04:52:48 2018 +0200
+
+    fixed a bug: one parameter is 2 in argc
+
+commit 7b87cbc20a4568fb516cfdc3e30ad4b57e5c73da
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 17 03:57:53 2018 +0200
+
+    fixed a bug: one parameter is 2 in argc
+
+commit c13cc0f23180a4d4c90a5c865b1c5fb1fab35c45
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 17 03:53:42 2018 +0200
+
+    little changes, added check for arguments and the token in lexer
+
+commit b82e8f3476582683f146de8afd91c154ea574c56
+Author: tairch <tairch@gmail.com>
+Date:   Mon Dec 17 02:55:24 2018 +0200
+
+    varCommand and CMakeLists
+
+commit bdbd44daaec3671a7ba3136d1662e405277cc57c
+Author: tomery11 <tomeryona92@gmail.com>
+Date:   Sun Dec 16 17:27:59 2018 +0200
+
+    first update
