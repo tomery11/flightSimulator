@@ -103,6 +103,7 @@ int main(int argc, char *argv[]) {
                 throw "bad argument number";
             }
         } catch (char const *exception) {
+            cout << "Exception!!!" << endl;
             printf("%s", exception);
         }
     //}

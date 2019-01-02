@@ -16,7 +16,7 @@ using namespace std;
 class ShuntingYard {
 
 private:
-    vector<Expression*> vecToDelete;
+    //vector<Expression*> vecToDelete;
 
 private:
     bool isNumber(char a);
@@ -32,13 +32,21 @@ private:
 
 public:
     double evaluate(string &mathematical_exp, SymbolsTable *currTable);
-    ~ShuntingYard(){
-        vector<Expression*>::iterator it = this->vecToDelete.begin();
-        for(;it!=this->vecToDelete.end();++it){
-            delete (*it);
+    /*~ShuntingYard(){
+        if (!this->vecToDelete.empty()) {
+            vector<Expression *>::iterator it = this->vecToDelete.begin();
+            for (; it != this->vecToDelete.end(); ++it) {
+                //cout << (*it)->calculate() << endl;
+                //cout << "deleting: " << (*it)->calculate() << endl;
+                delete (*it);
+                (*it) = NULL;
+            }
+            vecToDelete.clear();
+        } else {
+            cout << "vecToDelete is null" << endl;
         }
     }
-
+*/
 };
 
 
