@@ -133,7 +133,7 @@ void ConditionParser::doTheCommands() {
 }
 
 ConditionParser::~ConditionParser() {
-    cout << "ConditionParser deleted" << endl;
+    //cout << "ConditionParser deleted" << endl;
     delete this->parseUtils1;
     this->parseUtils1=NULL;
 }

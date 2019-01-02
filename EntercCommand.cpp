@@ -6,7 +6,7 @@
 
 //wait for an input of enter from the user
 void EntercCommand::doCommand(std::vector<string> *inputVec) {
-    cout << "press enter to continue: " << endl;
+    //cout << "press enter to continue: " << endl;
     getc(stdin);
 }
 

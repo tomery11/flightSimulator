@@ -4,6 +4,8 @@
 #define BUFFER_LENGTH 512
 
 #include "DataReaderServer.h"
+#include <chrono>
+#include <thread>
 
 DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbols) {
     try {
@@ -39,12 +41,12 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
         }
         //}
         //accept
-        cout << "server try to accept" << endl;
+        //cout << "server try to accept" << endl;
         newSocket = accept(socketDescriptor, (struct sockaddr *) &address, (socklen_t *) &addrlen);
         if (newSocket < 0) {
             throw "server accept failed";
         }
-        cout << "server accepted" <<endl;
+        //cout << "server accepted" <<endl;
         int i = 0;
         while (true) {
             i++;
@@ -63,7 +65,8 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
             //update the vars
             symbols->updateServer(buffer);
             //sleep for frequency
-            sleep(frequency/60);
+            //this_thread::sleep_for(chrono::milliseconds(1000 / frequency));
+            //sleep(frequency/60);
             //newsockfd.flush();
             /* Write a response to the client */
             //n = write(newsockfd,"I got your message",18);
@@ -74,7 +77,7 @@ DataReaderServer::DataReaderServer(int port, int frequency, SymbolsTable *symbol
 }
 
 DataReaderServer::~DataReaderServer() {
-    cout << "server socket closed" << endl;
+    //cout << "server socket closed" << endl;
     close(this->socketDescriptor);
     close(this->newSocket);
 }

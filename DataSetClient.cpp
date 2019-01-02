@@ -3,6 +3,8 @@
 //
 
 #include "DataSetClient.h"
+#include <chrono>
+#include <thread>
 
 DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) {
     try {
@@ -36,7 +38,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
         while (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
             sleep(1);
         }
-        cout << "client accepted" << endl;
+        //cout << "client accepted" << endl;
         //loop to send to simulator
         while (true) {
             //get a message for the simulator
@@ -62,7 +64,6 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
                 //}
                 //printf("%s\n", buffer);
             }
-            sleep(10/60);
         }
     } catch (char const *exception) {
         printf("%s",exception);
