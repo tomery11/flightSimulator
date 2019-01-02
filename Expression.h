@@ -10,7 +10,6 @@ class Expression {
 public:
     //Expression();
     virtual double calculate()=0;
-    virtual ~Expression(){};
 };
 
 

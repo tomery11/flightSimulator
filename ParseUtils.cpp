@@ -80,7 +80,7 @@ void ParseUtils::parser(vector <string> *inputVec){
             }
             ShuntingYard shunt;
             double value = shunt.evaluate(valueStr, this->symbols);
-            cout << "var to set: " << inputVec->at(0) << " value: " << value << endl;
+            //cout << "var to set: " << inputVec->at(0) << " value: " << value << endl;
             symbols->set(inputVec->at(0), value);
         } else {
             throw "bad input: not a command or a variable";
@@ -125,7 +125,6 @@ ParseUtils::ParseUtils(SymbolsTable *symbols1) {
 ParseUtils::~ParseUtils() {
     //cout << "end of parse utils" << endl;
     for(auto it=this->commandMap.begin(); it!=commandMap.end(); ++it){
-        cout << (*it).second << " deleted" << endl;
         delete (*it).second;
         (*it).second = NULL;
     }

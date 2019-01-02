@@ -24,11 +24,10 @@ class OpenServerCommand : public Command {
     int frequency;
     int port;
     SymbolsTable *symbolTable;
-    struct ServerData *serverData;
 public:
     void doCommand(std::vector<string> *inputVec);
     void setSymbolTable(SymbolsTable *symbolTable);
-    virtual ~OpenServerCommand();
+    virtual ~OpenServerCommand(){}
 };
 
 
