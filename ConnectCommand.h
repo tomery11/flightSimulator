@@ -33,10 +33,11 @@ class ConnectCommand : public Command {
     string ipAddress;
     int port;
     SymbolsTable *symbolTable;
+    struct ClientData *clientData;
 public:
     virtual void doCommand(std::vector<string> *inputVec);
     virtual void setSymbolTable(SymbolsTable *symbolTable);
-    virtual ~ConnectCommand(){}
+    virtual ~ConnectCommand();
 };
 
 

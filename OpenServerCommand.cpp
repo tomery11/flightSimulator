@@ -13,11 +13,11 @@ void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
     //input validation
     ShuntingYard myAlgo;
     //todo add another variable in algorithm
-    this->port = myAlgo.evaluate(inputVec->at(1), this->symbolTable);
-    this->frequency = myAlgo.evaluate(inputVec->at(2), this->symbolTable);
+    this->port = (int)myAlgo.evaluate(inputVec->at(1), this->symbolTable);
+    this->frequency = (int)myAlgo.evaluate(inputVec->at(2), this->symbolTable);
     //open thread and read a line in frequency, update symbol table
     pthread_t threadID;
-    struct ServerData *serverData = new struct ServerData;
+    this->serverData = new struct ServerData;
     serverData->port = this->port;
     serverData->frequency = this->frequency;
     //wont run if symbolTable is NULL
@@ -32,6 +32,12 @@ void OpenServerCommand::doCommand(std::vector<string> *inputVec) {
 
 void OpenServerCommand::setSymbolTable(SymbolsTable *symbolTable) {
     this->symbolTable = symbolTable;
+}
+
+OpenServerCommand::~OpenServerCommand() {
+    cout << "open sever command quit" << endl;
+    delete this->serverData;
+    this->serverData = NULL;
 }
 
 //run in the thread. open a a dataReaderServer and in an infinite loop update the symbol table

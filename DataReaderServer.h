@@ -5,7 +5,7 @@
 #ifndef FLIGHTSIMULATOR_DATAREADERSERVER_H
 #define FLIGHTSIMULATOR_DATAREADERSERVER_H
 
-#include <unistd.h>
+#include <chrono>
 #include <stdio.h>
 #include <sys/socket.h>
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "SymbolsTable.h"
 #include <iostream>
 #include <vector>
-#include <unistd.h>
+#include <thread>
 
 class DataReaderServer {
 int port;

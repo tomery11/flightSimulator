@@ -2,6 +2,8 @@
 // Created by t on 22/12/18.
 //
 
+#include <chrono>
+#include <thread>
 #include "DataSetClient.h"
 
 DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) {
@@ -37,8 +39,8 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
             sleep(1);
         }
         cout << "client accepted" << endl;
-        //loop to send to simulator
-        while (true) {
+        //loop send to simulator until quit
+        while (!symbols->getQuitFlag()) {
             //get a message for the simulator
             pair<string, double> message = symbols->getMessage();
             //check validity and send if real message
@@ -48,7 +50,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
                 strcpy(buffer, str.c_str());
                 /* Send message to the server */
                 n = write(sockfd, buffer, strlen(buffer));
-
+                cout << symbols << " client did " << str << endl;
                 if (n < 0) {
                     throw "write to socket failed";
                 }
@@ -62,7 +64,8 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
                 //}
                 //printf("%s\n", buffer);
             }
-            sleep(10/60);
+            //sleep for 1/6 second
+            this_thread::sleep_for(chrono::milliseconds(1000 / 60));
         }
     } catch (char const *exception) {
         printf("%s",exception);
@@ -70,6 +73,7 @@ DataSetClient::DataSetClient(string ipAddress, int port, SymbolsTable *symbols) 
 }
 
 DataSetClient::~DataSetClient() {
+    cout << "client socket end, data set client end" << endl;
     close(this->sockfd);
 }
 

@@ -3,9 +3,14 @@
 //
 
 #include "BinaryExpression.h"
+#include "Number.h"
 
 BinaryExpression::BinaryExpression(Expression *leftExp, Expression *rightExp) {
     this->left=leftExp;
     this->right=rightExp;
 
+}
+BinaryExpression::~BinaryExpression() {
+    delete(this->left);
+    delete(this->right);
 }

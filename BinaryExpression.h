@@ -13,6 +13,7 @@ public:
 public:
     BinaryExpression (Expression *leftExp, Expression *rightExp);
     double calculate()=0;
+    ~BinaryExpression();
 
 };
 

@@ -126,6 +126,7 @@ Expression *ShuntingYard::algorithm(string expr, SymbolsTable *currTable) {
         myStack.pop();
         myQueue.push(opr_toPush);
     }
+
     return postfix_calc(myQueue);
 }
 
@@ -150,26 +151,30 @@ string ShuntingYard::prepareNumber(string expr, int i) {
 
 
 
-/* i need to finish this function-- this is according to Reverse Polish notation algoritm*/
+/* this function computes the mathimatical expression when is in postfix notation*/
 Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
     stack <Expression*> exprStack;
 
     while(!myQueue.empty()){
         //case if the next bind in our postfix queue is a number
         if(isValid_number(myQueue.front())){
-        Number* number= new Number(myQueue.front());
-        myQueue.pop();
+            Number* number= new Number(myQueue.front());
+            //cout << number->calculate() << endl;
+            cout << "Queue contained number: " << number->calculate() << endl;
+            //addToDeleteVec(number);
+            myQueue.pop();
 
             //caution for not popping out bind
-        if(!myQueue.empty() && myQueue.front()==","){
-            //pop the delimeter bind ","
-            myQueue.pop();
-        }
+            if(!myQueue.empty() && myQueue.front()==","){
+                 //pop the delimeter bind ","
+                 myQueue.pop();
+            }
 
-        exprStack.push(number);
+            exprStack.push(number);
         }
         //this case is if the next bind is an operator
         else{
+            cout << "In else: NAN " << endl;
             Expression* right_num = exprStack.top();
             exprStack.pop();
 
@@ -190,9 +195,13 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
 
             switch(oper_toCalc){
                 case '+':{
+                    cout << "Plus " << endl;
                     Plus* plus= new Plus(left_num,right_num);
                     //i added this on 24.12 to check if 5+5=10 and is inserted into the stack
-                    Number* number= new Number(plus->calculate());
+                    double add_toStack = plus->calculate();
+                    delete(plus);
+                    Number* number= new Number(add_toStack);
+                    //addToDeleteVec(number);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -204,8 +213,12 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     break;
                 }
                 case '-':{
+                    cout << "Minus " << endl;
                     Minus* minus= new Minus(left_num,right_num);
-                    Number* number= new Number(minus->calculate());
+                    double add_toStack = minus->calculate();
+                    delete(minus);
+                    Number* number= new Number(add_toStack);
+                    //addToDeleteVec(number);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -216,8 +229,12 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     break;
                 }
                 case '*':{
+                    cout << "Multiply " << endl;
                     Multiply* multiply= new Multiply(left_num,right_num);
-                    Number* number= new Number(multiply->calculate());
+                    double add_toStack = multiply->calculate();
+                    delete(multiply);
+                    Number* number= new Number(add_toStack);
+                    //addToDeleteVec(number);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -228,8 +245,12 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     break;
                 }
                 case '/':{
+                    cout << "Divide " << endl;
                     Divide* divide= new Divide(left_num,right_num);
-                    Number* number= new Number(divide->calculate());
+                    double add_toStack = divide->calculate();
+                    delete(divide);
+                    Number* number= new Number(add_toStack);
+                    //addToDeleteVec(number);
                     exprStack.push(number);
                     myQueue.pop();
                     //caution for not popping out bind
@@ -240,10 +261,13 @@ Expression *ShuntingYard::postfix_calc(queue<string>& myQueue) {
                     break;
                 }
                 default:
+                    cout << "Something is rotten in the kingdom of Denmark" << endl;
                     break;
-            }
-        }
-    }
+            } // Switch
+        } // Else
+    } // While
+
+
     return exprStack.top();
 }
 
@@ -261,8 +285,11 @@ bool ShuntingYard::isValid_number(string number) {
 }
 
 double ShuntingYard::evaluate(string &mathematical_exp, SymbolsTable *currTable) {
+    cout << "shunting yard input: " << mathematical_exp << endl;
     Expression *calcExp= algorithm(mathematical_exp, currTable);
-    return calcExp->calculate();
+    double toReturn = calcExp->calculate();
+    delete(calcExp);
+    return toReturn;
 }
 
 /*checks if the char is a letter*/
@@ -282,4 +309,9 @@ string ShuntingYard::prepareVariable(string expr, int i) {
     }
     return toReturn;
 }
+/*in this function we put the "new" objects created in a vector and when destructor is called data will be deleted*/
+//void ShuntingYard::addToDeleteVec(Expression *exp) {
+    //this->vecToDelete.push_back(exp);
+//}
+
 
