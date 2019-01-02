@@ -90,7 +90,20 @@ void SymbolsTable::addVar(string name, double value) {
 
 //check if a variable already exist
 bool SymbolsTable::exist(string var) {
-    return this->symbolsMap.count(var) == 1;
+    //return this->symbolsMap.count(var) == 1;
+    if (this->symbolsMap.find(var) != symbolsMap.end()) {
+        return true;
+    }
+    return false;
+}
+
+//check if a variable is binded
+bool SymbolsTable::isBinded(string var) {
+    //return this->bindedVars.count(var) == 1;
+    if (this->bindedVars.find(var) != bindedVars.end()) {
+        return true;
+    }
+    return false;
 }
 
 //get a string with values delimited by ',' and update the simulatorOutput and binded varsOrder
@@ -127,8 +140,12 @@ void SymbolsTable::updateServer(char *buffer) {
 //set a variable's bind to be sent to the simulation
 void SymbolsTable::set(string var, double value) {
     if (exist(var)) {
-        //push to the set queue
-        this->setQueue.push(make_pair(var, value));
+        if (isBinded(var)) {
+            //push to the set queue
+            this->setQueue.push(make_pair(var, value));
+        } else { //if not binded only change here and don't send 
+            this->symbolsMap.find(var)->second = value;
+        }
     } else {
         throw "symbol set: no such variable ";// + var; + to_string(value);
     }

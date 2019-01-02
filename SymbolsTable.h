@@ -14,20 +14,21 @@ using namespace std;
 
 class SymbolsTable {
     //vars that exist in program
-    map<string,double> symbolsMap;
+    map<string, double> symbolsMap;
     //all vars from simulation
-    map<string,double> simulatorOutput;
+    map<string, double> simulatorOutput;
     //vars order in simulation output
     vector<string> varsOrder;
     //binded vars in program. name var first, bind path second
     map<string, string> bindedVars;
     //queue of values to be set to simulation
-    queue<pair<string,double >> setQueue;
+    queue<pair<string, double >> setQueue;
 public:
     SymbolsTable();
     void addVar(string name, string bind);
     void addVar(string name, double value);
     bool exist(string var);
+    bool isBinded(string var);
     void updateServer(char *buffer);
     void set(string var, double value);
     pair<string, double> getMessage();

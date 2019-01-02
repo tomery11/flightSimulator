@@ -59,6 +59,9 @@ int main(int argc, char *argv[]) {
                     //send for lexer and parser
                     parseUtils->lexer(&input, &inputVec);
                     parseUtils->parser(&inputVec);
+                    if (scriptFile.eof()) {
+                        break;
+                    }
                     //get the next line from the file
                     getline(scriptFile, input);
                 }
@@ -79,10 +82,10 @@ int main(int argc, char *argv[]) {
     } catch (char const *exception) {
         printf("%s", exception);
     }
-    cout << "sleep" << endl;
-    while(true) {
-        sleep(900);
-    }
+    //cout << "sleep" << endl;
+    //while(true) {
+    //    sleep(900);
+    //}
     delete symbols;
     symbols = NULL;
     delete parseUtils;
